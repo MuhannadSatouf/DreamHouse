@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenu">
+   <children>
+      <Pane prefHeight="647.0" prefWidth="165.0" style="-fx-background-color: #404040;">
+         <children>
+            <JFXButton layoutY="131.0" prefHeight="79.0" prefWidth="165.0" text="Add" textFill="#5190b9" />
+            <JFXButton layoutX="-2.0" layoutY="195.0" prefHeight="79.0" prefWidth="165.0" text="Remove" textFill="#5190b9" />
+            <JFXButton layoutY="261.0" prefHeight="79.0" prefWidth="165.0" textFill="#5190b9" />
+            <JFXButton layoutX="-2.0" layoutY="340.0" prefHeight="79.0" prefWidth="165.0" textFill="#5190b9" />
+            <JFXButton layoutX="-2.0" layoutY="419.0" prefHeight="79.0" prefWidth="165.0" textFill="#5190b9" />
+            <JFXButton layoutX="-2.0" layoutY="498.0" prefHeight="79.0" prefWidth="165.0" textFill="#5190b9" />
+            <JFXButton layoutY="567.0" onAction="#backToRegister" prefHeight="79.0" prefWidth="165.0" text="Back" textFill="#5190b9" />
+         </children></Pane>
+      <Pane layoutX="190.0" prefHeight="647.0" prefWidth="610.0" />
+   </children>
+</Pane>
