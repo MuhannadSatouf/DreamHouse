@@ -4,13 +4,13 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.StringProperty;
 
 public class User {
-    private final StringProperty ssn;
+    private final IntegerProperty ssn;
     private final StringProperty name;
     private final StringProperty address;
     private final IntegerProperty phone;
     private final StringProperty email;
 
-    public User(StringProperty ssn, StringProperty name, StringProperty address, IntegerProperty phone, StringProperty email) {
+    public User(IntegerProperty ssn, StringProperty name, StringProperty address, IntegerProperty phone, StringProperty email) {
         this.ssn = ssn;
         this.name = name;
         this.address = address;
@@ -18,7 +18,7 @@ public class User {
         this.email = email;
     }
 
-    public StringProperty getSsn() {
+    public IntegerProperty getSsn() {
         return ssn;
     }
 
