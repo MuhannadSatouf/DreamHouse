@@ -10,5 +10,6 @@
     <orderEntry type="library" exported="" name="lib" level="project" />
     <orderEntry type="library" exported="" name="jfoenix-9.0.8" level="project" />
     <orderEntry type="library" exported="" name="mysql-connector-java-8.0.11" level="project" />
+
   </component>
 </module>
