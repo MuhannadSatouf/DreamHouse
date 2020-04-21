@@ -6,7 +6,7 @@ import javafx.beans.property.StringProperty;
 public class Employee extends User {
     private IntegerProperty employeeId;
 
-    public Employee(StringProperty ssn, StringProperty name, StringProperty address, IntegerProperty phone, StringProperty email) {
+    public Employee(IntegerProperty ssn, StringProperty name, StringProperty address, IntegerProperty phone, StringProperty email) {
         super(ssn, name, address, phone, email);
     }
 

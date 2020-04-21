@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1038.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ControllerForViewEmployee">
+   <children>
+      <Pane fx:id="downPane" layoutY="74.0" prefHeight="626.0" prefWidth="1038.0">
+         <children>
+            <TableView fx:id="tableOfEmployee" layoutY="-1.0" prefHeight="626.0" prefWidth="1038.0">
+              <columns>
+                <TableColumn fx:id="SSNCol" prefWidth="75.0" text="SSN" />
+                  <TableColumn fx:id="nameCol" prefWidth="75.0" text="Name" />
+                  <TableColumn fx:id="addressCol" prefWidth="75.0" text="Address" />
+                  <TableColumn fx:id="phoneCol" prefWidth="75.0" text="Phone" />
+                  <TableColumn fx:id="emailCol" prefWidth="75.0" text="Email" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+      </Pane>
+      <Pane fx:id="upPane" prefHeight="74.0" prefWidth="1038.0">
+         <children>
+            <HBox fx:id="hbox" alignment="CENTER" prefHeight="74.0" prefWidth="1038.0">
+               <children>
+                  <ImageView fx:id="imageView" fitHeight="66.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Resources/Logo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+   </children>
+</Pane>
