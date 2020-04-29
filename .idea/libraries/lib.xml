@@ -1,6 +1,7 @@
 <component name="libraryTable">
   <library name="lib">
     <CLASSES>
+<<<<<<< HEAD
       <root url="file://$PROJECT_DIR$/../../Mu future/javafx-sdk-13.0.2/lib" />
     </CLASSES>
     <JAVADOC />
@@ -16,5 +17,15 @@
     </SOURCES>
     <jarDirectory url="file://$PROJECT_DIR$/../../Mu future/javafx-sdk-13.0.2/lib" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/../../Mu future/javafx-sdk-13.0.2/lib" recursive="false" type="SOURCES" />
+=======
+      <root url="file://$USER_HOME$/Downloads/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$USER_HOME$/Downloads/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib" />
+    </SOURCES>
+    <jarDirectory url="file://$USER_HOME$/Downloads/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/Downloads/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib" recursive="false" type="SOURCES" />
+>>>>>>> 61db5738b61190a14956171f764de84dd38850da
   </library>
 </component>
