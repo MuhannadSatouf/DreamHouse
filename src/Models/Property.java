@@ -1,84 +1,86 @@
 package Models;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public class Property {
-    private final IntegerProperty propertyId;
-    private final StringProperty region;
-    private final StringProperty address;
-    private final DoubleProperty area;
-    private final IntegerProperty yearBuilt;
-    private final IntegerProperty price;
-    private final BooleanProperty availability;
 
+    private  SimpleIntegerProperty property_ID;
+    private  SimpleStringProperty region;
+    private  SimpleStringProperty address;
+    private  SimpleIntegerProperty area;
+    private  SimpleIntegerProperty  yearBuilt;
+    private  SimpleIntegerProperty price;
+    private  SimpleBooleanProperty propertyAvailability;
 
-    public Property(IntegerProperty propertyId, StringProperty region, StringProperty address, DoubleProperty area, IntegerProperty yearBuilt, IntegerProperty price, BooleanProperty availability, BooleanProperty availability1) {
-        this.propertyId = propertyId;
-        this.region = region;
-        this.address = address;
-        this.area = area;
-        this.yearBuilt = yearBuilt;
-        this.price = price;
-        this.availability = availability;
+    public Property(int property_ID, String region, String address, int area, int yearBuilt, int price,boolean propertyAvailability) {
+        this.property_ID = new SimpleIntegerProperty (property_ID);
+        this.region = new SimpleStringProperty (region);
+        this.address = new SimpleStringProperty (address);
+        this.area = new SimpleIntegerProperty  (area);
+        this.yearBuilt = new SimpleIntegerProperty (yearBuilt);
+        this.price = new SimpleIntegerProperty (price);
+        this.propertyAvailability=new SimpleBooleanProperty (propertyAvailability);
+    }
+    public Property() {
+
 
     }
 
-    public int getPropertyId() {
-        return propertyId.get();
+    public int getProperty_ID() {
+        return property_ID.get ();
     }
 
-    public IntegerProperty propertyIdProperty() {
-        return propertyId;
+    public SimpleIntegerProperty property_IDProperty() {
+        return property_ID;
     }
 
-    public String getRegion() {
-        return region.get();
+    public int getArea() {
+        return area.get ();
     }
 
-    public StringProperty regionProperty() {
-        return region;
-    }
-
-    public String getAddress() {
-        return address.get();
-    }
-
-    public StringProperty addressProperty() {
-        return address;
-    }
-
-    public double getArea() {
-        return area.get();
-    }
-
-    public DoubleProperty areaProperty() {
+    public SimpleIntegerProperty areaProperty() {
         return area;
     }
 
     public int getYearBuilt() {
-        return yearBuilt.get();
+        return yearBuilt.get ();
     }
 
-    public IntegerProperty yearBuiltProperty() {
+    public SimpleIntegerProperty yearBuiltProperty() {
         return yearBuilt;
     }
 
     public int getPrice() {
-        return price.get();
+        return price.get ();
     }
 
-    public IntegerProperty priceProperty() {
+    public SimpleIntegerProperty priceProperty() {
         return price;
     }
 
-    public boolean isAvailability() {
-        return availability.get();
+    public String getRegion() {
+        return region.get ();
     }
 
-    public BooleanProperty availabilityProperty() {
-        return availability;
+    public SimpleStringProperty regionProperty() {
+        return region;
+    }
+
+    public String getAddress() {
+        return address.get ();
+    }
+
+    public SimpleStringProperty addressProperty() {
+        return address;
+    }
+
+    public boolean isPropertyAvailability() {
+        return propertyAvailability.get ();
+    }
+
+    public SimpleBooleanProperty propertyAvailabilityProperty() {
+        return propertyAvailability;
     }
 }

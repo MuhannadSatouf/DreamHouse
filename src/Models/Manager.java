@@ -7,8 +7,10 @@ public class Manager extends User{
     private final IntegerProperty managerId;
 
 
-    public Manager(String ssn, String name, String address, String phone, String email, IntegerProperty managerId) {
-        super (ssn, name, address, phone, email);
+    public Manager(IntegerProperty ssn, StringProperty name, StringProperty address, IntegerProperty phone, StringProperty email, IntegerProperty managerId) {
+
+
+
         this.managerId = managerId;
     }
 }
