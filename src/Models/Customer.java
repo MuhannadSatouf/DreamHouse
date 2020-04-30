@@ -1,14 +1,27 @@
 package Models;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.SimpleStringProperty;
 
 public class Customer extends User {
-    private final StringProperty type;
+    private final SimpleStringProperty type;
 
 
-    public Customer(IntegerProperty ssn, StringProperty name, StringProperty address, IntegerProperty phone, StringProperty email, StringProperty type) {
-        super(ssn, name, address, phone, email);
-        this.type = type;
+
+    public Customer(String ssn, String name ,String address, String phone, String email, String type) {
+        super (ssn, name, address, phone, email);
+        this.type = new SimpleStringProperty (type);
     }
+
+
+
+
+    public String getType() {
+        return type.get ();
+    }
+
+    public SimpleStringProperty typeProperty() {
+        return type;
+    }
+
+
 }

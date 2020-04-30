@@ -1,17 +1,13 @@
 package Models;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.SimpleStringProperty;
 
-public class Employee extends User {
-    private IntegerProperty employeeId;
+public class Employee {
 
-    public Employee(IntegerProperty ssn, StringProperty name, StringProperty address, IntegerProperty phone, StringProperty email) {
-        super(ssn, name, address, phone, email);
-    }
+    private SimpleStringProperty employee_Id;
 
+    public Employee(String ssn, String name, String address, String phone, String email, SimpleStringProperty employee_Id) {
 
-    public IntegerProperty getID() {
-        return employeeId;
+        this.employee_Id = employee_Id;
     }
 }

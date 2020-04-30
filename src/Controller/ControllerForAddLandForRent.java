@@ -22,7 +22,7 @@ public class ControllerForAddLandForRent implements Initializable {
     public JFXCheckBox irrigated;
 
     public JFXDatePicker availableFrom;
-    ObservableList<String> propertyType = FXCollections.observableArrayList ("Vacant Land","Ranch","Farm","Timberland");
+    ObservableList<String> propertyType = FXCollections.observableArrayList ("VACANT_LAND","RANCH","FARM","TIMBERLAND");
     public void save(ActionEvent actionEvent) {
 
     }

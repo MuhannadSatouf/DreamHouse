@@ -1,5 +1,6 @@
 package Controller;
 
+import Models.EmailSend;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
