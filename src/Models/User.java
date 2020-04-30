@@ -1,40 +1,85 @@
 package Models;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class User {
-    private final IntegerProperty ssn;
-    private final StringProperty name;
-    private final StringProperty address;
-    private final IntegerProperty phone;
-    private final StringProperty email;
+    private SimpleStringProperty ssn;
+    private SimpleStringProperty name;
+    private SimpleStringProperty address;
+    private SimpleStringProperty phone;
+    private SimpleStringProperty email;
+    private SimpleStringProperty password;
 
-    public User(IntegerProperty ssn, StringProperty name, StringProperty address, IntegerProperty phone, StringProperty email) {
-        this.ssn = ssn;
-        this.name = name;
-        this.address = address;
-        this.phone = phone;
-        this.email = email;
+
+
+    public User(String ssn, String name ,String address, String phone, String email) {
+        this.ssn = new SimpleStringProperty (ssn);
+
+        this.name =new SimpleStringProperty (name);
+
+        this.address =new SimpleStringProperty (address);
+        this.phone =new SimpleStringProperty (phone);
+        this.email =new SimpleStringProperty (email);
     }
 
-    public IntegerProperty getSsn() {
+
+    public User(){
+
+
+
+    }
+
+
+
+    public String getSsn() {
+        return ssn.get ();
+    }
+
+    public SimpleStringProperty ssnProperty() {
         return ssn;
     }
 
-    public StringProperty getName() {
+
+
+    public String getName() {
+        return name.get ();
+    }
+
+    public SimpleStringProperty nameProperty() {
         return name;
     }
 
-    public StringProperty getAddress() {
+    public String getAddress() {
+        return address.get ();
+    }
+
+    public SimpleStringProperty addressProperty() {
         return address;
     }
 
-    public IntegerProperty getPhone() {
+    public String getPhone() {
+        return phone.get ();
+    }
+
+    public SimpleStringProperty phoneProperty() {
         return phone;
     }
 
-    public StringProperty getEmail() {
+    public String getEmail() {
+        return email.get ();
+    }
+
+    public SimpleStringProperty emailProperty() {
         return email;
     }
 }
+
+
+
+
+
+
+

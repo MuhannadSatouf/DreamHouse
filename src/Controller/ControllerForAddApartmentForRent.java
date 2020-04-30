@@ -1,6 +1,7 @@
 package Controller;
 
-import Models.DBHandle;
+
+import Models.DataBaseHandler;
 import com.jfoenix.controls.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +10,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ControllerForAddApartmentForRent implements Initializable {
@@ -28,89 +31,54 @@ public class ControllerForAddApartmentForRent implements Initializable {
     public JFXTextField address;
 
     public JFXDatePicker availableFromDate;
-    DBHandle dbHandle;
+    DataBaseHandler dataBaseHandler;
 
-    ObservableList<String> numberOfRooms = FXCollections.observableArrayList ("STUDIO","ONE","TWO","THREE","FOUR","FIVE","SIX");
-    ObservableList<String> numberOfBathrooms = FXCollections.observableArrayList ("ONE","TWO","THREE");
-    ObservableList<String> floorNumber = FXCollections.observableArrayList ("GROUND_FLOOR","ONE","TWO","THREE","FOUR","FIVE","SIX","SEVEN","MORE");
+    ObservableList<String> numberOfRooms = FXCollections.observableArrayList ("STUDIO", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX");
+    ObservableList<String> numberOfBathrooms = FXCollections.observableArrayList ("ONE", "TWO", "THREE");
+    ObservableList<String> floorNumber = FXCollections.observableArrayList ("GROUND_FLOOR", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "MORE");
 
 
-//    public void save(ActionEvent actionEvent) {
-//
-//        int property_ID = Integer.parseInt (propertyID.getText ());
-//        String apartmentRegion = region.getText ();
-//        String apartmentAddress = address.getText ();
-//        String apartmentArea = area.getText ();
-//        int year_Built = Integer.parseInt (yearBuilt.getText ());
-//        int apartmentPrice = Integer.parseInt (price.getText ());
-//        boolean apartmentHeating = heating.isSelected ();
-//        boolean apartmentParking = parking.isSelected ();
-//        boolean apartmentBalcony =balcony.isSelected ();
-//        String apartmentFloor =floor.getAccessibleText ();
-//        String apartmentRooms =roomsNumber.getAccessibleText ();
-//        String apartmentBathrooms =bathroomsNumber.getAccessibleText ();
-//
-//
-//
-//
-//
-//        if (propertyID.getText ().isEmpty ()|| apartmentRegion.isEmpty () || apartmentAddress.isEmpty ()
-//                || apartmentArea.isEmpty () || yearBuilt.getText ().isEmpty () || price.getText ().isEmpty ()) {
-//            Alert alert = new Alert (Alert.AlertType.ERROR);
-//            alert.setHeaderText (null);
-//            alert.setContentText ("Please enter in all fields");
-//            alert.showAndWait ();
-//            return;
-//        }
-//       /*String qu ="INSERT INTO ApartmentForRent (property_ID,apartmentRegion,apartmentAddress,apartmentArea,year_Built,apartmentPrice,apartmentHeating,apartmentParking,apartmentBalcony,apartmentFloor,apartmentRooms,apartmentBathrooms,true)"+
-//                "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";*/
-//       /* String Query_String = "INSERT INTO tablename(field1,field2)
-//        VALUES ('"+Text1+"','"+Text2+"')"*/
-//
-//        String qu = "INSERT INTO ApartmentForRent VALUES ("
-//                + "'" + property_ID + "',"
-//                + "'" + apartmentRegion + "',"
-//                + "'" + apartmentAddress + "',"
-//                + "'" + apartmentArea + "',"
-//                + "'" + year_Built + "',"
-//                + "'" + apartmentPrice + "',"
-//                + "'" + apartmentHeating + "',"
-//                + "'" + apartmentParking + "',"
-//                + "'" + apartmentBalcony + "',"
-//                + "'" + apartmentFloor + "',"
-//                + "'" + apartmentRooms + "',"
-//                + "'" + apartmentBathrooms + "',"
-//                + "'" + true + "'" +
-//                ")";
-//        System.out.println (qu);
-//        if (dbHandle.execAction (qu)) {
-//            Alert alert = new Alert (Alert.AlertType.INFORMATION);
-//            alert.setHeaderText (null);
-//            alert.setContentText ("SUCCESS");
-//            alert.showAndWait ();
-//
-//        } else {
-//            Alert alert = new Alert (Alert.AlertType.ERROR);
-//            alert.setHeaderText (null);
-//            alert.setContentText ("There is Error");
-//            alert.showAndWait ();
-//            propertyID.setText ("");
-//            region.setText ("");
-//            address.setText ("");
-//            area.setText ("");
-//            yearBuilt.setText ("");
-//            price.setText ("");
-//
-//
-//        }
-//    }
+    public void save(ActionEvent actionEvent) {
+
+        if (propertyID.getText ().isEmpty () || region.getText ().isEmpty () || address.getText ().isEmpty () ||
+                yearBuilt.getText ().isEmpty () || price.getText ().isEmpty () || availableFromDate.getEditor ().getText ().isEmpty ()) {
+            Alert alert = new Alert (Alert.AlertType.ERROR);
+            alert.setHeaderText (null);
+            alert.setContentText ("Please enter in all fields");
+            alert.showAndWait ();
+            return;
+        }
+
+
+        try {
+
+
+            String qu = "UPDATE apartmentforrent set AvailableFrom=?";
+            dataBaseHandler.addApartment (propertyID.getText (), region.getText (), address.getText (), area.getText (), yearBuilt.getText (), parking.isSelected (),
+                    heating.isSelected (), balcony.isSelected (), floor.getValue ().toString (), roomsNumber.getValue ().toString (), bathroomsNumber.getValue ().toString ());
+            PreparedStatement pst;
+
+            pst = DataBaseHandler.connection.prepareStatement (qu);
+            pst.setString (1, availableFromDate.getEditor ().getText ());
+
+
+            pst.execute ();
+            pst.close ();
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace ();
+        }
+
+    }
+
 
     public void cancel(ActionEvent actionEvent) {
+
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        dbHandle =DataBaseHandler.getInstance ();
+        dataBaseHandler = DataBaseHandler.getInstance ();
         roomsNumber.setItems (numberOfRooms);
         bathroomsNumber.setItems (numberOfBathrooms);
         floor.setItems (floorNumber);
