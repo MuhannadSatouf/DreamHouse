@@ -13,7 +13,6 @@ public class House extends Property {
         this.garage = garage;
     }
 
-
     public boolean isGarage() {
         return garage.get();
     }
