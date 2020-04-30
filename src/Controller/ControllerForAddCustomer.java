@@ -22,7 +22,7 @@ public class ControllerForAddCustomer implements Initializable {
     public JFXButton cancelBtn;
     public JFXTextField customerPassword;
 
-    ObservableList<String> customerTypeList = FXCollections.observableArrayList ("Buyer","vendor","tenant");
+    ObservableList<String> customerTypeList = FXCollections.observableArrayList ("BUYER","VENDOR","TENANT");
 
 
 

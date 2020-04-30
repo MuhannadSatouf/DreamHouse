@@ -29,8 +29,8 @@ public class ControllerForAddHouseForSale implements Initializable {
     public JFXTextField region;
     public JFXTextField propertyID;
 
-    ObservableList<String> numberOfRooms = FXCollections.observableArrayList ("Studio","1","2","3","4","5","6");
-    ObservableList<String> numberOfBathrooms = FXCollections.observableArrayList ("One","Two","Three");
+    ObservableList<String> numberOfRooms = FXCollections.observableArrayList ("STUDIO","ONE","TWO","THREE","FOUR","FIVE","SIX");
+    ObservableList<String> numberOfBathrooms = FXCollections.observableArrayList ("ONE","TWO","THREE");
 
     public void save(ActionEvent actionEvent) {
     }

@@ -26,9 +26,8 @@ public class ControllerForAddCommercialForSale implements Initializable {
     public JFXTextField propertyID;
     public JFXButton cancelBtn;
 
-    ObservableList<String> propertyType = FXCollections.observableArrayList ("Offices","Retail Properties","Gas Stations","Stores","Restaurants");
-    ObservableList<String> floorNumber = FXCollections.observableArrayList ("Ground floor","1","2","3","4","5","6","7","None","more");
-
+    ObservableList<String> propertyType = FXCollections.observableArrayList ("OFFICES","RETAIL_PROPERTIES","GAS_STATIONS","STORES","RESTAURANTS");
+    ObservableList<String> floorNumber = FXCollections.observableArrayList ("GROUND_FLOOR","ONE","TWO","THREE","FOUR","FIVE","SIX","SEVEN","NONE","MORE");
     public void save(ActionEvent actionEvent) {
     }
 

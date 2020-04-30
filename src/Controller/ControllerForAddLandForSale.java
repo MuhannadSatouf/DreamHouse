@@ -24,7 +24,7 @@ public class ControllerForAddLandForSale implements Initializable {
     public JFXTextField price;
     public JFXButton cancelBtn;
     public JFXCheckBox includesResidence;
-    ObservableList<String> propertyType = FXCollections.observableArrayList ("Vacant Land","Ranch","Farm","Timberland");
+    ObservableList<String> propertyType = FXCollections.observableArrayList ("VACANT_LAND","RANCH","FARM","TIMBERLAND");
     public void save(ActionEvent actionEvent) {
     }
 
