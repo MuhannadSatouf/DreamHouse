@@ -7,13 +7,14 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="mysql-connector-java-8.0.11" level="project" />
     <orderEntry type="library" name="activation" level="project" />
     <orderEntry type="library" name="javax.mail-1.4.4" level="project" />
     <orderEntry type="library" name="protobuf-java-2.6.0" level="project" />
     <orderEntry type="library" name="iText7-Core-7.1" level="project" />
     <orderEntry type="library" name="iText7-Core-7.11" level="project" />
-    <orderEntry type="library" name="jfoenix-9.0.8" level="project" />
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-5.1.40" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-8.0.11" level="project" />
+    <orderEntry type="library" name="jfoenix-9.0.8" level="project" />
   </component>
 </module>

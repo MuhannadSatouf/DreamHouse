@@ -1,7 +1,6 @@
 package Models;
 
 
-
 import java.sql.*;
 
 public class DataBaseHandler {
@@ -13,28 +12,27 @@ public class DataBaseHandler {
 
     public static DataBaseHandler getInstance() {
         if (databaseHandler == null) {
-            databaseHandler = new DataBaseHandler ();
+            databaseHandler = new DataBaseHandler();
         }
         return databaseHandler;
     }
 
     private DataBaseHandler() {
-        createConnection ();
+        createConnection();
 
 
     }
 
 
-
     void createConnection() {
         try {
-            Class.forName (DRIVER).newInstance ();
-            connection = DriverManager.getConnection ("jdbc:mysql://localhost:3306/mydb?useSSL=false", "root", "root");
+            Class.forName(DRIVER).newInstance();
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false", "root", "root");
             //Remote database  // connection = DriverManager.getConnection ("jdbc:mysql://den1.mysql5.gear.host:3306/realestate2?useSSL=false", "realestate2", "Xl9pU?!yN6Rr");
-            System.out.println ("Connection success");
+            System.out.println("Connection success");
         } catch (Exception e) {
 
-            e.printStackTrace ();
+            e.printStackTrace();
         }
     }
 
@@ -51,57 +49,73 @@ public class DataBaseHandler {
 
 
             PreparedStatement pst;
-            pst = DataBaseHandler.connection.prepareStatement (qu);
+            pst = DataBaseHandler.connection.prepareStatement(qu);
 
-            pst.setString (1, property_Id);
-            pst.setString (2, region);
-            pst.setString (3, address);
-            pst.setString (4, area);
-            pst.setString (5, year_built);
-            pst.setBoolean (6, parking);
-            pst.setBoolean (7, heating);
-            pst.setBoolean (8, balcony);
-            pst.setString (9, floor);
-            pst.setString (10, rooms);
-            pst.setString (11, bathrooms);
+            pst.setString(1, property_Id);
+            pst.setString(2, region);
+            pst.setString(3, address);
+            pst.setString(4, area);
+            pst.setString(5, year_built);
+            pst.setBoolean(6, parking);
+            pst.setBoolean(7, heating);
+            pst.setBoolean(8, balcony);
+            pst.setString(9, floor);
+            pst.setString(10, rooms);
+            pst.setString(11, bathrooms);
 
 
-            pst.execute ();
-            pst.close ();
+            pst.execute();
+            pst.close();
 
         } catch (SQLException throwable) {
-            throwable.printStackTrace ();
+            throwable.printStackTrace();
         }
-
-
     }
 
-
-    public void addProperty(String property_Id, String region, String address, String area, String price) {
+    public void addPropertyForSale(String property_Id, String region, String address, String area, String fees, String price) {
         try {
-            String qu = "INSERT INTO property (Property_ID,Region,Address,Area,Price) " +
-                    "VALUES(?,?,?,?,?)";
+            String qu = "INSERT INTO property (Property_ID,Region,Address,Area,Price,fees) " +
+                    "VALUES(?,?,?,?,?,?)";
 
             PreparedStatement pst;
-            pst = DataBaseHandler.connection.prepareStatement (qu);
+            pst = DataBaseHandler.connection.prepareStatement(qu);
 
-            pst.setString (1, property_Id);
-            pst.setString (2, region);
-            pst.setString (3, address);
-            pst.setString (4, area);
-            pst.setString (5, price);
-            pst.execute ();
-            pst.close ();
+            pst.setString(1, property_Id);
+            pst.setString(2, region);
+            pst.setString(3, address);
+            pst.setInt(4, Integer.parseInt(area));
+            pst.setString(5, price);
+            pst.setInt(6, Integer.parseInt(String.valueOf(fees)));
+            pst.execute();
+            pst.close();
 
         } catch (SQLException throwable) {
-            throwable.printStackTrace ();
+            throwable.printStackTrace();
         }
-
-
     }
 
 
+    public void addPropertyForRent (String property_Id, String region, String address, String area, String availableFrom, String price) {
+        try {
+            String qu = "INSERT INTO property (Property_ID,Region,Address,Area,Price,availableFrom) " +
+                    "VALUES(?,?,?,?,?,?)";
 
+            PreparedStatement pst;
+            pst = DataBaseHandler.connection.prepareStatement(qu);
+
+            pst.setString(1, property_Id);
+            pst.setString(2, region);
+            pst.setString(3, address);
+            pst.setInt(4, Integer.parseInt(area));
+            pst.setString(5, price);
+            pst.setString(5, availableFrom);
+            pst.execute();
+            pst.close();
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+    }
     public void addUser(String customerSSn, String customerPassword, String name, String address, String phone, String email) {
 
 
@@ -111,32 +125,31 @@ public class DataBaseHandler {
 
 
             PreparedStatement pst;
-            pst = DataBaseHandler.connection.prepareStatement (qu);
-            pst.setString (1, customerSSn);
-            pst.setString (2, customerPassword);
-            pst.setString (3, name);
-            pst.setString (4, address);
-            pst.setString (5, phone);
-            pst.setString (6, email);
-            pst.execute ();
-            pst.close ();
+            pst = DataBaseHandler.connection.prepareStatement(qu);
+            pst.setString(1, customerSSn);
+            pst.setString(2, customerPassword);
+            pst.setString(3, name);
+            pst.setString(4, address);
+            pst.setString(5, phone);
+            pst.setString(6, email);
+            pst.execute();
+            pst.close();
 
         } catch (SQLException throwable) {
-            throwable.printStackTrace ();
+            throwable.printStackTrace();
         }
 
 
     }
 
 
-
     public ResultSet execQuery(String query) {
         ResultSet result;
         try {
-            statement = connection.createStatement ();
-            result = statement.executeQuery (query);
+            statement = connection.createStatement();
+            result = statement.executeQuery(query);
         } catch (SQLException ex) {
-            ex.printStackTrace ();
+            ex.printStackTrace();
             return null;
         } finally {
         }
@@ -144,14 +157,13 @@ public class DataBaseHandler {
     }
 
 
-
     public boolean execAction(String qu) {
         try {
-            statement = connection.createStatement ();
-            statement.execute (qu);
+            statement = connection.createStatement();
+            statement.execute(qu);
             return true;
         } catch (SQLException ex) {
-            ex.printStackTrace ();
+            ex.printStackTrace();
             return false;
         } finally {
         }
