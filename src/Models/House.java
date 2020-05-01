@@ -13,7 +13,6 @@ public class House extends Resident {
         this.garage = new SimpleBooleanProperty(garage);
     }
 
-
     public boolean isGarage() {
         return garage.get();
     }
