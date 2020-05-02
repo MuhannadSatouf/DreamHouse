@@ -50,6 +50,16 @@ public class ControllerForAddLandForSale implements Initializable {
             alert.showAndWait ();
             return;
         }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+        dataBaseHandler.addProperty (propertyID.getText (),region.getText (),address.getText (),area.getText (),price.getText (),fees.getText());
+
+=======
+        dataBaseHandler.addPropertyForSale(propertyID.getText(), region.getText(), address.getText(), area.getText(), fees.getText(),price.getText());
+>>>>>>> d65d5f0b29bc6bdbddcadb89173e2a9fd5db4b20
+>>>>>>> e1b1eaef68d2c7cc95cf6c8a7038a88bd4be7b8c
 
 
         if (editMode) {

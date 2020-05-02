@@ -68,11 +68,16 @@
             <Image url="@../Resources/price-tag.png" />
          </image>
       </ImageView>
+<<<<<<< HEAD
       <JFXButton fx:id="cancelBtn" layoutX="200.0" layoutY="518.0" onAction="#cancel" prefHeight="81.0" prefWidth="195.0" ripplerFill="RED" text="Cancel" textFill="#9c9898">
          <font>
             <Font size="18.0" />
          </font></JFXButton>
       <JFXCheckBox fx:id="includesResidence" checkedColor="#5190b9" layoutX="134.0" layoutY="468.0" prefHeight="18.0" prefWidth="210.0" text="Includes Residence" textFill="#9c9898" unCheckedColor="#5190b9" />
+=======
+      <JFXButton fx:id="cancelBtn" layoutX="200.0" layoutY="518.0" onAction="#cancel" prefHeight="81.0" prefWidth="195.0" text="Cancel" textFill="#9c9898" />
+      <JFXCheckBox fx:id="includesResidence" checkedColor="#5190b9" layoutX="138.0" layoutY="468.0" prefHeight="18.0" prefWidth="210.0" text="Includes Residence" textFill="#9c9898" unCheckedColor="#5190b9" />
+>>>>>>> e1b1eaef68d2c7cc95cf6c8a7038a88bd4be7b8c
       <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="463.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/home%20(1).png" />

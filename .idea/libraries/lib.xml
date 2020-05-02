@@ -1,13 +1,33 @@
 <component name="libraryTable">
   <library name="lib">
     <CLASSES>
+<<<<<<< HEAD
       <root url="file://$PROJECT_DIR$/../../../../../javafx-sdk-13.0.1/lib" />
+=======
+<<<<<<< HEAD
+      <root url="file://$USER_HOME$/Downloads/javafx-sdk-13.0.1/lib" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$USER_HOME$/Downloads/javafx-sdk-13.0.1/lib" />
+    </SOURCES>
+    <jarDirectory url="file://$USER_HOME$/Downloads/javafx-sdk-13.0.1/lib" recursive="false" />
+    <jarDirectory url="file://$USER_HOME$/Downloads/javafx-sdk-13.0.1/lib" recursive="false" type="SOURCES" />
+=======
+      <root url="file://$PROJECT_DIR$/../../Mu future/javafx-sdk-13.0.2/lib" />
+>>>>>>> e1b1eaef68d2c7cc95cf6c8a7038a88bd4be7b8c
     </CLASSES>
     <JAVADOC />
     <SOURCES>
       <root url="file://$PROJECT_DIR$/../../../../../javafx-sdk-13.0.1/lib" />
     </SOURCES>
+<<<<<<< HEAD
     <jarDirectory url="file://$PROJECT_DIR$/../../../../../javafx-sdk-13.0.1/lib" recursive="false" />
     <jarDirectory url="file://$PROJECT_DIR$/../../../../../javafx-sdk-13.0.1/lib" recursive="false" type="SOURCES" />
+=======
+    <jarDirectory url="file://$PROJECT_DIR$/../../Mu future/javafx-sdk-13.0.2/lib" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/../../Mu future/javafx-sdk-13.0.2/lib" recursive="false" type="SOURCES" />
+>>>>>>> d65d5f0b29bc6bdbddcadb89173e2a9fd5db4b20
+>>>>>>> e1b1eaef68d2c7cc95cf6c8a7038a88bd4be7b8c
   </library>
 </component>
