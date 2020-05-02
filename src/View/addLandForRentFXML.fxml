@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
-<?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXDatePicker?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Pane?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ControllerForAddLandForRent">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ControllerForAddLandForRent">
    <children>
       <Pane prefHeight="81.0" prefWidth="400.0" style="-fx-background-color: #404040;">
          <children>
@@ -22,7 +19,10 @@
       </Pane>
       <JFXTextField fx:id="area" focusColor="#5190b9" layoutX="134.0" layoutY="283.0" prefHeight="34.0" prefWidth="210.0" promptText="Area" />
       <JFXCheckBox fx:id="irrigated" checkedColor="#5190b9" layoutX="137.0" layoutY="425.0" prefHeight="18.0" prefWidth="210.0" text="Irrigated" textFill="#9c9898" unCheckedColor="#5190b9" />
-      <JFXButton fx:id="saveBtn" layoutX="1.0" layoutY="520.0" onAction="#save" prefHeight="81.0" prefWidth="192.0" text="Save" textFill="#9c9898" />
+      <JFXButton fx:id="saveBtn" layoutX="1.0" layoutY="520.0" onAction="#save" prefHeight="81.0" prefWidth="192.0" ripplerFill="#18e233" text="Save" textFill="#9c9898">
+         <font>
+            <Font size="18.0" />
+         </font></JFXButton>
       <JFXComboBox fx:id="type" focusColor="#5190b9" layoutX="134.0" layoutY="156.0" prefHeight="25.0" prefWidth="210.0" promptText="Type" />
       <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="286.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -63,7 +63,10 @@
             <Image url="@../Resources/identification.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="cancelBtn" layoutX="193.0" layoutY="520.0" onAction="#cancel" prefHeight="81.0" prefWidth="204.0" text="Cancel" textFill="#9c9898" />
+      <JFXButton fx:id="cancelBtn" layoutX="193.0" layoutY="520.0" onAction="#cancel" prefHeight="81.0" prefWidth="204.0" ripplerFill="RED" text="Cancel" textFill="#9c9898">
+         <font>
+            <Font size="18.0" />
+         </font></JFXButton>
       <JFXCheckBox fx:id="includesResidence" checkedColor="#5190b9" layoutX="137.0" layoutY="467.0" prefHeight="18.0" prefWidth="210.0" text="Includes Residence" textFill="#9c9898" unCheckedColor="#5190b9" />
       <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="462.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -75,6 +78,6 @@
             <Image url="@../Resources/calendar.png" />
          </image>
       </ImageView>
-      <JFXDatePicker fx:id="availableFrom" defaultColor="#5190b9" layoutX="134.0" layoutY="330.0" prefHeight="28.0" prefWidth="210.0" promptText="Available From Date" />
+      <DatePicker fx:id="availableFrom" layoutX="134.0" layoutY="332.0" prefHeight="25.0" prefWidth="210.0" />
    </children>
 </Pane>
