@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -24,8 +25,7 @@ public class AddHouseForRentController implements Initializable {
     public JFXTextField address;
     public JFXTextField region;
     public JFXTextField propertyID;
-    public JFXTextField availableFromDate;
-    public JFXDatePicker availableFrom;
+    public DatePicker availableFrom;
 
 
     ObservableList<String> numberOfRooms = FXCollections.observableArrayList ("STUDIO","ONE","TWO","THREE","FOUR","FIVE","SIX");

@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddCommercialForSaleController">
    <children>
@@ -19,7 +20,10 @@
       <JFXTextField fx:id="yearBuilt" focusColor="#5190b9" layoutX="138.0" layoutY="322.0" prefHeight="25.0" prefWidth="210.0" promptText="Year built" />
       <JFXTextField fx:id="fees" focusColor="#5190b9" layoutX="134.0" layoutY="363.0" prefHeight="25.0" prefWidth="210.0" promptText="Fees" />
       <JFXCheckBox fx:id="parking" checkedColor="#5190b9" layoutX="290.0" layoutY="476.0" text="Parking" textFill="#9c9898" unCheckedColor="#5190b9" />
-      <JFXButton fx:id="saveBtn" layoutY="531.0" onAction="#save" prefHeight="69.0" prefWidth="203.0" text="Save" textFill="#9c9898" />
+      <JFXButton fx:id="saveBtn" layoutY="531.0" onAction="#save" prefHeight="69.0" prefWidth="203.0" ripplerFill="#18e233" text="Save" textFill="#9c9898">
+         <font>
+            <Font size="18.0" />
+         </font></JFXButton>
       <JFXComboBox fx:id="type" focusColor="#5190b9" layoutX="134.0" layoutY="130.0" prefHeight="25.0" prefWidth="210.0" promptText="Type" />
       <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="272.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -76,6 +80,9 @@
             <Image url="@../Resources/identification.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="cancelBtn" layoutX="189.0" layoutY="531.0" onAction="#cancel" prefHeight="69.0" prefWidth="203.0" text="Cancel" textFill="#9c9898" />
+      <JFXButton fx:id="cancelBtn" layoutX="189.0" layoutY="531.0" onAction="#cancel" prefHeight="69.0" prefWidth="203.0" ripplerFill="RED" text="Cancel" textFill="#9c9898">
+         <font>
+            <Font size="18.0" />
+         </font></JFXButton>
    </children>
 </Pane>

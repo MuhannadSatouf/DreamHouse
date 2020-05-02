@@ -87,6 +87,9 @@ public class MainMenuController implements Initializable {
     }
 
     public void transactions(ActionEvent actionEvent) {
+        createNewStage ("/View/transactionsFXML.fxml","Transactions");
+
+
     }
 
     @Override

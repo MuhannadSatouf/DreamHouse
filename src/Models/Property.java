@@ -6,13 +6,13 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Property {
 
-    private  SimpleIntegerProperty property_ID;
-    private  SimpleStringProperty region;
-    private  SimpleStringProperty address;
-    private  SimpleIntegerProperty area;
-    private  SimpleIntegerProperty price;
-    private  SimpleBooleanProperty propertyAvailability;
-    private  SimpleIntegerProperty fees;
+    public   SimpleIntegerProperty property_ID;
+    public   SimpleStringProperty region;
+    public  SimpleStringProperty address;
+    public  SimpleIntegerProperty area;
+    public  SimpleIntegerProperty price;
+    public  SimpleBooleanProperty propertyAvailability;
+    public  SimpleIntegerProperty fees;
 
     public Property(int property_ID, String region, String address, int area, int price,int fees,boolean propertyAvailability) {
         this.fees = new SimpleIntegerProperty(fees);

@@ -28,7 +28,10 @@
          <font>
             <Font size="15.0" />
          </font></JFXTextField>
-      <JFXButton fx:id="saveBtn" layoutX="1.0" layoutY="531.0" onAction="#saveEmployee" prefHeight="69.0" prefWidth="210.0" text="Save" textFill="#9c9898" />
+      <JFXButton fx:id="saveBtn" layoutX="1.0" layoutY="531.0" onAction="#saveEmployee" prefHeight="69.0" prefWidth="210.0" ripplerFill="#18e233" text="Save" textFill="#9c9898">
+         <font>
+            <Font size="18.0" />
+         </font></JFXButton>
       <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/map.png" />
@@ -62,7 +65,10 @@
             <Image url="@../Resources/shield.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="cancelBtn" layoutX="190.0" layoutY="531.0" onAction="#cancel" prefHeight="69.0" prefWidth="210.0" text="Cancel" textFill="#9c9898" />
+      <JFXButton fx:id="cancelBtn" layoutX="190.0" layoutY="531.0" onAction="#cancel" prefHeight="69.0" prefWidth="210.0" ripplerFill="RED" text="Cancel" textFill="#9c9898">
+         <font>
+            <Font size="18.0" />
+         </font></JFXButton>
       <JFXTextField fx:id="employeePassword" focusColor="#5190b9" layoutX="138.0" layoutY="161.0" prefHeight="34.0" prefWidth="210.0" promptText="Password">
          <font>
             <Font size="15.0" />

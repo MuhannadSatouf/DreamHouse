@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddCommercialForRentController">
+   <children>
+      <Pane prefHeight="81.0" prefWidth="400.0" style="-fx-background-color: #404040;">
+         <children>
+            <ImageView fitHeight="92.0" fitWidth="81.0" layoutX="160.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resources/Logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <JFXTextField fx:id="area" focusColor="#5190b9" layoutX="138.0" layoutY="256.0" prefHeight="34.0" prefWidth="210.0" promptText="Area" />
+      <JFXTextField fx:id="yearBuilt" focusColor="#5190b9" layoutX="134.0" layoutY="314.0" prefHeight="25.0" prefWidth="210.0" promptText="Year built" />
+      <JFXTextField fx:id="price" focusColor="#5190b9" layoutX="134.0" layoutY="395.0" prefHeight="25.0" prefWidth="210.0" promptText="Price per month" />
+      <JFXCheckBox fx:id="parking" checkedColor="#5190b9" layoutX="282.0" layoutY="446.0" text="Parking" textFill="#9c9898" unCheckedColor="#5190b9" />
+      <JFXButton fx:id="saveBtn" layoutX="1.0" layoutY="531.0" onAction="#save" prefHeight="68.0" prefWidth="203.0" text="Save" textFill="#9c9898" />
+      <JFXComboBox fx:id="type" focusColor="#5190b9" layoutX="134.0" layoutY="132.0" prefHeight="25.0" prefWidth="210.0" promptText="Type" />
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="262.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/area%20(1).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="313.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/year.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="394.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/price-tag.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="239.0" layoutY="441.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/park.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="131.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/type%20(1).png" />
+         </image>
+      </ImageView>
+      <JFXTextField fx:id="address" focusColor="#5190b9" layoutX="134.0" layoutY="209.0" prefHeight="34.0" prefWidth="210.0" promptText="Address" />
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/address.png" />
+         </image>
+      </ImageView>
+      <JFXTextField fx:id="region" focusColor="#5190b9" layoutX="134.0" layoutY="167.0" prefHeight="34.0" prefWidth="210.0" promptText="region" />
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/location.png" />
+         </image>
+      </ImageView>
+      <JFXComboBox fx:id="floor" focusColor="#5190b9" layoutX="134.0" layoutY="443.0" prefHeight="25.0" prefWidth="66.0" promptText="Floor" />
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="442.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/stairs.png" />
+         </image>
+      </ImageView>
+      <JFXTextField fx:id="propertyID" focusColor="#5190b9" layoutX="134.0" layoutY="88.0" prefHeight="34.0" prefWidth="210.0" promptText="Property ID" />
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="91.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/identification.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="cancelBtn" layoutX="189.0" layoutY="531.0" onAction="#cancel" prefHeight="68.0" prefWidth="203.0" text="Cancel" textFill="#9c9898" />
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="353.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/calendar.png" />
+         </image>
+      </ImageView>
+      <JFXDatePicker fx:id="availableFrom" defaultColor="#5190b9" layoutX="134.0" layoutY="350.0" prefHeight="34.0" prefWidth="210.0" promptText="Available From Date" />
+   </children>
+</Pane>

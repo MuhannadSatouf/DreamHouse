@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddApartmentForSaleController">
+   <children>
+      <Pane prefHeight="81.0" prefWidth="400.0" style="-fx-background-color: #404040;">
+         <children>
+            <ImageView fitHeight="92.0" fitWidth="81.0" layoutX="160.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resources/Logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <JFXTextField fx:id="area" focusColor="#5190b9" layoutX="138.0" layoutY="197.0" prefHeight="34.0" prefWidth="210.0" promptText="Area" />
+      <JFXTextField fx:id="yearBuilt" focusColor="#5190b9" layoutX="138.0" layoutY="246.0" prefHeight="25.0" prefWidth="210.0" promptText="Year built" />
+      <JFXTextField fx:id="fees" focusColor="#5190b9" layoutX="138.0" layoutY="283.0" prefHeight="25.0" prefWidth="210.0" promptText="Fees" />
+      <JFXTextField fx:id="price" focusColor="#5190b9" layoutX="138.0" layoutY="316.0" prefHeight="25.0" prefWidth="210.0" promptText="Price" />
+      <JFXCheckBox fx:id="parking" checkedColor="#5190b9" layoutX="291.0" layoutY="361.0" text="Parking" textFill="#9c9898" unCheckedColor="#5190b9" />
+      <JFXCheckBox fx:id="heating" checkedColor="#5190b9" layoutX="127.0" layoutY="361.0" text="Heating" textFill="#9c9898" unCheckedColor="#5190b9" />
+      <JFXCheckBox fx:id="balcony" checkedColor="#5190b9" layoutX="127.0" layoutY="398.0" text="Balcony" textFill="#9c9898" unCheckedColor="#5190b9" />
+      <JFXComboBox fx:id="roomsNumber" focusColor="#5190b9" layoutX="138.0" layoutY="451.0" prefHeight="25.0" prefWidth="210.0" promptText="Rooms" />
+      <JFXButton fx:id="saveBtn" layoutX="-1.0" layoutY="531.0" onAction="#save" prefHeight="69.0" prefWidth="201.0" text="Save" textFill="#9c9898" />
+      <JFXComboBox fx:id="bathroomsNumber" focusColor="#5190b9" layoutX="138.0" layoutY="499.0" prefHeight="25.0" prefWidth="210.0" promptText="Bathrooms" />
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/area%20(1).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="246.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/year.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="282.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/fees.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/price-tag.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/radiator.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="393.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/balcony%20(1).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="243.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/park.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="451.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/room%20(2).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="497.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/bathroom.png" />
+         </image>
+      </ImageView>
+      <JFXTextField fx:id="address" focusColor="#5190b9" layoutX="138.0" layoutY="152.0" prefHeight="34.0" prefWidth="210.0" promptText="Address" />
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/address.png" />
+         </image>
+      </ImageView>
+      <JFXTextField fx:id="region" focusColor="#5190b9" layoutX="138.0" layoutY="111.0" prefHeight="34.0" prefWidth="210.0" promptText="region" />
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/location.png" />
+         </image>
+      </ImageView>
+      <JFXComboBox fx:id="floor" focusColor="#5190b9" layoutX="292.0" layoutY="395.0" prefHeight="25.0" prefWidth="66.0" promptText="Floor" />
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="243.0" layoutY="393.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/stairs.png" />
+         </image>
+      </ImageView>
+      <JFXTextField fx:id="propertyID" focusColor="#5190b9" layoutX="138.0" layoutY="63.0" prefHeight="34.0" prefWidth="210.0" promptText="Propert ID" />
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/identification.png" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="cancelBtn" layoutX="209.0" layoutY="531.0" onAction="#cancel" prefHeight="69.0" prefWidth="188.0" text="Cancel" textFill="#9c9898" />
+   </children>
+</Pane>

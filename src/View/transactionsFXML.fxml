@@ -1,14 +1,251 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="View.TransectionsFXML"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.transactionsController">
+   <children>
+      <Pane prefHeight="81.0" prefWidth="850.0" style="-fx-background-color: #404040;">
+         <children>
+            <ImageView fitHeight="92.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resources/Logo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="345.0" layoutY="21.0" prefHeight="39.0" prefWidth="161.0" text="Transactions" textFill="#5190b9">
+               <font>
+                  <Font name="System Bold Italic" size="26.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="55.0" fitWidth="54.0" layoutX="782.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resources/arrows.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <TabPane layoutY="81.0" prefHeight="419.0" prefWidth="850.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Sell">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #A9A9A9;">
+                     <children>
+                        <Pane layoutX="21.0" layoutY="25.0" prefHeight="304.0" prefWidth="375.0" style="-fx-background-color: #404040;">
+                           <children>
+                              <JFXTextField fx:id="propertyIDSale" focusColor="#5190b9" layoutX="37.0" layoutY="39.0" prefHeight="47.0" prefWidth="299.0" promptText="Property ID">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font></JFXTextField>
+                              <Label layoutX="36.0" layoutY="135.0" prefHeight="17.0" prefWidth="54.0" text="Region:" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="36.0" layoutY="167.0" prefHeight="17.0" prefWidth="67.0" text="Address:" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="36.0" layoutY="203.0" prefHeight="20.0" prefWidth="43.0" text="Area:" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="36.0" layoutY="238.0" prefHeight="17.0" prefWidth="54.0" text="Price:" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label fx:id="getRegionSale" layoutX="128.0" layoutY="135.0" prefHeight="17.0" prefWidth="235.0" text="Label" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="getAddressSale" layoutX="126.0" layoutY="167.0" prefHeight="17.0" prefWidth="235.0" text="Label" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="getAreaSale" layoutX="126.0" layoutY="203.0" prefHeight="17.0" prefWidth="235.0" text="Label" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="getPriceSale" layoutX="126.0" layoutY="238.0" prefHeight="17.0" prefWidth="235.0" text="Label" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="441.0" layoutY="25.0" prefHeight="304.0" prefWidth="375.0" style="-fx-background-color: #404040;">
+                           <children>
+                              <JFXTextField fx:id="customerSSNSale" focusColor="#5190b9" layoutX="32.0" layoutY="39.0" prefHeight="47.0" prefWidth="300.0" promptText="Customer SSN">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font></JFXTextField>
+                              <Label layoutX="32.0" layoutY="136.0" prefHeight="20.0" prefWidth="67.0" text="Name:" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="32.0" layoutY="172.0" prefHeight="20.0" prefWidth="71.0" text="Address:" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="33.0" layoutY="210.0" prefHeight="20.0" prefWidth="54.0" text="Phone:" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label layoutX="32.0" layoutY="241.0" prefHeight="20.0" prefWidth="54.0" text="Email:" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font></Label>
+                              <Label fx:id="getNameSale" layoutX="112.0" layoutY="136.0" prefHeight="17.0" prefWidth="235.0" text="Label" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="getAddressSaleCustomer" layoutX="112.0" layoutY="172.0" prefHeight="17.0" prefWidth="235.0" text="Label" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="getPhoneSale" layoutX="112.0" layoutY="210.0" prefHeight="17.0" prefWidth="235.0" text="Label" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="getEmailSale" layoutX="112.0" layoutY="241.0" prefHeight="17.0" prefWidth="235.0" text="Label" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <JFXButton layoutX="21.0" layoutY="344.0" onAction="#sellProperty" prefHeight="30.0" prefWidth="795.0" ripplerFill="#18e233" style="-fx-background-color: #404040;" text="Sell" textFill="#5190b9">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Rent">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #A9A9A9;">
+                     <children>
+                        <Pane layoutX="23.0" layoutY="26.0" prefHeight="304.0" prefWidth="375.0" style="-fx-background-color: #404040;">
+                           <children>
+                              <JFXTextField fx:id="propertyIDRent" focusColor="#5190b9" layoutX="38.0" layoutY="39.0" prefHeight="47.0" prefWidth="282.0" promptText="Property ID">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </JFXTextField>
+                              <Label layoutX="38.0" layoutY="135.0" prefHeight="17.0" prefWidth="54.0" text="Region:" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="38.0" layoutY="167.0" prefHeight="17.0" prefWidth="67.0" text="Address:" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="38.0" layoutY="203.0" prefHeight="20.0" prefWidth="40.0" text="Area:" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="38.0" layoutY="238.0" prefHeight="17.0" prefWidth="54.0" text="Price:" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="getRegionRent" layoutX="134.0" layoutY="135.0" prefHeight="17.0" prefWidth="235.0" text="Label" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="getAddressRent" layoutX="132.0" layoutY="167.0" prefHeight="17.0" prefWidth="235.0" text="Label" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="getAreaRent" layoutX="132.0" layoutY="203.0" prefHeight="17.0" prefWidth="235.0" text="Label" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="getPriceRent" layoutX="132.0" layoutY="238.0" prefHeight="17.0" prefWidth="235.0" text="Label" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane layoutX="443.0" layoutY="26.0" prefHeight="304.0" prefWidth="375.0" style="-fx-background-color: #404040;">
+                           <children>
+                              <JFXTextField fx:id="customerSSNRent" focusColor="#5190b9" layoutX="38.0" layoutY="39.0" prefHeight="47.0" prefWidth="297.0" promptText="Customer SSN">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </JFXTextField>
+                              <Label layoutX="38.0" layoutY="136.0" prefHeight="20.0" prefWidth="54.0" text="Name:" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="36.0" layoutY="172.0" prefHeight="20.0" prefWidth="65.0" text="Address:" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="38.0" layoutY="210.0" prefHeight="20.0" prefWidth="61.0" text="Phone:" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="38.0" layoutY="241.0" prefHeight="20.0" prefWidth="54.0" text="Email:" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="getNameRent" layoutX="112.0" layoutY="136.0" prefHeight="17.0" prefWidth="235.0" text="Label" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="getAddressRentCustomer" layoutX="112.0" layoutY="172.0" prefHeight="17.0" prefWidth="235.0" text="Label" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="getPhoneRent" layoutX="112.0" layoutY="210.0" prefHeight="17.0" prefWidth="235.0" text="Label" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="getEmailRent" layoutX="112.0" layoutY="241.0" prefHeight="17.0" prefWidth="235.0" text="Label" textFill="#5190b9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <JFXButton layoutX="23.0" layoutY="346.0" onAction="#rentProperty" prefHeight="30.0" prefWidth="798.0" ripplerFill="#18e233" style="-fx-background-color: #404040;" text="Rent" textFill="#5190b9">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </JFXButton>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</Pane>

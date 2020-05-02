@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,8 +21,8 @@ public class AddLandForRentController implements Initializable {
     public JFXButton cancelBtn;
     public JFXCheckBox includesResidence;
     public JFXCheckBox irrigated;
+    public DatePicker availableFrom;
 
-    public JFXDatePicker availableFrom;
     ObservableList<String> propertyType = FXCollections.observableArrayList ("VACANT_LAND","RANCH","FARM","TIMBERLAND");
     public void save(ActionEvent actionEvent) {
 

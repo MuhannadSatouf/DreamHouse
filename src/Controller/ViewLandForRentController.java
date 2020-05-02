@@ -1,12 +1,15 @@
 package Controller;
 
+import Models.DataBaseHandler;
+import Models.Land;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ViewLandForRentController implements Initializable {
@@ -27,7 +30,9 @@ public class ViewLandForRentController implements Initializable {
     public TableColumn availabilityCol;
     public TableView tableOfLandForRent;
     public TableColumn residentialCol;
-    public TableColumn availableFromDateCol;
+
+    public TableColumn availableFromCol;
+    public ContextMenu contextTable;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -41,5 +46,58 @@ public class ViewLandForRentController implements Initializable {
 
         downPane.prefWidthProperty ().bind (mainPane.widthProperty ());
         downPane.prefHeightProperty ().bind (mainPane.heightProperty ());
+    }
+
+    public void editInfo(ActionEvent actionEvent) {
+    }
+
+/*
+    public void deleteInfo(ActionEvent actionEvent) {
+        Land landToDelete = tableOfLandForRent.getSelectionModel ().getSelectedItem ();
+        if (landToDelete == null) {
+            Alert alert = new Alert (Alert.AlertType.ERROR);
+            alert.setHeaderText (null);
+            alert.setContentText ("Please choose a land first!");
+            return;
+
+        }
+        Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+        alert.setTitle ("Delete Book");
+        alert.setContentText ("Are you sure want to delete the book" + landToDelete.getProperty_ID () + "?");
+
+        Optional<ButtonType> answerOfUser = alert.showAndWait ();
+
+        if (answerOfUser.get () == ButtonType.OK) {
+            boolean result = DataBaseHandler.getInstance ().deleteLandForRentFromDatabase (landToDelete);
+            if (result) {
+                alert = new Alert (Alert.AlertType.INFORMATION);
+                alert.setHeaderText (null);
+                alert.setContentText ("Book was deleted successfully");
+                alert.show ();
+                listOfLand.remove (landToDelete);
+
+            } else {
+
+                alert = new Alert (Alert.AlertType.INFORMATION);
+                alert.setHeaderText (null);
+                alert.setContentText ("Failed");
+                alert.show ();
+            }
+
+  }
+        }
+*/
+
+
+
+
+
+
+
+
+    public void deleteInfo(ActionEvent actionEvent) {
+    }
+
+    public void refresh(ActionEvent actionEvent) {
     }
 }

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
@@ -19,7 +21,7 @@
                   <TableColumn fx:id="areaCol" prefWidth="75.0" text="Area" />
                   <TableColumn fx:id="yearCol" prefWidth="75.0" text="Year built" />
                   <TableColumn fx:id="priceCol" prefWidth="75.0" text="Price" />
-                  <TableColumn fx:id="feesCol" prefWidth="75.0" text="Fees" />
+                  <TableColumn fx:id="availableFromCol" prefWidth="75.0" text="AvailableFrom" />
                   <TableColumn fx:id="typeCol" prefWidth="75.0" text="Type" />
                   <TableColumn fx:id="IrrigatedCol" prefWidth="75.0" text="Irrigated" />
                   <TableColumn fx:id="residentialCol" prefWidth="75.0" text="Residential" />
@@ -28,6 +30,15 @@
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
+               <contextMenu>
+                  <ContextMenu>
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#editInfo" text="Edit Item" />
+                        <MenuItem mnemonicParsing="false" onAction="#deleteInfo" text="Delete Item" />
+                        <MenuItem mnemonicParsing="false" onAction="#refresh" text="Refresh" />
+                     </items>
+                  </ContextMenu>
+               </contextMenu>
             </TableView>
          </children>
       </Pane>

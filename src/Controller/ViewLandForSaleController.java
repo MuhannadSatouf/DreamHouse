@@ -60,7 +60,7 @@ public class ViewLandForSaleController implements Initializable {
                 "property.Area,property.Price,Availability,land.Type,land.Irrigated,land.Includes_Residence "+
                 "FROM property,land "+
                 "WHERE property.Property_ID=land.Property_ID ";
-//                + "AND fees > 0";
+        //                + "AND fees > 0";
 
 
         ResultSet resultSet = databaseHandler.execQuery (qu);

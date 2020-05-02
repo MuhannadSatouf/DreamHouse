@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.DatePicker;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,9 +22,8 @@ public class AddCommercialForRentController implements Initializable {
     public JFXComboBox floor;
     public JFXTextField propertyID;
     public JFXButton cancelBtn;
+    public DatePicker availableFrom;
 
-
-    public JFXDatePicker availableFrom;
 
     ObservableList<String> propertyType = FXCollections.observableArrayList ("OFFICES","RETAIL_PROPERTIES","GAS_STATIONS","STORES","RESTAURANTS");
     ObservableList<String> floorNumber = FXCollections.observableArrayList ("GROUND_FLOOR","ONE","TWO","THREE","FOUR","FIVE","SIX","SEVEN","NONE","MORE");
