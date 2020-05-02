@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControllerForViewHouseForRent implements Initializable {
+public class ViewHouseForRentController implements Initializable {
     public Pane mainPane;
     public Pane downPane;
 

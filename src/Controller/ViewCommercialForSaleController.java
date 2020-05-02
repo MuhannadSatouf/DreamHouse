@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControllerForViewCommercialForRent implements Initializable {
+public class ViewCommercialForSaleController implements Initializable {
     public Pane mainPane;
     public Pane downPane;
 
@@ -19,13 +19,13 @@ public class ControllerForViewCommercialForRent implements Initializable {
     public TableColumn areaCol;
     public TableColumn yearCol;
     public TableColumn priceCol;
+    public TableColumn feesCol;
     public TableColumn typeCol;
     public TableColumn floorCol;
     public Pane upPane;
     public HBox hbox;
     public TableColumn availabilityCol;
-    public TableView tableOfCommercialForRent;
-    public TableColumn availableFromDateCol;
+    public TableView tableOfCommercialForSale;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -34,8 +34,8 @@ public class ControllerForViewCommercialForRent implements Initializable {
         upPane.prefWidthProperty ().bind (mainPane.widthProperty ());
 
 
-        tableOfCommercialForRent.prefWidthProperty ().bind (downPane.widthProperty ());
-       tableOfCommercialForRent.prefHeightProperty ().bind (downPane.heightProperty ());
+        tableOfCommercialForSale.prefWidthProperty ().bind (downPane.widthProperty ());
+        tableOfCommercialForSale.prefHeightProperty ().bind (downPane.heightProperty ());
 
         downPane.prefWidthProperty ().bind (mainPane.widthProperty ());
         downPane.prefHeightProperty ().bind (mainPane.heightProperty ());

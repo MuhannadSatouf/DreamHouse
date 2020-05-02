@@ -18,7 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class ControllerForViewLandForSale implements Initializable {
+public class ViewLandForSaleController implements Initializable {
     public Pane mainPane;
     public Pane downPane;
     public Pane upPane;

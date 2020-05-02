@@ -9,23 +9,19 @@ import javafx.scene.layout.Pane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControllerForViewCommercialForSale implements Initializable {
+public class ViewEmployeeController implements Initializable {
     public Pane mainPane;
     public Pane downPane;
-
-    public TableColumn propertyIDCol;
-    public TableColumn regionCol;
-    public TableColumn addressCol;
-    public TableColumn areaCol;
-    public TableColumn yearCol;
-    public TableColumn priceCol;
-    public TableColumn feesCol;
+    public TableView tableOfEmployee;
+    public TableColumn SSNCol;
     public TableColumn typeCol;
-    public TableColumn floorCol;
-    public Pane upPane;
+    public TableColumn nameCol;
+    public TableColumn addressCol;
+    public TableColumn phoneCol;
+    public TableColumn emailCol;
+    public TableColumn employeeIDCol;
     public HBox hbox;
-    public TableColumn availabilityCol;
-    public TableView tableOfCommercialForSale;
+    public Pane upPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -34,8 +30,8 @@ public class ControllerForViewCommercialForSale implements Initializable {
         upPane.prefWidthProperty ().bind (mainPane.widthProperty ());
 
 
-        tableOfCommercialForSale.prefWidthProperty ().bind (downPane.widthProperty ());
-        tableOfCommercialForSale.prefHeightProperty ().bind (downPane.heightProperty ());
+        tableOfEmployee.prefWidthProperty ().bind (downPane.widthProperty ());
+        tableOfEmployee.prefHeightProperty ().bind (downPane.heightProperty ());
 
         downPane.prefWidthProperty ().bind (mainPane.widthProperty ());
         downPane.prefHeightProperty ().bind (mainPane.heightProperty ());

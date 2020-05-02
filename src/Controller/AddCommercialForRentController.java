@@ -9,28 +9,24 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControllerForAddHouseForRent implements Initializable {
+public class AddCommercialForRentController implements Initializable {
     public JFXTextField area;
     public JFXTextField yearBuilt;
     public JFXTextField price;
     public JFXCheckBox parking;
-    public JFXCheckBox heating;
-    public JFXCheckBox garage;
-    public JFXCheckBox balcony;
-    public JFXComboBox roomsNumber;
     public JFXButton saveBtn;
-    public JFXButton cancelBtn;
-    public JFXComboBox bathroomsNumber;
+    public JFXComboBox type;
     public JFXTextField address;
     public JFXTextField region;
+    public JFXComboBox floor;
     public JFXTextField propertyID;
-    public JFXTextField availableFromDate;
+    public JFXButton cancelBtn;
+
+
     public JFXDatePicker availableFrom;
 
-
-    ObservableList<String> numberOfRooms = FXCollections.observableArrayList ("STUDIO","ONE","TWO","THREE","FOUR","FIVE","SIX");
-    ObservableList<String> numberOfBathrooms = FXCollections.observableArrayList ("ONE","TWO","THREE");
-
+    ObservableList<String> propertyType = FXCollections.observableArrayList ("OFFICES","RETAIL_PROPERTIES","GAS_STATIONS","STORES","RESTAURANTS");
+    ObservableList<String> floorNumber = FXCollections.observableArrayList ("GROUND_FLOOR","ONE","TWO","THREE","FOUR","FIVE","SIX","SEVEN","NONE","MORE");
 
     public void save(ActionEvent actionEvent) {
     }
@@ -40,7 +36,7 @@ public class ControllerForAddHouseForRent implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        roomsNumber.setItems (numberOfRooms);
-        bathroomsNumber.setItems (numberOfBathrooms);
+        type.setItems (propertyType);
+        floor.setItems (floorNumber);
     }
 }

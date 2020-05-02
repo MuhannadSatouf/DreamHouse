@@ -2,6 +2,7 @@ package Controller;
 
 
 import Models.DataBaseHandler;
+import Models.PassWordHash;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -16,7 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class ControllerForAddCustomer implements Initializable {
+public class AddCustomerController implements Initializable {
     public JFXTextField address;
     public JFXTextField phone;
     public JFXTextField email;
@@ -42,29 +43,16 @@ public class ControllerForAddCustomer implements Initializable {
             return;
         }
 
-        dataBaseHandler.addUser (customerSSN.getText (), customerPassword.getText (), name.getText (), address.getText (), phone.getText (), email.getText ());
+        // make the password hashed
+        String password = new PassWordHash().generateHash(customerPassword.getText());
+        // create user and save the data in the table user in ths database
+        dataBaseHandler.addUser (customerSSN.getText (), password, name.getText (),
+                address.getText (), phone.getText (), email.getText ());
+
+        //add info in the customer table
+        dataBaseHandler.addCustomer(customerType.getValue().toString(),customerSSN.getText());
 
 
-        try {
-
-            String qu = "INSERT INTO customer (Customer_type,SSN)" +
-                    "VALUES(?,?)";
-
-
-            PreparedStatement pst;
-            pst = DataBaseHandler.connection.prepareStatement (qu);
-            pst.setString (1, customerType.getValue ().toString ());
-            pst.setString (2, customerSSN.getText ());
-
-            pst.execute ();
-            pst.close ();
-
-        } catch (SQLException throwable) {
-            throwable.printStackTrace ();
-        }
-
-
-        ;
     }
 
     public void cancel(ActionEvent actionEvent) {

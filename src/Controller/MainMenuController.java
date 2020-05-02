@@ -1,6 +1,5 @@
 package Controller;
 
-import Models.EmailSend;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControllerForMainMenu implements Initializable {
+public class MainMenuController implements Initializable {
     public JFXButton addPropertyBtn;
     public JFXButton viewPropertyBtn;
     public JFXButton addUserBtn;
@@ -60,7 +59,7 @@ public class ControllerForMainMenu implements Initializable {
 
 
     public void backToRegister(ActionEvent actionEvent) {
-        createNewStage ("/View/registerFXML.fxml", "Register");
+        createNewStage ("/View/logIn.fxml", "Register");
 
 
     }

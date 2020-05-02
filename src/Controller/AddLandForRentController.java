@@ -9,7 +9,7 @@ import javafx.fxml.Initializable;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ControllerForAddLandForRent implements Initializable {
+public class AddLandForRentController implements Initializable {
     public JFXTextField area;
     public JFXButton saveBtn;
     public JFXComboBox type;

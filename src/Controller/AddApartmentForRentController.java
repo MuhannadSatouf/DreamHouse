@@ -14,7 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class ControllerForAddApartmentForRent implements Initializable {
+public class AddApartmentForRentController implements Initializable {
     public JFXTextField area;
     public JFXTextField yearBuilt;
     public JFXCheckBox parking;

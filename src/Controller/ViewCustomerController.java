@@ -18,7 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class ControllerForViewCustomer implements Initializable {
+public class ViewCustomerController implements Initializable {
     public Pane upPane;
     public HBox hbox;
     public Pane mainPane;

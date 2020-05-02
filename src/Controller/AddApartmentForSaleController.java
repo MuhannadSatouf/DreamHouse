@@ -16,7 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class ControllerForAddApartmentForSale implements Initializable {
+public class AddApartmentForSaleController implements Initializable {
     public JFXTextField propertyID;
     public JFXTextField region;
     public JFXTextField address;

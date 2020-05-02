@@ -17,7 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class ControllerForAddLandForSale implements Initializable {
+public class AddLandForSaleController implements Initializable {
     public JFXTextField area;
     public JFXCheckBox irrigated;
     public JFXButton saveBtn;

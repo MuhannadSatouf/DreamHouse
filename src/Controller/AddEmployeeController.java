@@ -4,7 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 
-public class ControllerForAddEmployee {
+public class AddEmployeeController {
     public JFXTextField address;
     public JFXTextField phone;
     public JFXTextField email;
