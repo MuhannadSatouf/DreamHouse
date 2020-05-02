@@ -29,6 +29,6 @@ public class transactionsController {
     public void sellProperty(ActionEvent actionEvent) {
     }
 
-    public void rentProperty(ActionEvent actionEvent) {
+    public void rentProperty(javafx.event.ActionEvent actionEvent) {
     }
 }
