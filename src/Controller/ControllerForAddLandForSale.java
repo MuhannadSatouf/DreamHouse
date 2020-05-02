@@ -31,64 +31,44 @@ public class ControllerForAddLandForSale implements Initializable {
     public JFXCheckBox includesResidence;
 
     DataBaseHandler dataBaseHandler;
-    ObservableList<String> propertyType = FXCollections.observableArrayList ("Vacant Land","Ranch","Farm","Timberland");
+    ObservableList<String> propertyType = FXCollections.observableArrayList("Vacant Land", "Ranch", "Farm", "Timberland");
+
     public void save(ActionEvent actionEvent) {
 
-
-        if (propertyID.getText ().isEmpty () || region.getText ().isEmpty () || address.getText ().isEmpty () ||
-                price.getText ().isEmpty ()  ) {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
-            alert.setHeaderText (null);
-            alert.setContentText ("Please enter in all fields");
-            alert.showAndWait ();
+        if (propertyID.getText().isEmpty() || region.getText().isEmpty() || address.getText().isEmpty() ||
+                price.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter in all fields");
+            alert.showAndWait();
             return;
         }
+<<<<<<< HEAD
 
         dataBaseHandler.addProperty (propertyID.getText (),region.getText (),address.getText (),area.getText (),price.getText (),fees.getText());
 
+=======
+        dataBaseHandler.addPropertyForSale(propertyID.getText(), region.getText(), address.getText(), area.getText(), fees.getText(),price.getText());
+>>>>>>> d65d5f0b29bc6bdbddcadb89173e2a9fd5db4b20
 
         try {
-
-
-            String qu ="INSERT INTO land (Type,Irrigated,Includes_Residence,Property_ID) " +"VALUES (?,?,?,?) ";
-
-
+            String qu = "INSERT INTO land (Type,Irrigated,Includes_Residence,Property_ID) " + "VALUES (?,?,?,?) ";
             PreparedStatement pst;
-            pst = DataBaseHandler.connection.prepareStatement (qu);
-            pst.setString (1, type.getValue ().toString ());
-            pst.setBoolean (2, irrigated.isSelected ());
-            pst.setBoolean (3, includesResidence.isSelected ());
-            pst.setString (4, propertyID.getText ());
+            pst = DataBaseHandler.connection.prepareStatement(qu);
+            pst.setString(1, type.getValue().toString());
+            pst.setBoolean(2, irrigated.isSelected());
+            pst.setBoolean(3, includesResidence.isSelected());
+            pst.setString(4, propertyID.getText());
 
-            pst.execute ();
-            pst.close ();
+            pst.execute();
+            pst.close();
 
         } catch (SQLException throwable) {
-            throwable.printStackTrace ();
+            throwable.printStackTrace();
         }
 
-        try {
 
-            String qu ="INSERT INTO forsale (Fees,Property_ID) " +"VALUES (?,?) ";
-
-
-            PreparedStatement pst;
-            pst = DataBaseHandler.connection.prepareStatement (qu);
-            pst.setString (1, fees.getText ());
-            pst.setString (2, propertyID.getText ());
-
-            pst.execute ();
-            pst.close ();
-
-        } catch (SQLException throwable) {
-            throwable.printStackTrace ();
-        }
     }
-
-
-
-
-
 
 
     public void cancel(ActionEvent actionEvent) {
@@ -96,7 +76,7 @@ public class ControllerForAddLandForSale implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        dataBaseHandler=DataBaseHandler.getInstance ();
-        type.setItems (propertyType);
+        dataBaseHandler = DataBaseHandler.getInstance();
+        type.setItems(propertyType);
     }
 }

@@ -10,22 +10,27 @@ public class Property {
     private  SimpleStringProperty region;
     private  SimpleStringProperty address;
     private  SimpleIntegerProperty area;
-    private  SimpleIntegerProperty  yearBuilt;
     private  SimpleIntegerProperty price;
     private  SimpleBooleanProperty propertyAvailability;
+    private  SimpleIntegerProperty fees;
 
-    public Property(int property_ID, String region, String address, int area, int yearBuilt, int price,boolean propertyAvailability) {
+    public Property(int property_ID, String region, String address, int area, int price,int fees,boolean propertyAvailability) {
+        this.fees = new SimpleIntegerProperty(fees);
         this.property_ID = new SimpleIntegerProperty (property_ID);
         this.region = new SimpleStringProperty (region);
         this.address = new SimpleStringProperty (address);
         this.area = new SimpleIntegerProperty  (area);
-        this.yearBuilt = new SimpleIntegerProperty (yearBuilt);
         this.price = new SimpleIntegerProperty (price);
         this.propertyAvailability=new SimpleBooleanProperty (propertyAvailability);
     }
-    public Property() {
 
 
+    public int getFees() {
+        return fees.get();
+    }
+
+    public SimpleIntegerProperty feesProperty() {
+        return fees;
     }
 
     public int getProperty_ID() {
@@ -44,13 +49,7 @@ public class Property {
         return area;
     }
 
-    public int getYearBuilt() {
-        return yearBuilt.get ();
-    }
 
-    public SimpleIntegerProperty yearBuiltProperty() {
-        return yearBuilt;
-    }
 
     public int getPrice() {
         return price.get ();

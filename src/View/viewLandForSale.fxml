@@ -17,9 +17,8 @@
                 <TableColumn fx:id="regionCol" prefWidth="75.0" text="region" />
                   <TableColumn fx:id="addressCol" prefWidth="75.0" text="Address" />
                   <TableColumn fx:id="areaCol" prefWidth="75.0" text="Area" />
-                  <TableColumn fx:id="yearCol" prefWidth="75.0" text="Year built" />
                   <TableColumn fx:id="priceCol" prefWidth="75.0" text="Price" />
-                  <TableColumn fx:id="heatingCol" prefWidth="75.0" text="Fees" />
+                  <TableColumn fx:id="feesCol" prefWidth="75.0" text="Fees" />
                   <TableColumn fx:id="typeCol" prefWidth="75.0" text="Type" />
                   <TableColumn fx:id="IrrigatedCol" prefWidth="75.0" text="Irrigated" />
                   <TableColumn fx:id="residentialCol" prefWidth="75.0" text="Residential" />

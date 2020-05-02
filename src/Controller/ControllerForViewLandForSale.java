@@ -21,6 +21,9 @@ import java.util.ResourceBundle;
 public class ControllerForViewLandForSale implements Initializable {
     public Pane mainPane;
     public Pane downPane;
+    public Pane upPane;
+    public HBox hbox;
+    public TableView tableOfLandForSale;
     public TableColumn<Land, Integer> propertyIDCol;
     public TableColumn<Land, String> regionCol;
     public TableColumn<Land, String> addressCol;
@@ -29,76 +32,35 @@ public class ControllerForViewLandForSale implements Initializable {
     public TableColumn<Land, Integer> priceCol;
     public TableColumn<Land, String> typeCol;
     public TableColumn<Land, Boolean> IrrigatedCol;
-    public Pane upPane;
-    public HBox hbox;
     public TableColumn<Land, Boolean> availabilityCol;
-    public TableView tableOfLandForSale;
     public TableColumn<Land, Boolean> residentialCol;
-    public TableColumn<ForSale, String> feesCol;
+    public TableColumn<Land, Integer> feesCol;
 
 
-    ObservableList<Land> listOfLand1 = FXCollections.observableArrayList ();
     ObservableList<Land> listOfLand2 = FXCollections.observableArrayList ();
-    ObservableList<ForSale> listOfLand3 = FXCollections.observableArrayList ();
-
 
     private void editCol() {
         propertyIDCol.setCellValueFactory (new PropertyValueFactory<> ("property_ID"));
         regionCol.setCellValueFactory (new PropertyValueFactory<> ("region"));
         addressCol.setCellValueFactory (new PropertyValueFactory<> ("address"));
         areaCol.setCellValueFactory (new PropertyValueFactory<> ("area"));
-        yearCol.setCellValueFactory (new PropertyValueFactory<> ("yearBuilt"));
         priceCol.setCellValueFactory (new PropertyValueFactory<> ("price"));
-        availabilityCol.setCellValueFactory (new PropertyValueFactory<> ("propertyAvailability"));
+        feesCol.setCellValueFactory (new PropertyValueFactory<> ("fees"));
+        typeCol.setCellValueFactory (new PropertyValueFactory<> ("type"));
         IrrigatedCol.setCellValueFactory (new PropertyValueFactory<> ("irrigated"));
         residentialCol.setCellValueFactory (new PropertyValueFactory<> ("includesResidence"));
-        typeCol.setCellValueFactory (new PropertyValueFactory<> ("type"));
-        feesCol.setCellValueFactory (new PropertyValueFactory<> ("fees"));
-
-        //feesCol.setCellValueFactory (new Callback<TableColumn.CellDataFeatures<ForSale, String>, ObservableValue<String>> ()  {
-     /*       @Override
-            public ObservableValue<String> call(TableColumn.CellDataFeatures<ForSale, String> forSaleIntegerCellDataFeatures) {
-                return forSaleIntegerCellDataFeatures.getValue ().feesProperty () ;
-
-            }
-        });*/
-
-
-
-
-
-    }
-
-
-    private void loadFees (){
-        DataBaseHandler databaseHandler = DataBaseHandler.getInstance ();
-        String qu ="SELECT Fees FROM forsale WHERE Property.Property_ID=forsale.Property_ID";
-        ResultSet resultSet = databaseHandler.execQuery (qu);
-        try {
-            while (resultSet.next ()) {
-                int fees = resultSet.getInt ("Fees");
-                //  listOfLand3.add (new ForSale (fees));
-
-            }
-
-        }catch (SQLException e){
-            e.printStackTrace ();
-        }
-
-
+        availabilityCol.setCellValueFactory (new PropertyValueFactory<> ("propertyAvailability"));
 
     }
 
     private void loadData() {
         DataBaseHandler databaseHandler = DataBaseHandler.getInstance ();
 
-
-        String qu = "SELECT Property.Property_ID,property.Region,Property.Address,Property.Area,Property.Year,Property.Price,Property.Availability," +
-                "land.Type,land.Irrigated,land.Includes_Residence," +
-                "forsale.Fees " +
-                "FROM Property,land,forsale " +
-                "WHERE Property.Property_ID=land.Property_ID " +
-                "AND Property.Property_ID=forsale.Property_ID";
+        String qu = "SELECT property.fees,property.Property_ID,property.Region,property.Address," +
+                "property.Area,property.Price,Availability,land.Type,land.Irrigated,land.Includes_Residence "+
+                "FROM property,land "+
+                "WHERE property.Property_ID=land.Property_ID ";
+//                + "AND fees > 0";
 
 
         ResultSet resultSet = databaseHandler.execQuery (qu);
@@ -108,30 +70,20 @@ public class ControllerForViewLandForSale implements Initializable {
                 String region = resultSet.getString ("Region");
                 String address = resultSet.getString ("Address");
                 int area = resultSet.getInt ("Area");
-                int year = resultSet.getInt ("Year");
                 int price = resultSet.getInt ("Price");
                 boolean isAvail = resultSet.getBoolean ("Availability");
                 String type = resultSet.getString ("Type");
                 boolean irrigated = resultSet.getBoolean ("Irrigated");
                 boolean includesResidence = resultSet.getBoolean ("Includes_Residence");
-                //  int fees = resultSet.getInt ("Fees");
-                // listOfLand1.add (new Property (propertyID,region,address,area,year,price,isAvail));
-                listOfLand2.add (new Land (propertyID, region, address, area, year, price, isAvail, type, irrigated, includesResidence));
-                //listOfLand3.add (new ForSale (propertyID,region,address,area,year,price,isAvail,fees));
+                int fees = resultSet.getInt("fees");
 
-
+                listOfLand2.add (new Land (propertyID,region,address,area,price,fees,type,irrigated,includesResidence,isAvail));
 
             }
         } catch (SQLException e) {
             e.printStackTrace ();
         }
         tableOfLandForSale.setItems (listOfLand2);
-        tableOfLandForSale.setItems (listOfLand3);
-
-        // tableOfLandForSale.setItems (listOfLand1);
-
-        // tableOfLandForSale.setItems (listOfLand3);
-
 
     }
 
