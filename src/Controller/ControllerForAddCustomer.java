@@ -44,12 +44,10 @@ public class ControllerForAddCustomer implements Initializable {
 
         dataBaseHandler.addUser (customerSSN.getText (), customerPassword.getText (), name.getText (), address.getText (), phone.getText (), email.getText ());
 
-
         try {
 
             String qu = "INSERT INTO customer (Customer_type,SSN)" +
                     "VALUES(?,?)";
-
 
             PreparedStatement pst;
             pst = DataBaseHandler.connection.prepareStatement (qu);
@@ -63,8 +61,6 @@ public class ControllerForAddCustomer implements Initializable {
             throwable.printStackTrace ();
         }
 
-
-        ;
     }
 
     public void cancel(ActionEvent actionEvent) {

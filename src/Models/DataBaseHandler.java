@@ -7,7 +7,7 @@ import java.sql.*;
 public class DataBaseHandler {
 
     private static DataBaseHandler databaseHandler = null;
-    public static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    public static final String DRIVER = "com.mysql.jdbc.Driver";
     public static Connection connection = null;
     public static Statement statement = null;
 
@@ -77,10 +77,10 @@ public class DataBaseHandler {
     }
 
 
-    public void addProperty(String property_Id, String region, String address, String area, String price) {
+    public void addProperty(String property_Id, String region, String address, String area,String price,String fees) {
         try {
-            String qu = "INSERT INTO property (Property_ID,Region,Address,Area,Price) " +
-                    "VALUES(?,?,?,?,?)";
+            String qu = "INSERT INTO property (Property_ID,Region,Address,Area,Price,Fees) " +
+                    "VALUES(?,?,?,?,?,?.?)";
 
             PreparedStatement pst;
             pst = DataBaseHandler.connection.prepareStatement (qu);
@@ -90,20 +90,16 @@ public class DataBaseHandler {
             pst.setString (3, address);
             pst.setString (4, area);
             pst.setString (5, price);
+            pst.setString (6, fees);
             pst.execute ();
             pst.close ();
 
         } catch (SQLException throwable) {
             throwable.printStackTrace ();
         }
-
-
     }
 
-
-
     public void addUser(String customerSSn, String customerPassword, String name, String address, String phone, String email) {
-
 
         try {
             String qu = "INSERT INTO user (SSN,Password,Name,Address,Phone,Email) " +

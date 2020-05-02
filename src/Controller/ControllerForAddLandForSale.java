@@ -44,7 +44,7 @@ public class ControllerForAddLandForSale implements Initializable {
             return;
         }
 
-        dataBaseHandler.addProperty (propertyID.getText (),region.getText (),address.getText (),area.getText (),price.getText ());
+        dataBaseHandler.addProperty (propertyID.getText (),region.getText (),address.getText (),area.getText (),price.getText (),fees.getText());
 
 
         try {
