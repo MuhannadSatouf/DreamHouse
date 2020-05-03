@@ -1,10 +1,6 @@
 package Models;
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> ad01d1358ef0bf1baa188442337f0ce448a7f596
 import java.sql.*;
 
 public class DataBaseHandler {
@@ -16,34 +12,35 @@ public class DataBaseHandler {
 
     public static DataBaseHandler getInstance() {
         if (databaseHandler == null) {
-            databaseHandler = new DataBaseHandler();
+            try {
+                databaseHandler = new DataBaseHandler ();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace ();
+            }
         }
         return databaseHandler;
     }
 
-    public void deleteInstance() {
-        databaseHandler = null;
-    }
 
-    public DataBaseHandler() {
-        createConnection();
+    public DataBaseHandler() throws SQLException {
+        createConnection ();
     }
 
 
     void createConnection() {
         try {
-            Class.forName(DRIVER).newInstance();
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false", "root", "root");
+            Class.forName (DRIVER).newInstance ();
+            connection = DriverManager.getConnection ("jdbc:mysql://localhost:3306/mydb?useSSL=false", "root", "root");
             //Remote database  // connection = DriverManager.getConnection ("jdbc:mysql://den1.mysql5.gear.host:3306/realestate2?useSSL=false", "realestate2", "Xl9pU?!yN6Rr");
-            System.out.println("Connection success");
+            System.out.println ("Connection success");
         } catch (Exception e) {
 
-            e.printStackTrace();
+            e.printStackTrace ();
         }
     }
 
 
-<<<<<<< HEAD
+
   /*  public void addPropertyForSale(String property_Id, String region, String address, String area, String fees, String price) {
         try {
 
@@ -62,7 +59,6 @@ public class DataBaseHandler {
             pst.close ();
 
 
-=======
     public void addApartment(String property_Id, String region, String address, String area, String year_built, boolean parking,
                              boolean heating, boolean balcony, String floor, String rooms, String bathrooms) {
 
@@ -93,31 +89,21 @@ public class DataBaseHandler {
             pst.execute();
             pst.close();
 
->>>>>>> ad01d1358ef0bf1baa188442337f0ce448a7f596
         } catch (SQLException throwable) {
             throwable.printStackTrace ();
         }
     }
 */
 
-<<<<<<< HEAD
-       public void addPropertyForSale(String property_Id, String region, String address, String area, String fees, String price) {
-        try {
-            String qu = "INSERT INTO property (Property_ID,Region,Address,Area,Price,fees) " +
-                    "VALUES(?,?,?,?,?,?)";
 
-=======
     public void addPropertyForSale(String property_Id, String region, String address, String area, String fees, String price) {
         try {
             String qu = "INSERT INTO property (Property_ID,Region,Address,Area,Price,fees) " +
                     "VALUES(?,?,?,?,?,?)";
->>>>>>> ad01d1358ef0bf1baa188442337f0ce448a7f596
+
 
             PreparedStatement pst;
-            pst = DataBaseHandler.connection.prepareStatement(qu);
-
-<<<<<<< HEAD
-
+            pst = DataBaseHandler.connection.prepareStatement (qu);
             pst.setString (1, property_Id);
             pst.setString (2, region);
             pst.setString (3, address);
@@ -126,26 +112,12 @@ public class DataBaseHandler {
             pst.setString (6, fees);
             pst.execute ();
             pst.close ();
-=======
-            pst.setString(1, property_Id);
-            pst.setString(2, region);
-            pst.setString(3, address);
-            pst.setInt(4, Integer.parseInt(area));
-            pst.setString(5, price);
-            pst.setInt(6, Integer.parseInt(String.valueOf(fees)));
-            pst.execute();
-            pst.close();
->>>>>>> ad01d1358ef0bf1baa188442337f0ce448a7f596
+
 
         } catch (SQLException throwable) {
-            throwable.printStackTrace();
+            throwable.printStackTrace ();
         }
     }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> ad01d1358ef0bf1baa188442337f0ce448a7f596
 
 
     public void addPropertyForRent(String property_Id, String region, String address, String area, String availableFrom, String price) {
@@ -154,19 +126,19 @@ public class DataBaseHandler {
                     "VALUES(?,?,?,?,?,?)";
 
             PreparedStatement pst;
-            pst = DataBaseHandler.connection.prepareStatement(qu);
+            pst = DataBaseHandler.connection.prepareStatement (qu);
 
-            pst.setString(1, property_Id);
-            pst.setString(2, region);
-            pst.setString(3, address);
-            pst.setInt(4, Integer.parseInt(area));
-            pst.setString(5, price);
-            pst.setString(5, availableFrom);
-            pst.execute();
-            pst.close();
+            pst.setString (1, property_Id);
+            pst.setString (2, region);
+            pst.setString (3, address);
+            pst.setInt (4, Integer.parseInt (area));
+            pst.setString (5, price);
+            pst.setString (5, availableFrom);
+            pst.execute ();
+            pst.close ();
 
         } catch (SQLException throwable) {
-            throwable.printStackTrace();
+            throwable.printStackTrace ();
         }
     }
 
@@ -178,18 +150,18 @@ public class DataBaseHandler {
                     "VALUES(?,?,?,?,?,?)  ";
 
             PreparedStatement pst;
-            pst = DataBaseHandler.connection.prepareStatement(qu);
-            pst.setString(1, customerSSn);
-            pst.setString(2, customerPassword);
-            pst.setString(3, name);
-            pst.setString(4, address);
-            pst.setString(5, phone);
-            pst.setString(6, email);
-            pst.execute();
-            pst.close();
+            pst = DataBaseHandler.connection.prepareStatement (qu);
+            pst.setString (1, customerSSn);
+            pst.setString (2, customerPassword);
+            pst.setString (3, name);
+            pst.setString (4, address);
+            pst.setString (5, phone);
+            pst.setString (6, email);
+            pst.execute ();
+            pst.close ();
 
         } catch (SQLException throwable) {
-            throwable.printStackTrace();
+            throwable.printStackTrace ();
         }
 
     }
@@ -203,25 +175,25 @@ public class DataBaseHandler {
 
 
             PreparedStatement pst;
-            pst = DataBaseHandler.connection.prepareStatement(qu);
-            pst.setString(1, customer_type);
-            pst.setString(2, SSN);
+            pst = DataBaseHandler.connection.prepareStatement (qu);
+            pst.setString (1, customer_type);
+            pst.setString (2, SSN);
 
-            pst.execute();
-            pst.close();
+            pst.execute ();
+            pst.close ();
 
         } catch (SQLException throwable) {
-            throwable.printStackTrace();
+            throwable.printStackTrace ();
         }
     }
 
     public ResultSet execQuery(String query) {
         ResultSet result;
         try {
-            statement = connection.createStatement();
-            result = statement.executeQuery(query);
+            statement = connection.createStatement ();
+            result = statement.executeQuery (query);
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            ex.printStackTrace ();
             return null;
         } finally {
         }
@@ -231,41 +203,39 @@ public class DataBaseHandler {
 
     public boolean execAction(String qu) {
         try {
-            statement = connection.createStatement();
-            statement.execute(qu);
+            statement = connection.createStatement ();
+            statement.execute (qu);
             return true;
         } catch (SQLException ex) {
-            ex.printStackTrace();
+            ex.printStackTrace ();
             return false;
         } finally {
         }
     }
 
     public String checkLogInIfEmployee(String ssn, String password) throws SQLException {
-        DataBaseHandler databaseHandler = DataBaseHandler.getInstance();
+        DataBaseHandler databaseHandler = DataBaseHandler.getInstance ();
         String passwordId = "";
         String role = "";
         String SSN = "";
 
-<<<<<<< HEAD
-        return false;
-    }
-=======
+
+        // return false;
+
+
         String qu = "SELECT * FROM user us, employee emp WHERE emp.SSN = '" + ssn + "'" + "AND us.SSN = '" + ssn + "'";
-        ResultSet rs = databaseHandler.execQuery(qu);
+        ResultSet rs = databaseHandler.execQuery (qu);
 
->>>>>>> ad01d1358ef0bf1baa188442337f0ce448a7f596
-
-        while (rs.next()) {
-            passwordId = rs.getString("passWord");
-            SSN = rs.getString("SSN");
-            role = rs.getString("Role");
+        while (rs.next ()) {
+            passwordId = rs.getString ("passWord");
+            SSN = rs.getString ("SSN");
+            role = rs.getString ("Role");
 
         }
 
-        if (passwordId.equals(password) && SSN.equals(ssn) & role.equals("Manager")) {
+        if (passwordId.equals (password) && SSN.equals (ssn) & role.equals ("Manager")) {
             return "1";
-        } else if (passwordId.equals(password) && SSN.equals(ssn) & role.equals("Employee")) {
+        } else if (passwordId.equals (password) && SSN.equals (ssn) & role.equals ("Employee")) {
             return "2";
         } else {
             return "10";
@@ -273,20 +243,20 @@ public class DataBaseHandler {
     }
 
     public String checkLogInIfCustomer(String ssn, String password) throws SQLException {
-        DataBaseHandler databaseHandler = DataBaseHandler.getInstance();
+        DataBaseHandler databaseHandler = DataBaseHandler.getInstance ();
         String passwordId = "";
         String SSN = "";
 
         String qu = "SELECT * FROM user us, customer cus WHERE cus.SSN = '" + ssn + "'" + "AND us.SSN = '" + ssn + "'";
-        ResultSet rs = databaseHandler.execQuery(qu);
+        ResultSet rs = databaseHandler.execQuery (qu);
 
-        while (rs.next()) {
-            passwordId = rs.getString("passWord");
-            SSN = rs.getString("SSN");
+        while (rs.next ()) {
+            passwordId = rs.getString ("passWord");
+            SSN = rs.getString ("SSN");
         }
-        if (passwordId.equals(password) && SSN.equals("")) {
+        if (passwordId.equals (password) && SSN.equals ("")) {
             return "0";
-        } else if (passwordId.equals(password) && SSN.equals(ssn)) {
+        } else if (passwordId.equals (password) && SSN.equals (ssn)) {
             return "1";
         } else {
             return "0";
@@ -298,27 +268,27 @@ public class DataBaseHandler {
         try {
             String qu = "INSERT INTO user (SSN,Password,Name,Address,Phone,Email) " +
                     "VALUES(?,?,?,?,?,?)  ";
-            String SSN = "8906219699";
-            String customerPassword = new PassWordHash().generateHash("111111");
+            String SSN = "11";
+            String customerPassword = new PassWordHash ().generateHash ("11");
             String name = "Muhannad";
             String address = "Kristianstad";
             String phone = "0768837489";
             String email = "mohanad2satouf@gmail.com";
 
             PreparedStatement pst;
-            pst = DataBaseHandler.connection.prepareStatement(qu);
-            pst.setString(1, SSN);
-            pst.setString(2, customerPassword);
-            pst.setString(3, name);
-            pst.setString(4, address);
-            pst.setString(5, phone);
-            pst.setString(6, email);
-            pst.execute();
-            pst.close();
+            pst = DataBaseHandler.connection.prepareStatement (qu);
+            pst.setString (1, SSN);
+            pst.setString (2, customerPassword);
+            pst.setString (3, name);
+            pst.setString (4, address);
+            pst.setString (5, phone);
+            pst.setString (6, email);
+            pst.execute ();
+            pst.close ();
 
 
         } catch (SQLException throwable) {
-            throwable.printStackTrace();
+            throwable.printStackTrace ();
         }
 
         try {
@@ -326,42 +296,42 @@ public class DataBaseHandler {
                     "VALUES (?,?)";
 
             String role = "Manager";
-            String SSN = "8906219699";
+            String SSN = "11";
             PreparedStatement pst;
-            pst = DataBaseHandler.connection.prepareStatement(qu2);
-            pst.setString(1, role);
-            pst.setString(2, SSN);
-            pst.execute();
-            pst.close();
+            pst = DataBaseHandler.connection.prepareStatement (qu2);
+            pst.setString (1, role);
+            pst.setString (2, SSN);
+            pst.execute ();
+            pst.close ();
 
         } catch (SQLException throwable) {
-            throwable.printStackTrace();
+            throwable.printStackTrace ();
         }
 
         try {
             String qu3 = "INSERT INTO user (SSN,Password,Name,Address,Phone,Email) " +
                     "VALUES(?,?,?,?,?,?)  ";
             String SSN = "22";
-            String customerPassword = new PassWordHash().generateHash("22");
+            String customerPassword = new PassWordHash ().generateHash ("22");
             String name = "Mohamad";
             String address = "Karlistad";
             String phone = "0768837489";
             String email = "mohanad2satouf@gmail.com";
 
             PreparedStatement pst;
-            pst = DataBaseHandler.connection.prepareStatement(qu3);
-            pst.setString(1, SSN);
-            pst.setString(2, customerPassword);
-            pst.setString(3, name);
-            pst.setString(4, address);
-            pst.setString(5, phone);
-            pst.setString(6, email);
-            pst.execute();
-            pst.close();
+            pst = DataBaseHandler.connection.prepareStatement (qu3);
+            pst.setString (1, SSN);
+            pst.setString (2, customerPassword);
+            pst.setString (3, name);
+            pst.setString (4, address);
+            pst.setString (5, phone);
+            pst.setString (6, email);
+            pst.execute ();
+            pst.close ();
 
 
         } catch (SQLException throwable) {
-            throwable.printStackTrace();
+            throwable.printStackTrace ();
         }
         try {
             String qu2 = "INSERT INTO employee (Role, SSN) " +
@@ -370,39 +340,39 @@ public class DataBaseHandler {
             String role = "Employee";
             String SSN = "22";
             PreparedStatement pst;
-            pst = DataBaseHandler.connection.prepareStatement(qu2);
-            pst.setString(1, role);
-            pst.setString(2, SSN);
-            pst.execute();
-            pst.close();
+            pst = DataBaseHandler.connection.prepareStatement (qu2);
+            pst.setString (1, role);
+            pst.setString (2, SSN);
+            pst.execute ();
+            pst.close ();
 
         } catch (SQLException throwable) {
-            throwable.printStackTrace();
+            throwable.printStackTrace ();
         }
         try {
             String qu3 = "INSERT INTO user (SSN,Password,Name,Address,Phone,Email) " +
                     "VALUES(?,?,?,?,?,?)  ";
             String SSN = "33";
-            String customerPassword = new PassWordHash().generateHash("33");
+            String customerPassword = new PassWordHash ().generateHash ("33");
             String name = "Ahmad";
             String address = "Stockholm";
             String phone = "0768837489";
             String email = "mohanad2satouf@gmail.com";
 
             PreparedStatement pst;
-            pst = DataBaseHandler.connection.prepareStatement(qu3);
-            pst.setString(1, SSN);
-            pst.setString(2, customerPassword);
-            pst.setString(3, name);
-            pst.setString(4, address);
-            pst.setString(5, phone);
-            pst.setString(6, email);
-            pst.execute();
-            pst.close();
+            pst = DataBaseHandler.connection.prepareStatement (qu3);
+            pst.setString (1, SSN);
+            pst.setString (2, customerPassword);
+            pst.setString (3, name);
+            pst.setString (4, address);
+            pst.setString (5, phone);
+            pst.setString (6, email);
+            pst.execute ();
+            pst.close ();
 
 
         } catch (SQLException throwable) {
-            throwable.printStackTrace();
+            throwable.printStackTrace ();
         }
         try {
             String qu2 = "INSERT INTO customer (Customer_type, SSN) " +
@@ -411,17 +381,84 @@ public class DataBaseHandler {
             String Customer_type = "Buyer";
             String SSN = "33";
             PreparedStatement pst;
-            pst = DataBaseHandler.connection.prepareStatement(qu2);
-            pst.setString(1, Customer_type);
-            pst.setString(2, SSN);
-            pst.execute();
-            pst.close();
+            pst = DataBaseHandler.connection.prepareStatement (qu2);
+            pst.setString (1, Customer_type);
+            pst.setString (2, SSN);
+            pst.execute ();
+            pst.close ();
 
         } catch (SQLException throwable) {
-            throwable.printStackTrace();
+            throwable.printStackTrace ();
         }
     }
 
+    public boolean deleteLand(Property property) {
+        try {
+            String deleteStat = "DELETE FROM Land WHERE Property_ID=? ";
+            PreparedStatement preparedStatement = connection.prepareStatement (deleteStat);
+            preparedStatement.setInt (1, property.getProperty_ID ());
+            preparedStatement.executeUpdate ();
+            deleteFromProperty (property);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace ();
+        }
+
+        return false;
+    }
+
+
+    public void deleteFromProperty(Property property) {
+        try {
+            String deleteStat = "DELETE FROM Property WHERE Property_ID = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement (deleteStat);
+            preparedStatement.setInt (1, property.getProperty_ID ());
+            preparedStatement.executeUpdate ();
+        } catch (SQLException e) {
+            e.printStackTrace ();
+        }
+    }
+
+    public void editLand(Land land) {
+
+
+        String updateLand = "UPDATE land SET Type=?, Irrigated=?, Includes_Residence=? WHERE Property_ID=?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement (updateLand);
+            preparedStatement.setString (1, land.getType ());
+            preparedStatement.setBoolean (2, land.isIrrigated ());
+            preparedStatement.setBoolean (3, land.isIncludesResidence ());
+            preparedStatement.setInt (4, land.getProperty_ID ());
+            preparedStatement.executeUpdate ();
+        } catch (SQLException e) {
+            e.printStackTrace ();
+        }
+
+    }
+
+
+    public boolean editProperty(Land land) {
+        try {
+            String editProperty = "UPDATE property SET Property_ID=?, Region=?, Address=?," +
+                    "Area=?, Price=?, fees=? " +
+                    "WHERE Property_ID=?";
+            PreparedStatement preparedStatement = connection.prepareStatement (editProperty);
+            preparedStatement.setInt (1, land.getProperty_ID ());
+            preparedStatement.setString (2, land.getRegion ());
+            preparedStatement.setString (3, land.getAddress ());
+            preparedStatement.setInt (4, land.getArea ());
+            preparedStatement.setInt (5, land.getPrice ());
+            preparedStatement.setInt (6, land.getFees ());
+            preparedStatement.setInt (7, land.getProperty_ID ());
+            int res = preparedStatement.executeUpdate ();
+            editLand (land);
+            return (res > 0);
+        } catch (SQLException e) {
+            e.printStackTrace ();
+        }
+
+        return false;
+    }
 
 }
 

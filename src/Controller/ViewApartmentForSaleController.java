@@ -62,50 +62,15 @@ public class ViewApartmentForSaleController implements Initializable {
     }
 
     private void loadData() {
-        DataBaseHandler databaseHandler = DataBaseHandler.getInstance();
 
-        String qu = "SELECT property.Property_ID,property.Region,property.Address," +
-                "property.Area,property.Price,property.fees,property.year,Availability," +
-                "resident.heating,resident.parking,resident.balcony,resident.rooms,resident.bathrooms,resident.year " +
-                ",apartment.floor "+
-                "FROM property, resident, apartment " +
-                "WHERE property.Property_ID = resident.Property_ID " +
-                "AND property.Property_ID = apartment.Property_ID ";
 
-        ResultSet resultSet = databaseHandler.execQuery(qu);
-        try {
-            while (resultSet.next()) {
-                int propertyID = resultSet.getInt("Property_ID");
-                String region = resultSet.getString("Region");
-                String address = resultSet.getString("Address");
-                int area = resultSet.getInt("Area");
-                int yearBuilt = resultSet.getInt("Year");
-                int fees = resultSet.getInt("fees");
-                int price = resultSet.getInt("Price");
-                boolean heating = resultSet.getBoolean("heating");
-                boolean parking = resultSet.getBoolean("parking");
-                boolean balcony = resultSet.getBoolean("balcony");
-                String floor = resultSet.getString("floor");
-                String room = resultSet.getString("room");
-                String bathroom = resultSet.getString("bathroom");
-                boolean isAvail = resultSet.getBoolean("Availability");
-
-                listOfApartmentForSale.add(new Apartment(propertyID,  region,  address,  area,  yearBuilt,  fees,
-                 price,  heating,  parking,  balcony, floor,  room,  bathroom,
-                        isAvail));
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        tableOfApartmentForSale.setItems(listOfApartmentForSale);
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        editCol();
-        loadData();
+      //  editCol();
+       // loadData();
 
         hbox.prefWidthProperty().bind(upPane.widthProperty());
         hbox.prefHeightProperty().bind(upPane.heightProperty());

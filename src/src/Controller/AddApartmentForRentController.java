@@ -50,24 +50,6 @@ public class AddApartmentForRentController implements Initializable {
         }
 
 
-        try {
-
-
-            String qu = "UPDATE apartmentforrent set AvailableFrom=?";
-            dataBaseHandler.addApartment (propertyID.getText (), region.getText (), address.getText (), area.getText (), yearBuilt.getText (), parking.isSelected (),
-                    heating.isSelected (), balcony.isSelected (), floor.getValue ().toString (), roomsNumber.getValue ().toString (), bathroomsNumber.getValue ().toString ());
-            PreparedStatement pst;
-
-            pst = DataBaseHandler.connection.prepareStatement (qu);
-            pst.setString (1, availableFromDate.getEditor ().getText ());
-
-
-            pst.execute ();
-            pst.close ();
-
-        } catch (SQLException throwable) {
-            throwable.printStackTrace ();
-        }
 
     }
 
