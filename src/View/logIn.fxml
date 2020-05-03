@@ -8,9 +8,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="447.0" prefWidth="652.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LogInController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#forgetPassword" prefHeight="447.0" prefWidth="652.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.LogInController">
    <children>
-      <ImageView fitHeight="148.0" fitWidth="178.0" layoutX="252.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="182.0" fitWidth="195.0" layoutX="223.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/Logo.png" />
          </image>
@@ -36,5 +36,6 @@
          </image>
       </ImageView>
       <ProgressIndicator fx:id="progressBar" cache="true" layoutX="314.0" layoutY="345.0" opacity="0.65" prefHeight="69.0" prefWidth="26.0" />
+      <JFXButton layoutX="26.0" layoutY="388.0" onAction="#forgetPassword" prefHeight="35.0" prefWidth="133.0" text="Forget Password!" textFill="#5190b9" />
    </children>
 </Pane>

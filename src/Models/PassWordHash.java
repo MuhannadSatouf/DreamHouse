@@ -1,68 +1,72 @@
 package Models;
 
 import javax.crypto.Cipher;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.Base64;
 
 public class PassWordHash {
-    public String generateHash(String PasswordToHash){
-        String generatedPasswordHash = null;
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            md.update(PasswordToHash.getBytes());
-            byte[] bytes = md.digest();
-            StringBuilder sb = new StringBuilder();
+    private static SecretKeySpec secretKey;
+    private static byte[] key;
+    // another method to encrypt.
+//    public String generateHash(String PasswordToHash){
+//        String generatedPasswordHash = null;
+//        try {
+//            MessageDigest md = MessageDigest.getInstance("SHA-256");
+//            md.update(PasswordToHash.getBytes());
+//            byte[] bytes = md.digest();
+//            StringBuilder sb = new StringBuilder();
+//
+//            for (byte aByte : bytes) {
+//                sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
+//            }
+//            generatedPasswordHash = sb.toString();
+//        } catch (NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//        }
+//        return generatedPasswordHash;
+//    }
 
-            for (byte aByte : bytes) {
-                sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
-            }
-            generatedPasswordHash = sb.toString();
+
+    public static void setKey(String myKey) {
+        MessageDigest sha = null;
+        try {
+            key = myKey.getBytes("UTF-8");
+            sha = MessageDigest.getInstance("SHA-1");
+            key = sha.digest(key);
+            key = Arrays.copyOf(key, 16);
+            secretKey = new SecretKeySpec(key, "AES");
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-        }
-        return generatedPasswordHash;
-    }
-    private String connectionKey = "dreamhouse";
-
-    private byte[] generateKeyFromString(){
-        return new PassWordHash().generateHash(connectionKey).substring(0, 16).getBytes();
-    }
-
-    public Cipher getEncryptionCipher() {
-        return createCipher(Cipher.ENCRYPT_MODE);
-    }
-
-    public Cipher getDecryptionCipher(){
-        return createCipher(Cipher.DECRYPT_MODE);
-    }
-
-    private Cipher createCipher(int mode){
-        try {
-            IvParameterSpec iv = new IvParameterSpec(getIv());
-            SecretKeySpec sKeySpec = new SecretKeySpec(generateKeyFromString(), "AES");
-            Cipher cipher = Cipher.getInstance("AES/CFB8/NoPadding");
-            cipher.init(mode, sKeySpec, iv);
-
-            return cipher;
-
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException e) {
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
+        }
+    }
+        // encrypt password and using security key for than
+    public String encrypt(String strToEncrypt, String secret) {
+        try {
+            setKey(secret);
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+            return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
+        } catch (Exception e) {
+            System.out.println("Error while encrypting: " + e.toString());
         }
         return null;
     }
 
-    private byte[] getIv(){
-        return new byte[]
-                {
-                        0x04, 0x02, 0x0f, 0x0a,
-                        0x08, 0x08, 0x05, 0x0c,
-                        0x03, 0x01, 0x0e, 0x0f,
-                        0x08, 0x08, 0x05, 0x0c
-                };
+    public String decrypt(String strToDecrypt, String secret) {
+        try {
+            setKey(secret);
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5PADDING");
+            cipher.init(Cipher.DECRYPT_MODE, secretKey);
+            return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
+        } catch (Exception e) {
+            System.out.println("Error while decrypting: " + e.toString());
+        }
+        return null;
     }
 }

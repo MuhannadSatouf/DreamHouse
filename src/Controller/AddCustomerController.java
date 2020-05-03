@@ -42,7 +42,8 @@ public class AddCustomerController implements Initializable {
             return;
         }
 
-        dataBaseHandler.addUser (customerSSN.getText (), customerPassword.getText (), name.getText (), address.getText (), phone.getText (), email.getText ());
+        dataBaseHandler.addUser (customerSSN.getText (), customerPassword.getText (),
+                name.getText (), address.getText (), phone.getText (), email.getText ());
 
         try {
 
