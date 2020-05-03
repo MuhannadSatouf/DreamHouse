@@ -6,7 +6,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 
-class Resident extends Property {
+public class Resident extends Property {
 
     private final SimpleBooleanProperty heating;
     private final SimpleBooleanProperty parking;
