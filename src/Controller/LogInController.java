@@ -53,7 +53,7 @@ public class LogInController implements Initializable {
 
     private boolean validateLogin() throws SQLException {
         final String secretKey = "ssshhhhhhhhhhh!!!!";
-        String p = new PassWordHash().generateHash(passwordInput.getText());
+        String p = new PassWordHash().encrypt(passwordInput.getText(),secretKey);
         if (SSNInput.getText().equals("") || passwordInput.getText().equals("")) {
             errorMassage();
         } else {
@@ -70,7 +70,7 @@ public class LogInController implements Initializable {
                     return true;
                 case "10":
                     DataBaseHandler dataBaseHandler = new DataBaseHandler();
-                    String check2 = dataBaseHandler.checkLogInIfCustomer(SSNInput.getText(), new PassWordHash().generateHash(passwordInput.getText()));
+                    String check2 = dataBaseHandler.checkLogInIfCustomer(SSNInput.getText(), new PassWordHash().encrypt(passwordInput.getText(),secretKey));
                     switch (check2) {
                         case "1":
                             isCustomer = true;
@@ -116,7 +116,7 @@ public class LogInController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // These for testing the database and inlogning and will active them only one time to create them in the database if we use local database
-
+//
 //        DataBaseHandler dataBaseHandler = null;
 //        try {
 //            dataBaseHandler = new DataBaseHandler ();
