@@ -309,88 +309,88 @@ public class DataBaseHandler {
             throwable.printStackTrace();
         }
 
-//        try {
-//            String qu3 = "INSERT INTO user (SSN,Password,Name,Address,Phone,Email) " +
-//                    "VALUES(?,?,?,?,?,?)  ";
-//            String SSN = "22";
-//            String customerPassword = new PassWordHash().generateHash("22");
-//            String name = "Mohamad";
-//            String address = "Karlistad";
-//            String phone = "0768837489";
-//            String email = "mohanad2satouf@gmail.com";
-//
-//            PreparedStatement pst;
-//            pst = DataBaseHandler.connection.prepareStatement(qu3);
-//            pst.setString(1, SSN);
-//            pst.setString(2, customerPassword);
-//            pst.setString(3, name);
-//            pst.setString(4, address);
-//            pst.setString(5, phone);
-//            pst.setString(6, email);
-//            pst.execute();
-//            pst.close();
-//
-//
-//        } catch (SQLException throwable) {
-//            throwable.printStackTrace();
-//        }
-//        try {
-//            String qu2 = "INSERT INTO employee (Role, SSN) " +
-//                    "VALUES (?,?)";
-//
-//            String role = "Employee";
-//            String SSN = "22";
-//            PreparedStatement pst;
-//            pst = DataBaseHandler.connection.prepareStatement(qu2);
-//            pst.setString(1, role);
-//            pst.setString(2, SSN);
-//            pst.execute();
-//            pst.close();
-//
-//        } catch (SQLException throwable) {
-//            throwable.printStackTrace();
-//        }
-//        try {
-//            String qu3 = "INSERT INTO user (SSN,Password,Name,Address,Phone,Email) " +
-//                    "VALUES(?,?,?,?,?,?)  ";
-//            String SSN = "33";
-//            String customerPassword = new PassWordHash().generateHash("33");
-//            String name = "Ahmad";
-//            String address = "Stockholm";
-//            String phone = "0768837489";
-//            String email = "mohanad2satouf@gmail.com";
-//
-//            PreparedStatement pst;
-//            pst = DataBaseHandler.connection.prepareStatement(qu3);
-//            pst.setString(1, SSN);
-//            pst.setString(2, customerPassword);
-//            pst.setString(3, name);
-//            pst.setString(4, address);
-//            pst.setString(5, phone);
-//            pst.setString(6, email);
-//            pst.execute();
-//            pst.close();
-//
-//
-//        } catch (SQLException throwable) {
-//            throwable.printStackTrace();
-//        }
-//        try {
-//            String qu2 = "INSERT INTO customer (Customer_type, SSN) " +
-//                    "VALUES (?,?)";
-//
-//            String Customer_type = "Buyer";
-//            String SSN = "33";
-//            PreparedStatement pst;
-//            pst = DataBaseHandler.connection.prepareStatement(qu2);
-//            pst.setString(1, Customer_type);
-//            pst.setString(2, SSN);
-//            pst.execute();
-//            pst.close();
-//
-//        } catch (SQLException throwable) {
-//            throwable.printStackTrace();
-//        }
+        try {
+            String qu3 = "INSERT INTO user (SSN,Password,Name,Address,Phone,Email) " +
+                    "VALUES(?,?,?,?,?,?)  ";
+            String SSN = "22";
+            String customerPassword = new PassWordHash().encrypt("22",secretKey);
+            String name = "Mohamad";
+            String address = "Karlistad";
+            String phone = "0768837489";
+            String email = "mohanad2satouf@gmail.com";
+
+            PreparedStatement pst;
+            pst = DataBaseHandler.connection.prepareStatement(qu3);
+            pst.setString(1, SSN);
+            pst.setString(2, customerPassword);
+            pst.setString(3, name);
+            pst.setString(4, address);
+            pst.setString(5, phone);
+            pst.setString(6, email);
+            pst.execute();
+            pst.close();
+
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        try {
+            String qu2 = "INSERT INTO employee (Role, SSN) " +
+                    "VALUES (?,?)";
+
+            String role = "Employee";
+            String SSN = "22";
+            PreparedStatement pst;
+            pst = DataBaseHandler.connection.prepareStatement(qu2);
+            pst.setString(1, role);
+            pst.setString(2, SSN);
+            pst.execute();
+            pst.close();
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        try {
+            String qu3 = "INSERT INTO user (SSN,Password,Name,Address,Phone,Email) " +
+                    "VALUES(?,?,?,?,?,?)  ";
+            String SSN = "33";
+            String customerPassword = new PassWordHash().encrypt("33",secretKey);
+            String name = "Ahmad";
+            String address = "Stockholm";
+            String phone = "0768837489";
+            String email = "mohanad2satouf@gmail.com";
+
+            PreparedStatement pst;
+            pst = DataBaseHandler.connection.prepareStatement(qu3);
+            pst.setString(1, SSN);
+            pst.setString(2, customerPassword);
+            pst.setString(3, name);
+            pst.setString(4, address);
+            pst.setString(5, phone);
+            pst.setString(6, email);
+            pst.execute();
+            pst.close();
+
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        try {
+            String qu2 = "INSERT INTO customer (Customer_type, SSN) " +
+                    "VALUES (?,?)";
+
+            String Customer_type = "Buyer";
+            String SSN = "33";
+            PreparedStatement pst;
+            pst = DataBaseHandler.connection.prepareStatement(qu2);
+            pst.setString(1, Customer_type);
+            pst.setString(2, SSN);
+            pst.execute();
+            pst.close();
+
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
     }
 
     public boolean deleteLand(Property property) {
