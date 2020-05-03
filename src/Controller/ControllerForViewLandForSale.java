@@ -67,7 +67,6 @@ public class ControllerForViewLandForSale implements Initializable {
                 "FROM property,land " +
                 "WHERE property.Property_ID=land.Property_ID "
                 + "AND fees > 0";
-
         ResultSet resultSet = databaseHandler.execQuery (qu);
         try {
             while (resultSet.next ()) {
@@ -88,7 +87,6 @@ public class ControllerForViewLandForSale implements Initializable {
         }
         tableOfLandForSale.setItems (listOfLand);
     }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         editCol ();

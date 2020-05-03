@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="javafx-sdk-13.0">
+  <library name="protobuf-java-2.6.0">
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/../../../../../javafx-sdk-13.0.1" />
+      <root url="jar://$PROJECT_DIR$/src/Lib/protobuf-java-2.6.0.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -1,8 +1,6 @@
 package Models;
 
 
-import Controller.ControllerForAddLandForSale;
-import javafx.scene.control.Alert;
 
 import java.sql.*;
 
@@ -40,52 +38,40 @@ public class DataBaseHandler {
     }
 
 
-    public void addPropertyForSale(String property_Id, String region, String address, String area, String fees, String price) {
+  /*  public void addPropertyForSale(String property_Id, String region, String address, String area, String fees, String price) {
         try {
 
 
+            String qu = "INSERT INTO property (Property_ID,Region,Address,Area,Price,fees) " +
+                    "VALUES(?,?,?,?,?,?)";
+            PreparedStatement pst;
+            pst = DataBaseHandler.connection.prepareStatement (qu);
+            pst.setString (1, property_Id);
+            pst.setString (2, region);
+            pst.setString (3, address);
+            pst.setInt (4, Integer.parseInt (area));
+            pst.setString (5, price);
+            pst.setInt (6, Integer.parseInt (String.valueOf (fees)));
+            pst.execute ();
+            pst.close ();
 
 
-                String qu = "INSERT INTO property (Property_ID,Region,Address,Area,Price,fees) " +
-                        "VALUES(?,?,?,?,?,?)";
-                PreparedStatement pst;
-                pst = DataBaseHandler.connection.prepareStatement (qu);
-                pst.setString (1, property_Id);
-                pst.setString (2, region);
-                pst.setString (3, address);
-                pst.setInt (4, Integer.parseInt (area));
-                pst.setString (5, price);
-                pst.setInt (6, Integer.parseInt (String.valueOf (fees)));
-                pst.execute ();
-                pst.close ();
-
-
-
-<<<<<<< HEAD
-
-=======
         } catch (SQLException throwable) {
-            throwable.printStackTrace();
+            throwable.printStackTrace ();
         }
     }
+*/
 
-<<<<<<< HEAD
-
-    public void addProperty(String property_Id, String region, String address, String area,String price,String fees) {
-        try {
-            String qu = "INSERT INTO property (Property_ID,Region,Address,Area,Price,Fees) " +
-                    "VALUES(?,?,?,?,?,?.?)";
-=======
-    public void addPropertyForSale(String property_Id, String region, String address, String area, String fees, String price) {
+       public void addPropertyForSale(String property_Id, String region, String address, String area, String fees, String price) {
         try {
             String qu = "INSERT INTO property (Property_ID,Region,Address,Area,Price,fees) " +
                     "VALUES(?,?,?,?,?,?)";
->>>>>>> d65d5f0b29bc6bdbddcadb89173e2a9fd5db4b20
+
 
             PreparedStatement pst;
             pst = DataBaseHandler.connection.prepareStatement(qu);
 
-<<<<<<< HEAD
+
             pst.setString (1, property_Id);
             pst.setString (2, region);
             pst.setString (3, address);
@@ -94,25 +80,13 @@ public class DataBaseHandler {
             pst.setString (6, fees);
             pst.execute ();
             pst.close ();
-=======
-            pst.setString(1, property_Id);
-            pst.setString(2, region);
-            pst.setString(3, address);
-            pst.setInt(4, Integer.parseInt(area));
-            pst.setString(5, price);
-            pst.setInt(6, Integer.parseInt(String.valueOf(fees)));
-            pst.execute();
-            pst.close();
->>>>>>> d65d5f0b29bc6bdbddcadb89173e2a9fd5db4b20
->>>>>>> e1b1eaef68d2c7cc95cf6c8a7038a88bd4be7b8c
 
         } catch (SQLException throwable) {
           throwable.printStackTrace ();
         }
     }
-<<<<<<< HEAD
 
-=======
+
 
 
     public void addPropertyForRent(String property_Id, String region, String address, String area, String availableFrom, String price) {
@@ -136,17 +110,12 @@ public class DataBaseHandler {
             throwable.printStackTrace ();
         }
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> d65d5f0b29bc6bdbddcadb89173e2a9fd5db4b20
->>>>>>> e1b1eaef68d2c7cc95cf6c8a7038a88bd4be7b8c
     public void addUser(String customerSSn, String customerPassword, String name, String address, String phone, String email) {
 
         try {
             String qu = "INSERT INTO user (SSN,Password,Name,Address,Phone,Email) " +
                     "VALUES(?,?,?,?,?,?)  ";
-
 
             PreparedStatement pst;
             pst = DataBaseHandler.connection.prepareStatement (qu);
@@ -202,7 +171,6 @@ public class DataBaseHandler {
         } catch (SQLException e) {
             e.printStackTrace ();
         }
-
 
         return false;
     }
