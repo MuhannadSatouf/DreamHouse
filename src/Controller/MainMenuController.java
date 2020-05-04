@@ -1,12 +1,19 @@
 package Controller;
 
+import Models.DataBaseHandler;
+import Models.Land;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXRadioButton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.PieChart;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -56,7 +63,16 @@ public class MainMenuController implements Initializable {
     public JFXButton selectCommercialForViewBtn;
     public JFXButton viewEmployeeBtn;
     public JFXButton viewCustomerBtn;
-
+    public PieChart pieChart;
+    public JFXRadioButton landSta;
+    public JFXRadioButton allPropertiesSta;
+    public Pane chartPane;
+    public JFXComboBox <String>comboBox;
+    public JFXButton showButton;
+    ObservableList<PieChart.Data> pieChartData;
+    DataBaseHandler dataBaseHandler;
+    PieChart landChart;
+    ObservableList<String> combo = FXCollections.observableArrayList ("All Properties","Land","House","Apartment","Commercial Properties");
 
     public void backToRegister(ActionEvent actionEvent) {
         createNewStage ("/View/logIn.fxml", "Register");
@@ -79,7 +95,7 @@ public class MainMenuController implements Initializable {
 
     public void addUser(ActionEvent actionEvent) {
         switchBetweenScenes (actionEvent, "/View/selectUserForAddFXML.fxml");
-        
+
     }
 
     public void viewUser(ActionEvent actionEvent) {
@@ -87,15 +103,15 @@ public class MainMenuController implements Initializable {
     }
 
     public void transactions(ActionEvent actionEvent) {
-        createNewStage ("/View/transactionsFXML.fxml","Transactions");
+        createNewStage ("/View/transactionsFXML.fxml", "Transactions");
 
 
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
+        forCombo ();
+        dataBaseHandler = DataBaseHandler.getInstance ();
         addPropertyBtn.prefWidthProperty ().bind (hBoxForButtons.widthProperty ());
         addPropertyBtn.prefHeightProperty ().bind (hBoxForButtons.heightProperty ());
         viewPropertyBtn.prefWidthProperty ().bind (hBoxForButtons.widthProperty ());
@@ -110,7 +126,7 @@ public class MainMenuController implements Initializable {
         statisticsBtn.prefHeightProperty ().bind (hBoxForButtons.heightProperty ());
 
 
-      //  borderPane.prefWidthProperty ().bind (startPane.widthProperty ());
+        //  borderPane.prefWidthProperty ().bind (startPane.widthProperty ());
         // borderPane.prefHeightProperty ().bind (startPane.heightProperty ());
 
 
@@ -118,6 +134,7 @@ public class MainMenuController implements Initializable {
 
 
     public void statistics(ActionEvent actionEvent) {
+        switchBetweenScenes (actionEvent, "/View/statisticsFXML.fxml");
     }
 
 
@@ -143,40 +160,40 @@ public class MainMenuController implements Initializable {
     }
 
     public void addHouseForSale(ActionEvent actionEvent) {
-        createNewStage ("/View/addHouseForSaleFXML.fxml","House For Sale");
+        createNewStage ("/View/addHouseForSaleFXML.fxml", "House For Sale");
 
 
     }
 
     public void addHouseForRent(ActionEvent actionEvent) {
-        createNewStage ("/View/addHouseForRentFXML.fxml","House For Rent");
+        createNewStage ("/View/addHouseForRentFXML.fxml", "House For Rent");
     }
 
     public void addApartmentForSale(ActionEvent actionEvent) {
-        createNewStage ("/View/addApartmentForSaleFXML.fxml","Apartment For Sale");
+        createNewStage ("/View/addApartmentForSaleFXML.fxml", "Apartment For Sale");
 
 
     }
 
     public void addApartmentForRent(ActionEvent actionEvent) {
-        createNewStage ("/View/addApartmentForRentFXML.fxml","Apartment For Rent");
+        createNewStage ("/View/addApartmentForRentFXML.fxml", "Apartment For Rent");
     }
 
     public void addCommercialForSale(ActionEvent actionEvent) {
-        createNewStage ("/View/addCommercialForSaleFXML.fxml","Commercial Properties For Sale");
+        createNewStage ("/View/addCommercialForSaleFXML.fxml", "Commercial Properties For Sale");
     }
 
     public void addCommercialForRent(ActionEvent actionEvent) {
-        createNewStage ("/View/addCommercialForRentFXML.fxml","Commercial Properties For Rent");
+        createNewStage ("/View/addCommercialForRentFXML.fxml", "Commercial Properties For Rent");
 
     }
 
     public void addLandForSale(ActionEvent actionEvent) {
-        createNewStage ("/View/addLandForSaleFXML.fxml","Land For Sale");
+        createNewStage ("/View/addLandForSaleFXML.fxml", "Land For Sale");
     }
 
     public void addLandForRent(ActionEvent actionEvent) {
-        createNewStage ("/View/addLandForRentFXML.fxml","Land For Rent");
+        createNewStage ("/View/addLandForRentFXML.fxml", "Land For Rent");
     }
 
     void createNewStage(String location, String name) {
@@ -184,10 +201,10 @@ public class MainMenuController implements Initializable {
             Parent parent = FXMLLoader.load (getClass ().getResource (location));
             Stage stage = new Stage (StageStyle.DECORATED);
             stage.setTitle (name);
-            stage.setScene (new Scene (parent));
+            Scene scene=new Scene (parent);
+            scene.getStylesheets ().add(getClass ().getResource ("/Resources/Table.Css").toExternalForm ());
+            stage.setScene (scene);
             stage.show ();
-
-
         } catch (IOException e) {
             e.printStackTrace ();
         }
@@ -199,6 +216,7 @@ public class MainMenuController implements Initializable {
         try {
             parent = FXMLLoader.load (getClass ().getResource (location));
             Scene scene = new Scene (parent);
+            scene.getStylesheets ().add(getClass ().getResource ("/Resources/Table.Css").toExternalForm ());
             Stage stage = (Stage) ((Node) actionEvent.getSource ()).getScene ().getWindow ();
             stage.setScene (scene);
             stage.show ();
@@ -211,44 +229,44 @@ public class MainMenuController implements Initializable {
 
 
     public void addEmployee(ActionEvent actionEvent) {
-        createNewStage ("/View/addEmployeeFXML.fxml","Add Employee");
+        createNewStage ("/View/addEmployeeFXML.fxml", "Add Employee");
     }
 
     public void addCustomer(ActionEvent actionEvent) {
-        createNewStage ("/View/addCustomerFXML.fxml","Add Customer");
+        createNewStage ("/View/addCustomerFXML.fxml", "Add Customer");
     }
 
     public void viewApartmentForSale(ActionEvent actionEvent) {
-        createNewStage ("/View/viewApartmentForSale.fxml","Apartment For Sale");
+        createNewStage ("/View/viewApartmentForSale.fxml", "Apartment For Sale");
 
     }
 
     public void viewApartmentForRent(ActionEvent actionEvent) {
-        createNewStage ("/View/viewApartmentForRent.fxml","Apartment For Rent");
+        createNewStage ("/View/viewApartmentForRent.fxml", "Apartment For Rent");
     }
 
     public void viewCommercialForSale(ActionEvent actionEvent) {
-        createNewStage ("/View/viewCommercialForSale.fxml","Commercial Properties For Sale");
+        createNewStage ("/View/viewCommercialForSale.fxml", "Commercial Properties For Sale");
     }
 
     public void viewCommercialForRent(ActionEvent actionEvent) {
-        createNewStage ("/View/viewCommercialForRent.fxml","Commercial Properties For Sale");
+        createNewStage ("/View/viewCommercialForRent.fxml", "Commercial Properties For Sale");
     }
 
     public void viewHouseForSale(ActionEvent actionEvent) {
-        createNewStage ("/View/viewHouseForSale.fxml","House For Sale");
+        createNewStage ("/View/viewHouseForSale.fxml", "House For Sale");
     }
 
     public void viewHouseForRent(ActionEvent actionEvent) {
-        createNewStage ("/View/viewHouseForRent.fxml","House For Rent");
+        createNewStage ("/View/viewHouseForRent.fxml", "House For Rent");
     }
 
     public void viewLandForRent(ActionEvent actionEvent) {
-        createNewStage ("/View/viewLandForRent.fxml","Land For Rent");
+        createNewStage ("/View/viewLandForRent.fxml", "Land For Rent");
     }
 
     public void viewLandForSale(ActionEvent actionEvent) {
-        createNewStage ("/View/viewLandForSale.fxml","Land For Sale");
+        createNewStage ("/View/viewLandForSale.fxml", "Land For Sale");
     }
 
     public void selectHouseForView(ActionEvent actionEvent) {
@@ -268,11 +286,48 @@ public class MainMenuController implements Initializable {
     }
 
     public void viewEmployee(ActionEvent actionEvent) {
-        createNewStage ("/View/viewEmployee.fxml","Employees");
+        createNewStage ("/View/viewEmployee.fxml", "Employees");
     }
 
     public void ViewCustomer(ActionEvent actionEvent) {
-        createNewStage ("/View/viewCustomer.fxml","Customers");
+        createNewStage ("/View/viewCustomer.fxml", "Customers");
+    }
+
+
+
+
+
+    public void landView(ActionEvent actionEvent) {
+
+
+        //landChart.setStyle ("-fx-background-color:#5190b9");
+
+
+    }
+
+    public void allPropertiesView(ActionEvent actionEvent) {
+
+    }
+
+    public void forCombo(){
+       /* comboBox.setItems (combo);
+        showButton.setOnAction (actionEvent1 -> showLand());*/
+
+    }
+
+    public void getCombo(ActionEvent actionEvent) {
+
+    }
+
+    private void showLand() {
+
+
+    }
+
+
+    public void landAction(ActionEvent actionEvent) {
+        landChart=new PieChart (dataBaseHandler.getLandStatistics ());
+        chartPane.getChildren ().add (landChart);
     }
 }
 

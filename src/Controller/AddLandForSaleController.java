@@ -14,7 +14,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,7 +35,6 @@ public class AddLandForSaleController implements Initializable{
         public JFXTextField price;
         public JFXButton cancelBtn;
         public JFXCheckBox includesResidence;
-
         DataBaseHandler dataBaseHandler;
         ObservableList<String> propertyType = FXCollections.observableArrayList ("Vacant Land", "Ranch", "Farm", "Timberland");
 
@@ -55,6 +53,7 @@ public class AddLandForSaleController implements Initializable{
                 landEdit ();
                 return;
             }
+
             String query = "SELECT Property_ID from property WHERE Property_ID='" + propertyID.getText () + "'";
             ResultSet resultSet = dataBaseHandler.execQuery (query);
             try {
@@ -99,8 +98,10 @@ public class AddLandForSaleController implements Initializable{
         }
 
         public void landEdit() {
-            Land land = new Land (Integer.parseInt (propertyID.getText ()), region.getText (), address.getText (), Integer.parseInt (area.getText ()), Integer.parseInt (fees.getText ()), Integer.parseInt (price.getText ()), type.getValue ().toString (), irrigated.isSelected (), includesResidence.isSelected (), true);
-            if (dataBaseHandler.editProperty (land)) {
+            Land land = new Land (Integer.parseInt (propertyID.getText ()), region.getText (), address.getText (), Integer.parseInt (area.getText ()),
+                     Integer.parseInt (price.getText ()),fees.getText (),
+                    type.getValue ().toString (), irrigated.isSelected (), includesResidence.isSelected (), true);
+            if (dataBaseHandler.editPropertyForSale (land)) {
                 Alert alert = new Alert (Alert.AlertType.INFORMATION);
                 alert.setHeaderText (null);
                 alert.setContentText ("Land has been edited successfully!");
@@ -128,7 +129,7 @@ public class AddLandForSaleController implements Initializable{
             address.setText (property.getAddress ());
             area.setText (String.valueOf (property.getArea ()));
             price.setText (String.valueOf (property.getPrice ()));
-            fees.setText (String.valueOf (property.getFees ()));
+            fees.setText (String.valueOf (property.getFeesOrDate ()));
             editMode = Boolean.TRUE;
             propertyID.setEditable (false);
         }

@@ -1,6 +1,10 @@
 package Models;
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.chart.PieChart;
+
 import java.sql.*;
 
 public class DataBaseHandler {
@@ -39,62 +43,6 @@ public class DataBaseHandler {
             e.printStackTrace();
         }
     }
-
-
-
-  /*  public void addPropertyForSale(String property_Id, String region, String address, String area, String fees, String price) {
-        try {
-
-
-            String qu = "INSERT INTO property (Property_ID,Region,Address,Area,Price,fees) " +
-                    "VALUES(?,?,?,?,?,?)";
-            PreparedStatement pst;
-            pst = DataBaseHandler.connection.prepareStatement (qu);
-            pst.setString (1, property_Id);
-            pst.setString (2, region);
-            pst.setString (3, address);
-            pst.setInt (4, Integer.parseInt (area));
-            pst.setString (5, price);
-            pst.setInt (6, Integer.parseInt (String.valueOf (fees)));
-            pst.execute ();
-            pst.close ();
-
-
-    public void addApartment(String property_Id, String region, String address, String area, String year_built, boolean parking,
-                             boolean heating, boolean balcony, String floor, String rooms, String bathrooms) {
-
-
-        try {
-
-
-            String qu = "INSERT INTO apartmentforrent (Property_ID,Region,Address,Area,Year_Built,Parking,Heating,Balcony,Floor,Rooms,Bathrooms) " +
-                    "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-
-
-            PreparedStatement pst;
-            pst = DataBaseHandler.connection.prepareStatement(qu);
-
-            pst.setString(1, property_Id);
-            pst.setString(2, region);
-            pst.setString(3, address);
-            pst.setString(4, area);
-            pst.setString(5, year_built);
-            pst.setBoolean(6, parking);
-            pst.setBoolean(7, heating);
-            pst.setBoolean(8, balcony);
-            pst.setString(9, floor);
-            pst.setString(10, rooms);
-            pst.setString(11, bathrooms);
-
-
-            pst.execute();
-            pst.close();
-
-        } catch (SQLException throwable) {
-            throwable.printStackTrace ();
-        }
-    }
-*/
 
 
     public void addPropertyForSale(String property_Id, String region, String address, String area, String fees, String price) {
@@ -308,7 +256,6 @@ public class DataBaseHandler {
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
-
         try {
             String qu3 = "INSERT INTO user (SSN,Password,Name,Address,Phone,Email) " +
                     "VALUES(?,?,?,?,?,?)  ";
@@ -393,6 +340,7 @@ public class DataBaseHandler {
         }
     }
 
+
     public boolean deleteLand(Property property) {
         try {
             String deleteStat = "DELETE FROM Land WHERE Property_ID=? ";
@@ -438,21 +386,23 @@ public class DataBaseHandler {
     }
 
 
-    public boolean editProperty(Land land) {
+    public boolean editPropertyForSale(Land land) {
         try {
             String editProperty = "UPDATE property SET Property_ID=?, Region=?, Address=?," +
                     "Area=?, Price=?, fees=? " +
                     "WHERE Property_ID=?";
-            PreparedStatement preparedStatement = connection.prepareStatement(editProperty);
-            preparedStatement.setInt(1, land.getProperty_ID());
-            preparedStatement.setString(2, land.getRegion());
-            preparedStatement.setString(3, land.getAddress());
-            preparedStatement.setInt(4, land.getArea());
-            preparedStatement.setInt(5, land.getPrice());
-            preparedStatement.setInt(6, land.getFees());
-            preparedStatement.setInt(7, land.getProperty_ID());
-            int res = preparedStatement.executeUpdate();
-            editLand(land);
+
+            PreparedStatement preparedStatement = connection.prepareStatement (editProperty);
+            preparedStatement.setInt (1, land.getProperty_ID ());
+            preparedStatement.setString (2, land.getRegion ());
+            preparedStatement.setString (3, land.getAddress ());
+            preparedStatement.setInt (4, land.getArea ());
+            preparedStatement.setInt (5, land.getPrice ());
+            preparedStatement.setString (6, land.getFeesOrDate ());
+            preparedStatement.setInt (7, land.getProperty_ID ());
+            int res = preparedStatement.executeUpdate ();
+            editLand (land);
+
             return (res > 0);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -460,6 +410,54 @@ public class DataBaseHandler {
 
         return false;
     }
+
+
+
+    public boolean editPropertyForRent(Land land) {
+        try {
+            String editProperty = "UPDATE property SET Property_ID=?, Region=?, Address=?," +
+                    "Area=?, Price=?, AvailableFrom=? " +
+                    "WHERE Property_ID=?";
+            PreparedStatement preparedStatement = connection.prepareStatement (editProperty);
+            preparedStatement.setInt (1, land.getProperty_ID ());
+            preparedStatement.setString (2, land.getRegion ());
+            preparedStatement.setString (3, land.getAddress ());
+            preparedStatement.setInt (4, land.getArea ());
+            preparedStatement.setInt (5, land.getPrice ());
+            preparedStatement.setString (6, land.getFeesOrDate ());
+            preparedStatement.setInt (7, land.getProperty_ID ());
+            int res = preparedStatement.executeUpdate ();
+            editLand (land);
+            return (res > 0);
+        } catch (SQLException e) {
+            e.printStackTrace ();
+        }
+
+        return false;
+    }
+
+    public ObservableList<PieChart.Data> getLandStatistics() {
+        ObservableList<PieChart.Data> data = FXCollections.observableArrayList ();
+
+        String qu = "SELECT count(Property_ID) From Land";
+        //  String qu2 ="SELECT COUNT (*) From Property where ";
+
+        ResultSet rs = execQuery (qu);
+        try {
+            if (rs.next ()) {
+                int count = rs.getInt (1);
+                data.add (new PieChart.Data ("Total lands: ("+count +")", count));
+
+            }
+            //  rs=execQuery (qu2);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace ();
+        }
+
+        return data;
+    }
+
+
 
     public void checkIfEmail(String email) throws SQLException {
         DataBaseHandler databaseHandler = DataBaseHandler.getInstance();
@@ -494,6 +492,7 @@ public class DataBaseHandler {
         }
 
     }
+
 
 }
 
