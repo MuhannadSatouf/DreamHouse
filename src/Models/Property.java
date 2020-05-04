@@ -12,10 +12,10 @@ public class Property {
     public  SimpleIntegerProperty area;
     public  SimpleIntegerProperty price;
     public  SimpleBooleanProperty propertyAvailability;
-    public  SimpleStringProperty feesOrDate;
+    public  SimpleIntegerProperty fees;
 
-    public Property(int property_ID, String region, String address, int area, int price, String feesOrDate, boolean propertyAvailability) {
-        this.feesOrDate = new SimpleStringProperty(feesOrDate);
+    public Property(int property_ID, String region, String address, int area, int price, int fees, boolean propertyAvailability) {
+        this.fees = new SimpleIntegerProperty(fees);
         this.property_ID = new SimpleIntegerProperty (property_ID);
         this.region = new SimpleStringProperty (region);
         this.address = new SimpleStringProperty (address);
@@ -25,12 +25,12 @@ public class Property {
     }
 
 
-    public String getFeesOrDate() {
-        return feesOrDate.get ();
+    public int getFees() {
+        return fees.get();
     }
 
-    public SimpleStringProperty feesOrDateProperty() {
-        return feesOrDate;
+    public SimpleIntegerProperty feesProperty() {
+        return fees;
     }
 
     public int getProperty_ID() {

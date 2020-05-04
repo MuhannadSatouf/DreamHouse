@@ -82,7 +82,7 @@ public class DataBaseHandler {
             pst.setString(3, address);
             pst.setInt(4, Integer.parseInt(area));
             pst.setString(5, price);
-            pst.setString(5, availableFrom);
+            pst.setString(6, availableFrom);
             pst.execute();
             pst.close();
 
@@ -256,7 +256,7 @@ public class DataBaseHandler {
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
-        try {
+       /* try {
             String qu3 = "INSERT INTO user (SSN,Password,Name,Address,Phone,Email) " +
                     "VALUES(?,?,?,?,?,?)  ";
             String SSN = "22";
@@ -337,7 +337,7 @@ public class DataBaseHandler {
 
         } catch (SQLException throwable) {
             throwable.printStackTrace();
-        }
+        }*/
     }
 
 
@@ -386,7 +386,7 @@ public class DataBaseHandler {
     }
 
 
-    public boolean editPropertyForSale(Land land) {
+    public boolean editProperty(Land land) {
         try {
             String editProperty = "UPDATE property SET Property_ID=?, Region=?, Address=?," +
                     "Area=?, Price=?, fees=? " +
@@ -398,7 +398,7 @@ public class DataBaseHandler {
             preparedStatement.setString (3, land.getAddress ());
             preparedStatement.setInt (4, land.getArea ());
             preparedStatement.setInt (5, land.getPrice ());
-            preparedStatement.setString (6, land.getFeesOrDate ());
+            preparedStatement.setInt (6, land.getFees ());
             preparedStatement.setInt (7, land.getProperty_ID ());
             int res = preparedStatement.executeUpdate ();
             editLand (land);
@@ -413,28 +413,7 @@ public class DataBaseHandler {
 
 
 
-    public boolean editPropertyForRent(Land land) {
-        try {
-            String editProperty = "UPDATE property SET Property_ID=?, Region=?, Address=?," +
-                    "Area=?, Price=?, AvailableFrom=? " +
-                    "WHERE Property_ID=?";
-            PreparedStatement preparedStatement = connection.prepareStatement (editProperty);
-            preparedStatement.setInt (1, land.getProperty_ID ());
-            preparedStatement.setString (2, land.getRegion ());
-            preparedStatement.setString (3, land.getAddress ());
-            preparedStatement.setInt (4, land.getArea ());
-            preparedStatement.setInt (5, land.getPrice ());
-            preparedStatement.setString (6, land.getFeesOrDate ());
-            preparedStatement.setInt (7, land.getProperty_ID ());
-            int res = preparedStatement.executeUpdate ();
-            editLand (land);
-            return (res > 0);
-        } catch (SQLException e) {
-            e.printStackTrace ();
-        }
 
-        return false;
-    }
 
     public ObservableList<PieChart.Data> getLandStatistics() {
         ObservableList<PieChart.Data> data = FXCollections.observableArrayList ();

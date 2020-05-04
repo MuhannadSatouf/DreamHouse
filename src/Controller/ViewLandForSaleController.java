@@ -53,7 +53,7 @@ public class ViewLandForSaleController implements Initializable {
         addressCol.setCellValueFactory (new PropertyValueFactory<> ("address"));
         areaCol.setCellValueFactory (new PropertyValueFactory<> ("area"));
         priceCol.setCellValueFactory (new PropertyValueFactory<> ("price"));
-        feesCol.setCellValueFactory (new PropertyValueFactory<> ("feesOrDate"));
+        feesCol.setCellValueFactory (new PropertyValueFactory<> ("fees"));
         typeCol.setCellValueFactory (new PropertyValueFactory<> ("type"));
         IrrigatedCol.setCellValueFactory (new PropertyValueFactory<> ("irrigated"));
         residentialCol.setCellValueFactory (new PropertyValueFactory<> ("includesResidence"));
@@ -66,7 +66,9 @@ public class ViewLandForSaleController implements Initializable {
         String qu = "SELECT property.Property_ID,property.Region,property.Address," +
                 "property.Area,property.Price,Availability,land.Type,land.Irrigated,land.Includes_Residence,property.fees " +
                 "FROM property,land " +
-                "WHERE property.Property_ID=land.Property_ID";
+                "WHERE property.Property_ID=land.Property_ID " +
+                "And fees > 0";
+
 
         ResultSet resultSet = databaseHandler.execQuery (qu);
         try {
@@ -80,9 +82,10 @@ public class ViewLandForSaleController implements Initializable {
                 String type = resultSet.getString ("Type");
                 boolean irrigated = resultSet.getBoolean ("Irrigated");
                 boolean includesResidence = resultSet.getBoolean ("Includes_Residence");
-                String fees = resultSet.getString ("fees");
+                int fees = resultSet.getInt ("fees");
                 listOfLand.add (new Land (propertyID, region, address, area, price, fees, type, irrigated, includesResidence, isAvail));
             }
+
         } catch (SQLException e) {
             e.printStackTrace ();
         }

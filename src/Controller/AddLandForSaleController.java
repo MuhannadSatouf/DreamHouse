@@ -99,9 +99,9 @@ public class AddLandForSaleController implements Initializable{
 
         public void landEdit() {
             Land land = new Land (Integer.parseInt (propertyID.getText ()), region.getText (), address.getText (), Integer.parseInt (area.getText ()),
-                     Integer.parseInt (price.getText ()),fees.getText (),
+                     Integer.parseInt (price.getText ()),Integer.parseInt (fees.getText ()),
                     type.getValue ().toString (), irrigated.isSelected (), includesResidence.isSelected (), true);
-            if (dataBaseHandler.editPropertyForSale (land)) {
+            if (dataBaseHandler.editProperty (land)) {
                 Alert alert = new Alert (Alert.AlertType.INFORMATION);
                 alert.setHeaderText (null);
                 alert.setContentText ("Land has been edited successfully!");
@@ -129,7 +129,7 @@ public class AddLandForSaleController implements Initializable{
             address.setText (property.getAddress ());
             area.setText (String.valueOf (property.getArea ()));
             price.setText (String.valueOf (property.getPrice ()));
-            fees.setText (String.valueOf (property.getFeesOrDate ()));
+            fees.setText (String.valueOf (property.getFees ()));
             editMode = Boolean.TRUE;
             propertyID.setEditable (false);
         }
