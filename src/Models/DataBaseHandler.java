@@ -563,7 +563,9 @@ public class DataBaseHandler {
         ObservableList<PieChart.Data> data = FXCollections.observableArrayList ();
 
         String qu = "SELECT count(Property_ID) From Land";
-        //  String qu2 ="SELECT COUNT (*) From Property where ";
+          String qu2 ="SELECT count(*) From Property WHERE fees>0 ";
+        String qu3 ="SELECT count(*) From Property where fees IS NULL";
+
 
         ResultSet rs = execQuery (qu);
         try {
@@ -572,7 +574,19 @@ public class DataBaseHandler {
                 data.add (new PieChart.Data ("Total lands: ("+count +")", count));
 
             }
-            //  rs=execQuery (qu2);
+              rs=execQuery (qu2);
+            if (rs.next ()){
+                int count = rs.getInt (1);
+                data.add (new PieChart.Data ("Total lands for sale: ("+count +")", count));
+                
+            }
+            rs=execQuery (qu3);
+            if (rs.next ()) {
+                int count = rs.getInt (1);
+                data.add (new PieChart.Data ("Total lands for rent: (" + count + ")", count));
+
+            }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace ();
         }
