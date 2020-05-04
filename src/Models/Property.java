@@ -6,8 +6,8 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Property {
 
-    public   SimpleIntegerProperty property_ID;
-    public   SimpleStringProperty region;
+    public  SimpleIntegerProperty property_ID;
+    public  SimpleStringProperty region;
     public  SimpleStringProperty address;
     public  SimpleIntegerProperty area;
     public  SimpleIntegerProperty price;

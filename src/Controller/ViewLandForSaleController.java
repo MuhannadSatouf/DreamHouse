@@ -42,7 +42,7 @@ public class ViewLandForSaleController implements Initializable {
     public TableColumn<Land, Boolean> IrrigatedCol;
     public TableColumn<Land, Boolean> availabilityCol;
     public TableColumn<Land, Boolean> residentialCol;
-    public TableColumn<Land, String> feesCol;
+    public TableColumn<Land, Integer> feesCol;
 
 
     ObservableList<Land> listOfLand = FXCollections.observableArrayList ();
