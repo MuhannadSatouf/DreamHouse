@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddHouseForSaleController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddHouseForSaleController">
    <children>
       <Pane prefHeight="81.0" prefWidth="400.0" style="-fx-background-color: #404040;">
          <children>
@@ -19,10 +23,10 @@
       <JFXTextField fx:id="area" focusColor="#5190b9" layoutX="138.0" layoutY="200.0" prefHeight="34.0" prefWidth="210.0" promptText="Area" />
       <JFXTextField fx:id="yearBuilt" focusColor="#5190b9" layoutX="138.0" layoutY="249.0" prefHeight="25.0" prefWidth="210.0" promptText="Year built" />
       <JFXTextField fx:id="fees" focusColor="#5190b9" layoutX="138.0" layoutY="288.0" prefHeight="25.0" prefWidth="210.0" promptText="Fees" />
-      <JFXCheckBox fx:id="parking" checkedColor="#5190b9" layoutX="290.0" layoutY="389.0" text="Parking" textFill="#9c9898" unCheckedColor="#5190b9" />
-      <JFXCheckBox fx:id="heating" checkedColor="#5190b9" layoutX="127.0" layoutY="389.0" text="Heating" textFill="#9c9898" unCheckedColor="#5190b9" />
-      <JFXCheckBox fx:id="garage" checkedColor="#5190b9" layoutX="291.0" layoutY="431.0" text="Garage" textFill="#9c9898" unCheckedColor="#5190b9" />
-      <JFXCheckBox fx:id="balcony" checkedColor="#5190b9" layoutX="127.0" layoutY="431.0" text="Balcony" textFill="#9c9898" unCheckedColor="#5190b9" />
+      <JFXCheckBox fx:id="parking" checkedColor="#5190b9" layoutX="290.0" layoutY="380.0" text="Parking" textFill="#9c9898" unCheckedColor="#5190b9" />
+      <JFXCheckBox fx:id="heating" checkedColor="#5190b9" layoutX="138.0" layoutY="380.0" text="Heating" textFill="#9c9898" unCheckedColor="#5190b9" />
+      <JFXCheckBox fx:id="garage" checkedColor="#5190b9" layoutX="291.0" layoutY="422.0" text="Garage" textFill="#9c9898" unCheckedColor="#5190b9" />
+      <JFXCheckBox fx:id="balcony" checkedColor="#5190b9" layoutX="138.0" layoutY="422.0" text="Balcony" textFill="#9c9898" unCheckedColor="#5190b9" />
       <JFXComboBox fx:id="roomsNumber" focusColor="#5190b9" layoutX="138.0" layoutY="459.0" prefHeight="25.0" prefWidth="210.0" promptText="Rooms" />
       <JFXButton fx:id="saveBtn" layoutX="1.0" layoutY="531.0" onAction="#save" prefHeight="68.0" prefWidth="193.0" ripplerFill="#18e233" text="Save" textFill="#9c9898">
          <font>
@@ -54,12 +58,12 @@
             <Image url="@../Resources/balcony%20(1).png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="243.0" layoutY="384.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="243.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/park.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="243.0" layoutY="426.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="243.0" layoutY="417.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/garage.png" />
          </image>

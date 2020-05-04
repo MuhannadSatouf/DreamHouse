@@ -3,14 +3,14 @@ package Models;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class Land extends Property{
+public class Land extends Property {
     private  SimpleStringProperty type;
     private  SimpleBooleanProperty irrigated;
     private  SimpleBooleanProperty includesResidence;
 
-    public Land(int property_ID, String region, String address, int area, int price,int fees, String type,boolean irrigated,boolean includesResidence,
+    public Land(int property_ID, String region, String address, int area, int price,String feesOrDate, String type,boolean irrigated,boolean includesResidence,
                 boolean propertyAvailability) {
-        super (property_ID, region, address, area, price,fees, propertyAvailability);
+        super (property_ID, region, address, area, price,feesOrDate, propertyAvailability);
         this.type=new SimpleStringProperty (type);
         this.irrigated=new SimpleBooleanProperty (irrigated);
         this.includesResidence=new SimpleBooleanProperty (includesResidence);

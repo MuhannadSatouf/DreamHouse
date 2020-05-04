@@ -16,9 +16,9 @@ public class Resident extends Property {
     private  SimpleIntegerProperty  yearBuilt;
 
 
-    public Resident(int property_ID, String region, String address, int area, int yearBuilt, int fees, int price,
+    public Resident(int property_ID, String region, String address, int area, int yearBuilt, String feesOrDate, int price,
                     boolean heating, boolean parking, boolean balcony, String room, String bathroom, boolean propertyAvailability) {
-        super(property_ID, region, address, area, price, fees, propertyAvailability);
+        super(property_ID, region, address, area, price, feesOrDate, propertyAvailability);
         this.heating = new SimpleBooleanProperty(heating);
         this.parking = new SimpleBooleanProperty(parking);
         this.balcony = new SimpleBooleanProperty(balcony);

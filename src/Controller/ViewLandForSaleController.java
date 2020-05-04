@@ -42,7 +42,7 @@ public class ViewLandForSaleController implements Initializable {
     public TableColumn<Land, Boolean> IrrigatedCol;
     public TableColumn<Land, Boolean> availabilityCol;
     public TableColumn<Land, Boolean> residentialCol;
-    public TableColumn<Land, Integer> feesCol;
+    public TableColumn<Land, String> feesCol;
 
 
     ObservableList<Land> listOfLand = FXCollections.observableArrayList ();
@@ -53,7 +53,7 @@ public class ViewLandForSaleController implements Initializable {
         addressCol.setCellValueFactory (new PropertyValueFactory<> ("address"));
         areaCol.setCellValueFactory (new PropertyValueFactory<> ("area"));
         priceCol.setCellValueFactory (new PropertyValueFactory<> ("price"));
-        feesCol.setCellValueFactory (new PropertyValueFactory<> ("fees"));
+        feesCol.setCellValueFactory (new PropertyValueFactory<> ("feesOrDate"));
         typeCol.setCellValueFactory (new PropertyValueFactory<> ("type"));
         IrrigatedCol.setCellValueFactory (new PropertyValueFactory<> ("irrigated"));
         residentialCol.setCellValueFactory (new PropertyValueFactory<> ("includesResidence"));
@@ -63,11 +63,11 @@ public class ViewLandForSaleController implements Initializable {
     private void loadData() {
         DataBaseHandler databaseHandler = DataBaseHandler.getInstance ();
 
-        String qu = "SELECT property.fees,property.Property_ID,property.Region,property.Address," +
-                "property.Area,property.Price,Availability,land.Type,land.Irrigated,land.Includes_Residence " +
+        String qu = "SELECT property.Property_ID,property.Region,property.Address," +
+                "property.Area,property.Price,Availability,land.Type,land.Irrigated,land.Includes_Residence,property.fees " +
                 "FROM property,land " +
-                "WHERE property.Property_ID=land.Property_ID "
-                + "AND fees > 0";
+                "WHERE property.Property_ID=land.Property_ID";
+
         ResultSet resultSet = databaseHandler.execQuery (qu);
         try {
             while (resultSet.next ()) {
@@ -80,7 +80,7 @@ public class ViewLandForSaleController implements Initializable {
                 String type = resultSet.getString ("Type");
                 boolean irrigated = resultSet.getBoolean ("Irrigated");
                 boolean includesResidence = resultSet.getBoolean ("Includes_Residence");
-                int fees = resultSet.getInt ("fees");
+                String fees = resultSet.getString ("fees");
                 listOfLand.add (new Land (propertyID, region, address, area, price, fees, type, irrigated, includesResidence, isAvail));
             }
         } catch (SQLException e) {

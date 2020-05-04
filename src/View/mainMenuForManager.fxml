@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<Pane fx:id="startPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
+<Pane fx:id="startPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuController">
    <children>
       <BorderPane fx:id="borderPane" prefHeight="640.0" prefWidth="800.0" style="-fx-background-color: #404040;">
          <left>
@@ -20,7 +17,7 @@
                         <Image url="@../Resources/Logo.png" />
                      </image>
                   </ImageView>
-                  <JFXButton fx:id="addPropertyBtn" onAction="#addProperty" prefHeight="79.0" prefWidth="165.0" text="Add Property" textFill="#5190b9">
+                  <JFXButton fx:id="addPropertyBtn" onAction="#addProperty" prefHeight="79.0" prefWidth="165.0" ripplerFill="#404040" text="Add Property" textFill="#5190b9">
                      <font>
                         <Font name="System Bold Italic" size="16.0" />
                      </font></JFXButton>
