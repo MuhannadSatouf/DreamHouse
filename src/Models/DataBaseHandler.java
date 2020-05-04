@@ -269,7 +269,7 @@ public class DataBaseHandler {
         try {
             String qu = "INSERT INTO user (SSN,Password,Name,Address,Phone,Email) " +
                     "VALUES(?,?,?,?,?,?)  ";
-            String SSN = "44";
+            String SSN = "11";
             String customerPassword = new PassWordHash().encrypt("44",secretKey);
             String name = "Muhannad";
             String address = "Kristianstad";
@@ -297,7 +297,7 @@ public class DataBaseHandler {
                     "VALUES (?,?)";
 
             String role = "Manager";
-            String SSN = "44";
+            String SSN = "11";
             PreparedStatement pst;
             pst = DataBaseHandler.connection.prepareStatement(qu2);
             pst.setString(1, role);
@@ -317,7 +317,7 @@ public class DataBaseHandler {
             String name = "Mohamad";
             String address = "Karlistad";
             String phone = "0768837489";
-            String email = "mohanad2satouf@gmail.com";
+            String email = "mohanad1satouf@gmail.com";
 
             PreparedStatement pst;
             pst = DataBaseHandler.connection.prepareStatement(qu3);
@@ -358,7 +358,7 @@ public class DataBaseHandler {
             String name = "Ahmad";
             String address = "Stockholm";
             String phone = "0768837489";
-            String email = "mohanad2satouf@gmail.com";
+            String email = "mohanad22satouf@gmail.com";
 
             PreparedStatement pst;
             pst = DataBaseHandler.connection.prepareStatement(qu3);
