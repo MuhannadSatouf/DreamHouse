@@ -6,10 +6,10 @@ import javafx.beans.property.SimpleBooleanProperty;
 public class House extends Resident {
     private final BooleanProperty garage;
 
-    public House(int property_ID, String region, String address, int area, int yearBuilt, String feesOrDate,
+    public House(int property_ID, String region, String address, int area, int yearBuilt, int fees,
                  int price, boolean heating, boolean parking, boolean balcony, String room, String bathroom,
                  boolean propertyAvailability, boolean garage) {
-        super(property_ID, region, address, area, yearBuilt, feesOrDate, price, heating, parking, balcony, room, bathroom, propertyAvailability);
+        super(property_ID, region, address, area, yearBuilt, fees, price, heating, parking, balcony, room, bathroom, propertyAvailability);
         this.garage = new SimpleBooleanProperty(garage);
     }
 

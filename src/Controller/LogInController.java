@@ -13,6 +13,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -24,6 +25,7 @@ import java.util.ResourceBundle;
 
 public class LogInController implements Initializable {
 
+    public Pane startPane;
     @FXML
     private JFXTextField SSNInput, passwordInput;
     public ProgressIndicator progressBar;
@@ -48,6 +50,8 @@ public class LogInController implements Initializable {
         } else if (isCustomer) {
             viewWindow("/View/mainMenuForCustomer.fxml", "Menu");
         }
+        Stage stage = (Stage) startPane.getScene ().getWindow ();
+        stage.close ();
     }
 
 
@@ -116,13 +120,13 @@ public class LogInController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // These for testing the database and inlogning and will active them only one time to create them in the database if we use local database
-//
+
 //        DataBaseHandler dataBaseHandler = null;
 //        try {
 //            dataBaseHandler = new DataBaseHandler ();
 //        } catch (SQLException throwables) {
-//            throwables.printStackTrace ();
-//        }
+//           throwables.printStackTrace ();
+//       }
 //        dataBaseHandler.addUsersForTesting();
 
         progressBar.setVisible(false);

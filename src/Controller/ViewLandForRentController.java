@@ -22,7 +22,7 @@ public class ViewLandForRentController implements Initializable {
     public TableColumn areaCol;
     public TableColumn yearCol;
     public TableColumn priceCol;
-    public TableColumn heatingCol;
+
     public TableColumn typeCol;
     public TableColumn IrrigatedCol;
     public Pane upPane;
