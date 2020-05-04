@@ -35,7 +35,7 @@ public class DataBaseHandler {
     void createConnection() {
         try {
             Class.forName(DRIVER).newInstance();
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false", "root", "root");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false&allowPublicKeyRetrieval=true", "root", "root");
             //Remote database  // connection = DriverManager.getConnection ("jdbc:mysql://den1.mysql5.gear.host:3306/realestate2?useSSL=false", "realestate2", "Xl9pU?!yN6Rr");
             System.out.println("Connection success");
         } catch (Exception e) {
@@ -82,7 +82,7 @@ public class DataBaseHandler {
             pst.setString(3, address);
             pst.setInt(4, Integer.parseInt(area));
             pst.setString(5, price);
-            pst.setString(5, availableFrom);
+            pst.setString(6, availableFrom);
             pst.execute();
             pst.close();
 
