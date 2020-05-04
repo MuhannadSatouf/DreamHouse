@@ -64,7 +64,7 @@ public class AddLandForSaleController implements Initializable{
                     alert.showAndWait ();
                     refreshing ();
                 } else {
-                    dataBaseHandler.addPropertyForSale (propertyID.getText (), region.getText (), address.getText (), area.getText (), fees.getText (), price.getText ());
+                    dataBaseHandler.addProperty (propertyID.getText (), region.getText (), address.getText (), area.getText (), fees.getText (), price.getText ());
                     try {
                         String qu = "INSERT INTO land (Type,Irrigated,Includes_Residence,Property_ID) " + "VALUES (?,?,?,?) ";
                         PreparedStatement pst;

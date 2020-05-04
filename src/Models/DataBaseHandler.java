@@ -45,7 +45,7 @@ public class DataBaseHandler {
     }
 
 
-    public void addPropertyForSale(String property_Id, String region, String address, String area, String fees, String price) {
+    public void addProperty(String property_Id, String region, String address, String area, String fees, String price) {
         try {
             String qu = "INSERT INTO property (Property_ID,Region,Address,Area,Price,fees) " +
                     "VALUES(?,?,?,?,?,?)";
@@ -69,27 +69,27 @@ public class DataBaseHandler {
     }
 
 
-    public void addPropertyForRent(String property_Id, String region, String address, String area, String availableFrom, String price) {
-        try {
-            String qu = "INSERT INTO property (Property_ID,Region,Address,Area,Price,availableFrom) " +
-                    "VALUES(?,?,?,?,?,?)";
-
-            PreparedStatement pst;
-            pst = DataBaseHandler.connection.prepareStatement(qu);
-
-            pst.setString(1, property_Id);
-            pst.setString(2, region);
-            pst.setString(3, address);
-            pst.setInt(4, Integer.parseInt(area));
-            pst.setString(5, price);
-            pst.setString(6, availableFrom);
-            pst.execute();
-            pst.close();
-
-        } catch (SQLException throwable) {
-            throwable.printStackTrace();
-        }
-    }
+//    public void addPropertyForRent(String property_Id, String region, String address, String area, String availableFrom, String price) {
+//        try {
+//            String qu = "INSERT INTO property (Property_ID,Region,Address,Area,Price,availableFrom) " +
+//                    "VALUES(?,?,?,?,?,?)";
+//
+//            PreparedStatement pst;
+//            pst = DataBaseHandler.connection.prepareStatement(qu);
+//
+//            pst.setString(1, property_Id);
+//            pst.setString(2, region);
+//            pst.setString(3, address);
+//            pst.setInt(4, Integer.parseInt(area));
+//            pst.setString(5, price);
+//            pst.setString(6, availableFrom);
+//            pst.execute();
+//            pst.close();
+//
+//        } catch (SQLException throwable) {
+//            throwable.printStackTrace();
+//        }
+//    }
 
     public void addUser(String customerSSn, String customerPassword, String name, String address, String phone, String email) {
 
@@ -355,7 +355,48 @@ public class DataBaseHandler {
 
         return false;
     }
+    public boolean deleteApartment(Property property) {
+        try {
+            String deleteStat = "DELETE FROM Apartment WHERE Property_ID=? ";
+            PreparedStatement preparedStatement = connection.prepareStatement (deleteStat);
+            preparedStatement.setInt (1, property.getProperty_ID ());
+            preparedStatement.executeUpdate ();
+            deleteFromProperty (property);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace ();
+        }
 
+        return false;
+    }
+    public boolean deleteHouse(Property property) {
+        try {
+            String deleteStat = "DELETE FROM House WHERE Property_ID=? ";
+            PreparedStatement preparedStatement = connection.prepareStatement (deleteStat);
+            preparedStatement.setInt (1, property.getProperty_ID ());
+            preparedStatement.executeUpdate ();
+            deleteFromProperty (property);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace ();
+        }
+
+        return false;
+    }
+    public boolean deleteCommercial(Property property) {
+        try {
+            String deleteStat = "DELETE FROM Commercial WHERE Property_ID=? ";
+            PreparedStatement preparedStatement = connection.prepareStatement (deleteStat);
+            preparedStatement.setInt (1, property.getProperty_ID ());
+            preparedStatement.executeUpdate ();
+            deleteFromProperty (property);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace ();
+        }
+
+        return false;
+    }
 
     public void deleteFromProperty(Property property) {
         try {
@@ -384,7 +425,44 @@ public class DataBaseHandler {
         }
 
     }
+    public void editApartment(Apartment apartment) {
 
+        String updateApartment = "UPDATE apartment SET Floor=?, Property_ID=?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement (updateApartment);
+            preparedStatement.setString (1, apartment.getFloor());
+            preparedStatement.setString (2, String.valueOf(apartment.getProperty_ID()));
+            preparedStatement.executeUpdate ();
+        } catch (SQLException e) {
+            e.printStackTrace ();
+        }
+    }
+    public void editHouse(House house) {
+
+        String updateHouse = "UPDATE house SET Floor=?, Property_ID=?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement (updateHouse);
+            preparedStatement.setBoolean (1, house.isGarage());
+            preparedStatement.setString (2, String.valueOf(house.getProperty_ID()));
+            preparedStatement.executeUpdate ();
+        } catch (SQLException e) {
+            e.printStackTrace ();
+        }
+    }
+    public void editCommercial (CommercialProperty commercialProperty) {
+
+        String updateCommercial = "UPDATE commercial SET Type=?, Floor=? Property_ID=?, Year_Built=?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement (updateCommercial);
+            preparedStatement.setString (1, commercialProperty.getType());
+            preparedStatement.setString (2, commercialProperty.getFloor());
+            preparedStatement.setInt (3, commercialProperty.getProperty_ID());
+            preparedStatement.setInt (4, commercialProperty.getYear_Built());
+            preparedStatement.executeUpdate ();
+        } catch (SQLException e) {
+            e.printStackTrace ();
+        }
+    }
 
     public boolean editProperty(Land land) {
         try {
@@ -406,6 +484,72 @@ public class DataBaseHandler {
             return (res > 0);
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+
+        return false;
+    }
+    public boolean editProperty(Apartment apartment) {
+        try {
+            String editProperty = "UPDATE property SET Property_ID=?, Region=?, Address=?," +
+                    "Area=?, Price=?, availableFrom=? " +
+                    "WHERE Property_ID=?";
+            PreparedStatement preparedStatement = connection.prepareStatement (editProperty);
+            preparedStatement.setInt (1, apartment.getProperty_ID ());
+            preparedStatement.setString (2, apartment.getRegion ());
+            preparedStatement.setString (3, apartment.getAddress ());
+            preparedStatement.setInt (4, apartment.getArea ());
+            preparedStatement.setInt (5, apartment.getPrice ());
+            preparedStatement.setInt (6, apartment.getFees());
+            preparedStatement.setInt (7, apartment.getProperty_ID ());
+            int res = preparedStatement.executeUpdate ();
+            editApartment (apartment);
+            return (res > 0);
+        } catch (SQLException e) {
+            e.printStackTrace ();
+        }
+
+        return false;
+    }
+    public boolean editProperty(House house) {
+        try {
+            String editProperty = "UPDATE property SET Property_ID=?, Region=?, Address=?," +
+                    "Area=?, Fess=?, Price=? " +
+                    "WHERE Property_ID=?";
+            PreparedStatement preparedStatement = connection.prepareStatement (editProperty);
+            preparedStatement.setInt (1, house.getProperty_ID ());
+            preparedStatement.setString (2, house.getRegion ());
+            preparedStatement.setString (3, house.getAddress ());
+            preparedStatement.setInt (4, house.getArea ());
+            preparedStatement.setInt (5, house.getFees());
+            preparedStatement.setInt (6, house.getPrice ());
+            preparedStatement.setInt (7, house.getProperty_ID ());
+            int res = preparedStatement.executeUpdate ();
+            editHouse (house);
+            return (res > 0);
+        } catch (SQLException e) {
+            e.printStackTrace ();
+        }
+
+        return false;
+    }
+    public boolean editProperty(CommercialProperty commercialProperty) {
+        try {
+            String editProperty = "UPDATE commercial SET Property_ID=?, Region=?, Address=?," +
+                    "Area=?, fees=? , Price=?" +
+                    "WHERE Property_ID=?";
+            PreparedStatement preparedStatement = connection.prepareStatement (editProperty);
+            preparedStatement.setInt (1, commercialProperty.getProperty_ID ());
+            preparedStatement.setString (2, commercialProperty.getRegion ());
+            preparedStatement.setString (3, commercialProperty.getAddress ());
+            preparedStatement.setInt (4, commercialProperty.getArea ());
+            preparedStatement.setInt (5, commercialProperty.getPrice ());
+            preparedStatement.setInt (6, commercialProperty.getFees());
+            preparedStatement.setInt (7, commercialProperty.getProperty_ID ());
+            int res = preparedStatement.executeUpdate ();
+            editCommercial (commercialProperty);
+            return (res > 0);
+        } catch (SQLException e) {
+            e.printStackTrace ();
         }
 
         return false;
