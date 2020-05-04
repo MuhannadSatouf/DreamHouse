@@ -24,7 +24,7 @@ public class AddLandForRentController implements Initializable {
     public JFXTextField area;
     public JFXButton saveBtn;
     public JFXComboBox type;
-    public JFXTextField address; 
+    public JFXTextField address;
     public JFXTextField region;
     public JFXTextField price;
     public JFXTextField propertyID;

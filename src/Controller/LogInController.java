@@ -9,7 +9,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -49,14 +52,15 @@ public class LogInController implements Initializable {
 
 
     private boolean validateLogin() throws SQLException {
-
-        String p = new PassWordHash().generateHash(passwordInput.getText());
+        final String secretKey = "ssshhhhhhhhhhh!!!!";
+        String p = new PassWordHash().encrypt(passwordInput.getText(),secretKey);
         if (SSNInput.getText().equals("") || passwordInput.getText().equals("")) {
             errorMassage();
         } else {
             DataBaseHandler DBHandler = new DataBaseHandler();
             //String check = DBHandler.checkLogInIfEmployee(Integer.parseInt(SSNInput.getText()), passwordInput.getText());
-            String check = DBHandler.checkLogInIfEmployee(SSNInput.getText(), new PassWordHash().generateHash(passwordInput.getText()));
+            //String check = DBHandler.checkLogInIfEmployee(SSNInput.getText(), new PassWordHash().generateHash(passwordInput.getText()));
+            String check = DBHandler.checkLogInIfEmployee(SSNInput.getText(), new PassWordHash().encrypt(passwordInput.getText(),secretKey));
             switch (check) {
                 case "1":
                     isManager = true;
@@ -66,7 +70,7 @@ public class LogInController implements Initializable {
                     return true;
                 case "10":
                     DataBaseHandler dataBaseHandler = new DataBaseHandler();
-                    String check2 = dataBaseHandler.checkLogInIfCustomer(SSNInput.getText(), new PassWordHash().generateHash(passwordInput.getText()));
+                    String check2 = dataBaseHandler.checkLogInIfCustomer(SSNInput.getText(), new PassWordHash().encrypt(passwordInput.getText(),secretKey));
                     switch (check2) {
                         case "1":
                             isCustomer = true;
@@ -103,17 +107,23 @@ public class LogInController implements Initializable {
         }
     }
 
+    @FXML
+    void forgetPassword(ActionEvent event) {
+        viewWindow("/View/forgetPassword.fxml", "Forget password");
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // These for testing the database and inlogning and will active them only one time to create them in the database if we use local database
-
-   /*     DataBaseHandler dataBaseHandler = null;
-        try {
-            dataBaseHandler = new DataBaseHandler ();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace ();
-        }
-        dataBaseHandler.addUsersForTesting();*/
+//
+//        DataBaseHandler dataBaseHandler = null;
+//        try {
+//            dataBaseHandler = new DataBaseHandler ();
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace ();
+//        }
+//        dataBaseHandler.addUsersForTesting();
 
         progressBar.setVisible(false);
     }

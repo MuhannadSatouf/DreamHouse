@@ -15,7 +15,7 @@ public class EmailSend {
 
     }
 
-    public void sendEmail(String to, String messageText) {
+    public void sendEmailWithPassword(String sendTo, String messageText,String pw) {
         try {
             // The agency's email  is dreamhousesup@gmail.com and the password: asd112211
 
@@ -42,11 +42,12 @@ public class EmailSend {
             mailSession.setDebug(false);
             Message msg = new MimeMessage(mailSession);
             msg.setFrom(new InternetAddress(from));
-            InternetAddress[] address = {new InternetAddress(to)};
+            InternetAddress[] address = {new InternetAddress(sendTo)};
             msg.setRecipients(Message.RecipientType.TO, address);
             msg.setSubject(subject);
             msg.setSentDate(new Date());
-            msg.setText(messageText);
+            msg.setText(messageText + pw);
+
 
             Transport transport = mailSession.getTransport("smtp");
             transport.connect(host, from, password);
