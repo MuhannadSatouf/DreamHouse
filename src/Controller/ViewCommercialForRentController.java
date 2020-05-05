@@ -1,5 +1,6 @@
 package Controller;
 
+import Models.CommercialProperty;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -12,20 +13,18 @@ import java.util.ResourceBundle;
 public class ViewCommercialForRentController implements Initializable {
     public Pane mainPane;
     public Pane downPane;
-
-    public TableColumn propertyIDCol;
-    public TableColumn regionCol;
-    public TableColumn addressCol;
-    public TableColumn areaCol;
-    public TableColumn yearCol;
-    public TableColumn priceCol;
-    public TableColumn typeCol;
-    public TableColumn floorCol;
     public Pane upPane;
     public HBox hbox;
-    public TableColumn availabilityCol;
-    public TableView tableOfCommercialForRent;
-    public TableColumn availableFromDateCol;
+    public TableColumn<CommercialProperty,Integer> propertyIDCol;
+    public TableColumn<CommercialProperty,String> regionCol;
+    public TableColumn<CommercialProperty,String> addressCol;
+    public TableColumn<CommercialProperty,Integer> areaCol;
+    public TableColumn<CommercialProperty,Integer> priceCol;
+    public TableColumn<CommercialProperty,String> typeCol;
+    public TableColumn<CommercialProperty,String> floorCol;
+    public TableColumn<CommercialProperty,Boolean> availabilityCol;
+   // public TableColumn<CommercialProperty,String> availableFromDateCol;
+    public TableView<CommercialProperty> tableOfCommercialForRent;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

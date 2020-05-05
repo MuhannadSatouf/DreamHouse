@@ -1,5 +1,6 @@
 package Controller;
 
+import Models.House;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
@@ -43,4 +44,5 @@ public class AddHouseForSaleController implements Initializable {
         roomsNumber.setItems (numberOfRooms);
         bathroomsNumber.setItems (numberOfBathrooms);
     }
+
 }

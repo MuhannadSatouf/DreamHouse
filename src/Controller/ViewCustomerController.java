@@ -19,11 +19,11 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ViewCustomerController implements Initializable {
+
     public Pane upPane;
     public HBox hbox;
     public Pane mainPane;
     public Pane downPane;
-    public TableView<Customer> tableOfCustomer;
     public TableColumn <Customer,String>SSNCol;
     public TableColumn <Customer,String> typeCol;
     public TableColumn <Customer,String> nameCol;
@@ -31,7 +31,7 @@ public class ViewCustomerController implements Initializable {
     public TableColumn <Customer,String> phoneCol;
     public TableColumn <Customer,String> emailCol;
     public TableColumn <Customer,String> passCol;
-
+    public TableView<Customer> tableOfCustomer;
 
     ObservableList<Customer>customerList2 = FXCollections.observableArrayList ();
 
@@ -55,9 +55,6 @@ public class ViewCustomerController implements Initializable {
 
         ResultSet resultSet = databaseHandler.execQuery (qu);
 
-
-
-
         try {
             while (resultSet.next ()) {
                 String customerSsn = resultSet.getString ("SSN");
@@ -67,29 +64,14 @@ public class ViewCustomerController implements Initializable {
                 String customerEmail = resultSet.getString ("Email");
                 String customerType =resultSet.getString ("Customer_type");
 
-
                 customerList2.add (new Customer (customerSsn,customerName,customerAddress,customerPhone,customerEmail,customerType));
-
 
             }
         } catch (SQLException e) {
             e.printStackTrace ();
         }
-
-
         tableOfCustomer.setItems (customerList2);
-
-
-
     }
-
-
-
-
-
-
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
