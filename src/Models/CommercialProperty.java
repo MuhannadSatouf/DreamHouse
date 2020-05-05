@@ -1,42 +1,45 @@
 package Models;
 
+import javafx.beans.property.*;
+
 
 import javafx.beans.property.SimpleStringProperty;
 
+
+
 public class CommercialProperty extends Property {
+    public SimpleStringProperty type;
+    public SimpleStringProperty floor;
 
-    private SimpleStringProperty commercialType;
-    private SimpleStringProperty commercialFloor;
 
-    public CommercialProperty(int property_ID, String region, String address, int area, int price,
-                              int fees, boolean propertyAvailability, String commercialType,
-                              String commercialFloor) {
+
+
+
+
+
+    public CommercialProperty(int property_ID, String region, String address, int area, int price, int fees,
+                              boolean propertyAvailability, String type, String floor) {
         super(property_ID, region, address, area, price, fees, propertyAvailability);
-        this.commercialType = new SimpleStringProperty(commercialType);
-        this.commercialFloor = new SimpleStringProperty(commercialFloor);
+        this.type = new SimpleStringProperty(type);
+        this.floor = new SimpleStringProperty(floor);
+
     }
 
-    public String getCommercialType() {
-        return commercialType.get();
+
+    public String getType() {
+        return type.get();
     }
 
-    public SimpleStringProperty commercialTypeProperty() {
-        return commercialType;
+    public SimpleStringProperty typeProperty() {
+        return type;
     }
 
-    public void setCommercialType(String commercialType) {
-        this.commercialType.set(commercialType);
+    public String getFloor() {
+        return floor.get();
     }
 
-    public String getCommercialFloor() {
-        return commercialFloor.get();
+    public SimpleStringProperty floorProperty() {
+        return floor;
     }
 
-    public SimpleStringProperty commercialFloorProperty() {
-        return commercialFloor;
-    }
-
-    public void setCommercialFloor(String commercialFloor) {
-        this.commercialFloor.set(commercialFloor);
-    }
 }

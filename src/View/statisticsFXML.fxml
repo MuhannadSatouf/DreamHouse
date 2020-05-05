@@ -51,14 +51,29 @@
             <Pane fx:id="paneCenter" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                <children>
                   <Pane fx:id="chartPane" layoutX="70.0" layoutY="147.0" prefHeight="493.0" prefWidth="572.0" />
-                  <JFXButton fx:id="showButton" layoutX="260.0" layoutY="74.0" prefHeight="50.0" prefWidth="122.0" text="Show" textFill="#5190b9">
+                  <JFXRadioButton fx:id="landBt" layoutX="91.0" layoutY="67.0" onAction="#landAction" text="Land" textFill="#5190b9">
                      <font>
-                        <Font name="System Bold Italic" size="16.0" />
+                        <Font size="17.0" />
                      </font>
-                  </JFXButton>
-                  <JFXRadioButton layoutX="280.0" layoutY="32.0" onAction="#landAction" text="Land" textFill="#ca0202">
+                  </JFXRadioButton>
+                  <JFXRadioButton fx:id="apartmentBt" layoutX="192.0" layoutY="67.0" onAction="#apartmentAction" text="Apartment" textFill="#5190b9">
                      <font>
-                        <Font size="22.0" />
+                        <Font size="17.0" />
+                     </font>
+                  </JFXRadioButton>
+                  <JFXRadioButton fx:id="houseBt" layoutX="326.0" layoutY="67.0" onAction="#houseAction" text="House" textFill="#5190b9">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </JFXRadioButton>
+                  <JFXRadioButton fx:id="commercialBt" layoutX="447.0" layoutY="67.0" onAction="#commercialAction" text="Commercial" textFill="#5190b9">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </JFXRadioButton>
+                  <JFXRadioButton fx:id="allBt" layoutX="254.0" layoutY="23.0" onAction="#AllAction" text="All properties" textFill="#5190b9">
+                     <font>
+                        <Font size="17.0" />
                      </font>
                   </JFXRadioButton>
                </children></Pane>

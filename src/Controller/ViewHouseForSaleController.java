@@ -55,25 +55,25 @@ public class ViewHouseForSaleController implements Initializable {
         regionCol.setCellValueFactory (new PropertyValueFactory<> ("region"));
         addressCol.setCellValueFactory (new PropertyValueFactory<> ("address"));
         areaCol.setCellValueFactory (new PropertyValueFactory<> ("area"));
-        yearCol.setCellValueFactory (new PropertyValueFactory<> ("year"));
+        yearCol.setCellValueFactory (new PropertyValueFactory<> ("yearBuilt"));
         feesCol.setCellValueFactory (new PropertyValueFactory<> ("fees"));
         priceCol.setCellValueFactory (new PropertyValueFactory<> ("price"));
         heatingCol.setCellValueFactory(new PropertyValueFactory<>("heating"));
         parkingCol.setCellValueFactory(new PropertyValueFactory<>("parking"));
         balconyCol.setCellValueFactory(new PropertyValueFactory<>("balcony"));
         garageCol.setCellValueFactory(new PropertyValueFactory<>("garage"));
-        roomsCol.setCellValueFactory(new PropertyValueFactory<>("rooms"));
-        bathroomsCol.setCellValueFactory(new PropertyValueFactory<>("bathrooms"));
+        roomsCol.setCellValueFactory(new PropertyValueFactory<>("room"));
+        bathroomsCol.setCellValueFactory(new PropertyValueFactory<>("bathroom"));
         availabilityCol.setCellValueFactory (new PropertyValueFactory<> ("propertyAvailability"));
     }
     private void loadData() {
         DataBaseHandler databaseHandler = DataBaseHandler.getInstance ();
 
         String qu = "SELECT property.Property_ID,property.Region,property.Address," +
-                "property.Area,property.Price,Availability,Resident.heating,Resident.parking,Resident.balcony,Resident.rooms,Resident.bathrooms,Resident.year,house.garage,property.fees " +
+                "property.Area,property.Price,Property.Availability,Resident.heating,Resident.parking,Resident.balcony,Resident.rooms,Resident.bathrooms,Resident.year,house.garage,property.fees " +
                 "FROM property,resident,house " +
                 "WHERE property.Property_ID=house.Property_ID " +
-                "WHERE property.Property_ID=Resident.Property_ID " +
+                "AND property.Property_ID=Resident.Property_ID " +
                 "And fees > 0";
 
 

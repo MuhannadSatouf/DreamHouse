@@ -63,13 +63,12 @@ public class MainMenuController implements Initializable {
     public JFXButton selectCommercialForViewBtn;
     public JFXButton viewEmployeeBtn;
     public JFXButton viewCustomerBtn;
-    public PieChart pieChart;
-    public JFXRadioButton landSta;
-    public JFXRadioButton allPropertiesSta;
     public Pane chartPane;
-    public JFXComboBox <String>comboBox;
-    public JFXButton showButton;
-    ObservableList<PieChart.Data> pieChartData;
+    public JFXRadioButton allBt;
+    public JFXRadioButton commercialBt;
+    public JFXRadioButton houseBt;
+    public JFXRadioButton apartmentBt;
+    public JFXRadioButton landBt;
     DataBaseHandler dataBaseHandler;
     PieChart landChart;
     ObservableList<String> combo = FXCollections.observableArrayList ("All Properties","Land","House","Apartment","Commercial Properties");
@@ -110,7 +109,7 @@ public class MainMenuController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        forCombo ();
+
         dataBaseHandler = DataBaseHandler.getInstance ();
         addPropertyBtn.prefWidthProperty ().bind (hBoxForButtons.widthProperty ());
         addPropertyBtn.prefHeightProperty ().bind (hBoxForButtons.heightProperty ());
@@ -297,37 +296,40 @@ public class MainMenuController implements Initializable {
 
 
 
-    public void landView(ActionEvent actionEvent) {
 
 
-        //landChart.setStyle ("-fx-background-color:#5190b9");
-
-
-    }
-
-    public void allPropertiesView(ActionEvent actionEvent) {
-
-    }
-
-    public void forCombo(){
-       /* comboBox.setItems (combo);
-        showButton.setOnAction (actionEvent1 -> showLand());*/
-
-    }
-
-    public void getCombo(ActionEvent actionEvent) {
-
-    }
-
-    private void showLand() {
-
-
-    }
 
 
     public void landAction(ActionEvent actionEvent) {
         landChart=new PieChart (dataBaseHandler.getLandStatistics ());
         chartPane.getChildren ().add (landChart);
+        if (landBt.isSelected ()){
+        apartmentBt.setDisable (true);
+        houseBt.setDisable (true);
+        commercialBt.setDisable (true);
+        allBt.setDisable (true);}
+        else {
+            apartmentBt.setDisable (false);
+            houseBt.setDisable (false);
+            commercialBt.setDisable (false);
+            allBt.setDisable (false);}
+
+        }
+
+
+
+
+
+    public void apartmentAction(ActionEvent actionEvent) {
+    }
+
+    public void houseAction(ActionEvent actionEvent) {
+    }
+
+    public void commercialAction(ActionEvent actionEvent) {
+    }
+
+    public void AllAction(ActionEvent actionEvent) {
     }
 }
 

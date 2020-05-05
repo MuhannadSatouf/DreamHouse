@@ -79,7 +79,7 @@ public class ViewApartmentForSaleController implements Initializable {
                 "property.Area,property.Price,Property.Availability,Resident.heating,Resident.parking,Resident.balcony,Resident.rooms,Resident.bathrooms,Resident.year,apartment.floor,property.fees " +
                 "FROM property,resident,apartment " +
                 "WHERE property.Property_ID=apartment.Property_ID " +
-                "WHERE property.Property_ID=Resident.Property_ID " +
+                "AND property.Property_ID=Resident.Property_ID " +
                 "And fees > 0";
 
 
