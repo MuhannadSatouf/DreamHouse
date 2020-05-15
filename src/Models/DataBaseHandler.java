@@ -37,7 +37,11 @@ public class DataBaseHandler {
         try {
 
             Class.forName(DRIVER).newInstance();
+
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false&allowPublicKeyRetrieval=true", "root", "root");
+           // useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+           // connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false&allowPublicKeyRetrieval=true", "root", "root");
+
 
             //Remote database  // connection = DriverManager.getConnection ("jdbc:mysql://den1.mysql5.gear.host:3306/realestate2?useSSL=false", "realestate2", "Xl9pU?!yN6Rr");
             System.out.println("Connection success");
@@ -434,7 +438,7 @@ public class DataBaseHandler {
 
     public void editApartment(Apartment apartment) {
 
-        String updateApartment = "UPDATE apartment SET Floor=?, Property_ID=?";
+        String updateApartment = "UPDATE apartment SET Floor=? WHERE Property_ID=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(updateApartment);
             preparedStatement.setString(1, apartment.getFloor());
@@ -447,7 +451,7 @@ public class DataBaseHandler {
 
     public void editHouse(House house) {
 
-        String updateHouse = "UPDATE house SET Floor=?, Property_ID=?";
+        String updateHouse = "UPDATE house SET Floor=? WHERE Property_ID=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(updateHouse);
             preparedStatement.setBoolean(1, house.isGarage());
@@ -460,14 +464,22 @@ public class DataBaseHandler {
 
     public void editCommercial(CommercialProperty commercialProperty) {
 
-        String updateCommercial = "UPDATE commercial SET Type=?, Floor=? Property_ID=?, Year_Built=?";
+        String updateCommercial = "UPDATE commercial SET Type=?, Floor=? WHERE Property_ID=?";
         try {
+<<<<<<< HEAD
             PreparedStatement preparedStatement = connection.prepareStatement(updateCommercial);
             preparedStatement.setString(1, commercialProperty.getType());
             preparedStatement.setString(2, commercialProperty.getFloor());
             preparedStatement.setInt(3, commercialProperty.getProperty_ID());
             preparedStatement.setInt(4, commercialProperty.getYear_Built());
             preparedStatement.executeUpdate();
+=======
+            PreparedStatement preparedStatement = connection.prepareStatement (updateCommercial);
+            preparedStatement.setString (1, commercialProperty.getType());
+            preparedStatement.setString (2, commercialProperty.getFloor());
+            preparedStatement.setInt (3, commercialProperty.getProperty_ID());
+            preparedStatement.executeUpdate ();
+>>>>>>> 923987b7f0a3750e29eb9a4965d97131ab9384c3
         } catch (SQLException e) {
             e.printStackTrace();
         }

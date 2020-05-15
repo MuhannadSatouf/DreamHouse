@@ -1,43 +1,165 @@
 package Controller;
 
+import Models.CommercialProperty;
+import Models.DataBaseHandler;
+import Models.Land;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ViewCommercialForSaleController implements Initializable {
     public Pane mainPane;
     public Pane downPane;
-
-    public TableColumn propertyIDCol;
-    public TableColumn regionCol;
-    public TableColumn addressCol;
-    public TableColumn areaCol;
-    public TableColumn yearCol;
-    public TableColumn priceCol;
-    public TableColumn feesCol;
-    public TableColumn typeCol;
-    public TableColumn floorCol;
     public Pane upPane;
     public HBox hbox;
-    public TableColumn availabilityCol;
-    public TableView tableOfCommercialForSale;
+    public TableColumn<CommercialProperty, Integer> propertyIDCol;
+    public TableColumn<CommercialProperty, String> regionCol;
+    public TableColumn<CommercialProperty, String> addressCol;
+    public TableColumn<CommercialProperty, Integer> areaCol;
+    public TableColumn<CommercialProperty, Integer> priceCol;
+    public TableColumn<CommercialProperty, String> feesCol;
+    public TableColumn<CommercialProperty, String> typeCol;
+    public TableColumn<CommercialProperty, String> floorCol;
+    public TableColumn<CommercialProperty, Boolean> availabilityCol;
+    public TableView<CommercialProperty> tableOfCommercialForSale;
+    ObservableList<CommercialProperty> listOfCommercial = FXCollections.observableArrayList();
+
+    private void editCol() {
+        propertyIDCol.setCellValueFactory(new PropertyValueFactory<>("property_ID"));
+        regionCol.setCellValueFactory(new PropertyValueFactory<>("region"));
+        addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
+        areaCol.setCellValueFactory(new PropertyValueFactory<>("area"));
+        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        feesCol.setCellValueFactory(new PropertyValueFactory<>("fees"));
+        typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        floorCol.setCellValueFactory(new PropertyValueFactory<>("floor"));
+        availabilityCol.setCellValueFactory(new PropertyValueFactory<>("propertyAvailability"));
+    }
+
+    private void loadData() {
+        DataBaseHandler databaseHandler = DataBaseHandler.getInstance();
+
+        String qu = "SELECT property.Property_ID,property.Region,property.Address," +
+                "property.Area,property.Price,Availability,commercial.Type,commercial.floor,property.fees " +
+                "FROM property,commercial " +
+                "WHERE property.Property_ID=commercial.Property_ID " +
+                "And fees > 0";
+
+
+        ResultSet resultSet = databaseHandler.execQuery(qu);
+        try {
+            while (resultSet.next()) {
+                int propertyID = resultSet.getInt("Property_ID");
+                String region = resultSet.getString("Region");
+                String address = resultSet.getString("Address");
+                int area = resultSet.getInt("Area");
+                int price = resultSet.getInt("Price");
+                boolean isAvail = resultSet.getBoolean("Availability");
+                String type = resultSet.getString("Type");
+                String floor = resultSet.getString("Floor");
+                int fees = resultSet.getInt("fees");
+                listOfCommercial.add(new CommercialProperty(propertyID, region, address, area, price, fees, isAvail, type, floor));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        tableOfCommercialForSale.setItems(listOfCommercial);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        hbox.prefWidthProperty ().bind (upPane.widthProperty ());
-        hbox.prefHeightProperty ().bind (upPane.heightProperty ());
-        upPane.prefWidthProperty ().bind (mainPane.widthProperty ());
+        editCol();
+        loadData();
+        hbox.prefWidthProperty().bind(upPane.widthProperty());
+        hbox.prefHeightProperty().bind(upPane.heightProperty());
+        upPane.prefWidthProperty().bind(mainPane.widthProperty());
 
 
-        tableOfCommercialForSale.prefWidthProperty ().bind (downPane.widthProperty ());
-        tableOfCommercialForSale.prefHeightProperty ().bind (downPane.heightProperty ());
+        tableOfCommercialForSale.prefWidthProperty().bind(downPane.widthProperty());
+        tableOfCommercialForSale.prefHeightProperty().bind(downPane.heightProperty());
 
-        downPane.prefWidthProperty ().bind (mainPane.widthProperty ());
-        downPane.prefHeightProperty ().bind (mainPane.heightProperty ());
+        downPane.prefWidthProperty().bind(mainPane.widthProperty());
+        downPane.prefHeightProperty().bind(mainPane.heightProperty());
+    }
+    public void editInfo(ActionEvent actionEvent) {
+        CommercialProperty commercialToEdit = tableOfCommercialForSale.getSelectionModel ().getSelectedItem ();
+        if (commercialToEdit == null) {
+            Alert alert = new Alert (Alert.AlertType.ERROR);
+            alert.setHeaderText (null);
+            alert.setContentText ("Please choose an item first!");
+            return;
+        }
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader (getClass ().getResource ("/View/addCommercialForSaleFXML.fxml"));
+            Parent parent = fxmlLoader.load ();
+            AddCommercialForRentController controllerForAddCommercialForSale = fxmlLoader.getController ();
+           // controllerForAddCommercialForSale.refreshProperty (commercialToEdit);
+           // controllerForAddCommercialForSale.refreshCommercial (commercialToEdit);
+            Stage stage = new Stage (StageStyle.DECORATED);
+            stage.setTitle ("Edit Commercial");
+            stage.setScene (new Scene(parent));
+            stage.show ();
+        } catch (IOException e) {
+            e.printStackTrace ();
+        }
+    }
+
+
+    public void deleteInfo(ActionEvent actionEvent) {
+        CommercialProperty commercialToDelete = tableOfCommercialForSale.getSelectionModel ().getSelectedItem ();
+        if (commercialToDelete == null) {
+            Alert alert = new Alert (Alert.AlertType.ERROR);
+            alert.setHeaderText (null);
+            alert.setContentText ("Please choose an item first!");
+            return;
+        }
+        Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+        alert.setTitle ("Delete Commercial");
+        alert.setContentText ("Are you sure you want to delete this property ID number: " + commercialToDelete.getProperty_ID () + " ?");
+
+        Optional<ButtonType> answerOfUser = alert.showAndWait ();
+       /* if (answerOfUser.get () == ButtonType.OK) {
+            boolean result = DataBaseHandler.getInstance ().deleteCommercial (commercialToDelete);
+            if (result) {
+                alert = new Alert (Alert.AlertType.INFORMATION);
+                alert.setHeaderText (null);
+                alert.setContentText ("Commercial has been deleted successfully!");
+                alert.show ();
+                listOfCommercial.remove (commercialToDelete);
+            } else {
+                alert = new Alert (Alert.AlertType.INFORMATION);
+                alert.setHeaderText (null);
+                alert.setContentText ("Operation has been cancelled!");
+                alert.show ();
+            }
+        }*/
+    }
+
+
+    public void refresh(ActionEvent actionEvent) {
+        listOfCommercial.clear ();
+        editCol ();
+        loadData ();
     }
 }

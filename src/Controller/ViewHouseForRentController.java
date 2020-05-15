@@ -1,5 +1,6 @@
 package Controller;
 
+import Models.House;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -12,24 +13,23 @@ import java.util.ResourceBundle;
 public class ViewHouseForRentController implements Initializable {
     public Pane mainPane;
     public Pane downPane;
-
-    public TableColumn propertyIDCol;
-    public TableColumn regionCol;
-    public TableColumn addressCol;
-    public TableColumn areaCol;
-    public TableColumn yearCol;
-    public TableColumn priceCol;
-    public TableColumn heatingCol;
-    public TableColumn parkingCol;
-    public TableColumn balconyCol;
-    public TableColumn garageCol;
-    public TableColumn roomsCol;
-    public TableColumn bathroomsCol;
     public Pane upPane;
     public HBox hbox;
-    public TableView tableOfHouseForRent;
-    public TableColumn availabilityCol;
-    public TableColumn availableFromDateCol;
+    public TableColumn<House,Integer> propertyIDCol;
+    public TableColumn<House,String> regionCol;
+    public TableColumn<House,String> addressCol;
+    public TableColumn<House,Integer> areaCol;
+    public TableColumn<House,Integer> yearCol;
+    public TableColumn<House,Integer> priceCol;
+    public TableColumn<House,Boolean> heatingCol;
+    public TableColumn<House,Boolean> parkingCol;
+    public TableColumn<House,Boolean> balconyCol;
+    public TableColumn<House,Boolean> garageCol;
+    public TableColumn<House,String> roomsCol;
+    public TableColumn<House,String> bathroomsCol;
+    public TableColumn<House,Boolean> availabilityCol;
+    //public TableColumn availableFromDateCol;
+    public TableView<House> tableOfHouseForRent;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

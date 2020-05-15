@@ -1,5 +1,6 @@
 package Controller;
 
+import Models.Apartment;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -12,23 +13,23 @@ import java.util.ResourceBundle;
 public class ViewApartmentForRentController implements Initializable {
     public Pane mainPane;
     public Pane downPane;
-    public TableColumn propertyIDCol;
-    public TableColumn regionCol;
-    public TableColumn addressCol;
-    public TableColumn areaCol;
-    public TableColumn yearCol;
-    public TableColumn priceCol;
-    public TableColumn heatingCol;
-    public TableColumn parkingCol;
-    public TableColumn balconyCol;
-    public TableColumn floorCol;
-    public TableColumn roomsCol;
-    public TableColumn bathroomsCol;
     public Pane upPane;
     public HBox hbox;
-    public TableColumn availabilityCol;
-    public TableView tableOfApartmentForRent;
-    public TableColumn availableFromDateCol;
+    public TableColumn<Apartment, Integer> propertyIDCol;
+    public TableColumn<Apartment, String> regionCol;
+    public TableColumn<Apartment, String> addressCol;
+    public TableColumn<Apartment, Integer> areaCol;
+    public TableColumn<Apartment, Integer> yearCol;
+    public TableColumn<Apartment, Integer> priceCol;
+    public TableColumn<Apartment, Boolean> heatingCol;
+    public TableColumn<Apartment, Boolean> parkingCol;
+    public TableColumn<Apartment, Boolean> balconyCol;
+    public TableColumn<Apartment, String> floorCol;
+    public TableColumn<Apartment, String> roomsCol;
+    public TableColumn<Apartment, String> bathroomsCol;
+    public TableColumn<Apartment, Boolean> availabilityCol;
+    public TableView<Apartment> tableOfApartmentForRent;
+    public TableColumn<Apartment, Integer> availableFromDateCol;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

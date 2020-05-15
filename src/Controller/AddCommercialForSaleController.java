@@ -105,7 +105,7 @@ public class AddCommercialForSaleController implements Initializable {
         int fees=0;
         CommercialProperty commercialProperty = new CommercialProperty (Integer.parseInt (propertyID.getText ()),region.getText (), address.getText (),
                 Integer.parseInt (area.getText ()),Integer.parseInt (price.getText ()),fees, true,type.getValue().toString(),
-                floor.getValue().toString(),Integer.parseInt(yearBuilt.getText()));
+                floor.getValue().toString());
         if (dataBaseHandler.editProperty (commercialProperty)) {
             Alert alert = new Alert (Alert.AlertType.INFORMATION);
             alert.setHeaderText (null);
@@ -123,7 +123,6 @@ public class AddCommercialForSaleController implements Initializable {
     public void refreshCommercial () {
         type.setItems(propertyType);
         floor.setItems(floorNumber);
-        yearBuilt.setText("");
         editMode = Boolean.TRUE;
     }
     public void refreshProperty(Property property) {
@@ -145,8 +144,6 @@ public class AddCommercialForSaleController implements Initializable {
         fees.setText ("");
       type.setItems(propertyType);
       floor.setItems(floorNumber);
-      yearBuilt.setText("");
-
 
     }
 

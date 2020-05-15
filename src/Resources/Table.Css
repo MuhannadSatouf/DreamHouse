@@ -139,6 +139,7 @@
 
 .context-menu {
     -fx-background-color: -fx-secondary;
+
     -fx-text-fill: grey;
     -fx-prompt-text-fill: grey;
     -fx-background-color:white;
@@ -147,6 +148,7 @@
 
 
 }
+
 
 
 

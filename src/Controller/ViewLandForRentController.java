@@ -15,23 +15,19 @@ import java.util.ResourceBundle;
 public class ViewLandForRentController implements Initializable {
     public Pane mainPane;
     public Pane downPane;
-
-    public TableColumn propertyIDCol;
-    public TableColumn regionCol;
-    public TableColumn addressCol;
-    public TableColumn areaCol;
-    public TableColumn yearCol;
-    public TableColumn priceCol;
-
-    public TableColumn typeCol;
-    public TableColumn IrrigatedCol;
     public Pane upPane;
     public HBox hbox;
-    public TableColumn availabilityCol;
-    public TableView tableOfLandForRent;
-    public TableColumn residentialCol;
-
-    public TableColumn availableFromCol;
+    public TableColumn<Land, Integer> propertyIDCol;
+    public TableColumn<Land, String> regionCol;
+    public TableColumn<Land, String> addressCol;
+    public TableColumn<Land, Integer> areaCol;
+    public TableColumn<Land, Integer> yearCol;
+    public TableColumn<Land, Integer> priceCol;
+    public TableColumn<Land, String> typeCol;
+    public TableColumn<Land, Boolean> IrrigatedCol;
+    public TableColumn<Land, Boolean> availabilityCol;
+    public TableColumn<Land, Boolean> residentialCol;
+    public TableView<Land> tableOfLandForRent;
     public ContextMenu contextTable;
 
     @Override
