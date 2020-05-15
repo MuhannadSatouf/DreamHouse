@@ -14,7 +14,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="Dream House" options="--add-exports java.base/com.sun.net.ssl.internal.ssl=ALL-UNNAMED" />
+      <module name="Dream House" options="--add-exports java.base/com.sun.net.ssl.internal.ssl=ALL-UNNAMED --add-exports java.base/jdk.internal.jimage=ALL-UNNAMED" />
     </option>
   </component>
 </project>

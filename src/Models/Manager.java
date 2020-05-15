@@ -9,8 +9,6 @@ public class Manager extends User{
 
     public Manager(IntegerProperty ssn, StringProperty name, StringProperty address, IntegerProperty phone, StringProperty email, IntegerProperty managerId) {
 
-
-
         this.managerId = managerId;
     }
 }

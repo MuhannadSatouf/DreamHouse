@@ -30,9 +30,10 @@ public class LogInController implements Initializable {
     private JFXTextField SSNInput, passwordInput;
     public ProgressIndicator progressBar;
     public ProgressBar progressBar2;
-    private boolean isManager = false;
-    private boolean isEmployee = false;
-    private boolean isCustomer = false;
+    private boolean isManager;
+    private boolean isEmployee;
+    private boolean isCustomer;
+
 
     public void register(ActionEvent actionEvent) throws IOException {
 
@@ -50,21 +51,19 @@ public class LogInController implements Initializable {
         } else if (isCustomer) {
             viewWindow("/View/mainMenuForCustomer.fxml", "Menu");
         }
-        Stage stage = (Stage) startPane.getScene ().getWindow ();
-        stage.close ();
+        Stage stage = (Stage) startPane.getScene().getWindow();
+        stage.close();
     }
 
 
-    private boolean validateLogin() throws SQLException {
+    public boolean validateLogin() throws SQLException {
         final String secretKey = "ssshhhhhhhhhhh!!!!";
-        String p = new PassWordHash().encrypt(passwordInput.getText(),secretKey);
+
         if (SSNInput.getText().equals("") || passwordInput.getText().equals("")) {
             errorMassage();
         } else {
             DataBaseHandler DBHandler = new DataBaseHandler();
-            //String check = DBHandler.checkLogInIfEmployee(Integer.parseInt(SSNInput.getText()), passwordInput.getText());
-            //String check = DBHandler.checkLogInIfEmployee(SSNInput.getText(), new PassWordHash().generateHash(passwordInput.getText()));
-            String check = DBHandler.checkLogInIfEmployee(SSNInput.getText(), new PassWordHash().encrypt(passwordInput.getText(),secretKey));
+            String check = DBHandler.checkLogInIfEmployee(SSNInput.getText(), new PassWordHash().encrypt(passwordInput.getText(), secretKey));
             switch (check) {
                 case "1":
                     isManager = true;
@@ -74,7 +73,7 @@ public class LogInController implements Initializable {
                     return true;
                 case "10":
                     DataBaseHandler dataBaseHandler = new DataBaseHandler();
-                    String check2 = dataBaseHandler.checkLogInIfCustomer(SSNInput.getText(), new PassWordHash().encrypt(passwordInput.getText(),secretKey));
+                    String check2 = dataBaseHandler.checkLogInIfCustomer(SSNInput.getText(), new PassWordHash().encrypt(passwordInput.getText(), secretKey));
                     switch (check2) {
                         case "1":
                             isCustomer = true;
@@ -128,7 +127,5 @@ public class LogInController implements Initializable {
 //           throwables.printStackTrace ();
 //       }
 //        dataBaseHandler.addUsersForTesting();
-
-        progressBar.setVisible(false);
     }
 }

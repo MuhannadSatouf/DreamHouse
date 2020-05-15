@@ -1,9 +1,7 @@
 package Controller;
 
 import Models.DataBaseHandler;
-import Models.Land;
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,6 +20,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable {
@@ -71,38 +70,34 @@ public class MainMenuController implements Initializable {
     public JFXRadioButton landBt;
     DataBaseHandler dataBaseHandler;
     PieChart landChart;
-    ObservableList<String> combo = FXCollections.observableArrayList ("All Properties","Land","House","Apartment","Commercial Properties");
+    ObservableList<String> combo = FXCollections.observableArrayList("All Properties", "Land", "House", "Apartment", "Commercial Properties");
+    int isCustomer;
 
     public void backToRegister(ActionEvent actionEvent) {
-        createNewStage ("/View/logIn.fxml", "Register");
+        createNewStage("/View/logIn.fxml", "Register");
 
 
     }
 
-
     public void addProperty(ActionEvent actionEvent) throws IOException {
-
-        switchBetweenScenes (actionEvent, "/View/selectPropertyForAddFXML.fxml");
-
-
+        switchBetweenScenes(actionEvent, "/View/selectPropertyForAddFXML.fxml");
     }
 
     public void viewProperty(ActionEvent actionEvent) {
-        switchBetweenScenes (actionEvent, "/View/selectPropertyForViewFXML.fxml");
-
+        switchBetweenScenes(actionEvent, "/View/selectPropertyForViewFXML.fxml");
     }
 
     public void addUser(ActionEvent actionEvent) {
-        switchBetweenScenes (actionEvent, "/View/selectUserForAddFXML.fxml");
+        switchBetweenScenes(actionEvent, "/View/selectUserForAddFXML.fxml");
 
     }
 
     public void viewUser(ActionEvent actionEvent) {
-        switchBetweenScenes (actionEvent, "/View/selectUserForViewFXML.fxml");
+        switchBetweenScenes(actionEvent, "/View/selectUserForViewFXML.fxml");
     }
 
     public void transactions(ActionEvent actionEvent) {
-        createNewStage ("/View/transactionsFXML.fxml", "Transactions");
+        createNewStage("/View/transactionsFXML.fxml", "Transactions");
 
 
     }
@@ -110,102 +105,96 @@ public class MainMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        dataBaseHandler = DataBaseHandler.getInstance ();
-        addPropertyBtn.prefWidthProperty ().bind (hBoxForButtons.widthProperty ());
-        addPropertyBtn.prefHeightProperty ().bind (hBoxForButtons.heightProperty ());
-        viewPropertyBtn.prefWidthProperty ().bind (hBoxForButtons.widthProperty ());
-        viewPropertyBtn.prefHeightProperty ().bind (hBoxForButtons.heightProperty ());
-        addUserBtn.prefWidthProperty ().bind (hBoxForButtons.widthProperty ());
-        addUserBtn.prefHeightProperty ().bind (hBoxForButtons.heightProperty ());
-        viewUserBtn.prefWidthProperty ().bind (hBoxForButtons.widthProperty ());
-        viewUserBtn.prefHeightProperty ().bind (hBoxForButtons.heightProperty ());
-        transactionsBtn.prefWidthProperty ().bind (hBoxForButtons.widthProperty ());
-        transactionsBtn.prefHeightProperty ().bind (hBoxForButtons.heightProperty ());
-        statisticsBtn.prefWidthProperty ().bind (hBoxForButtons.widthProperty ());
-        statisticsBtn.prefHeightProperty ().bind (hBoxForButtons.heightProperty ());
-
-
-        //  borderPane.prefWidthProperty ().bind (startPane.widthProperty ());
-        // borderPane.prefHeightProperty ().bind (startPane.heightProperty ());
-
-
+        dataBaseHandler = DataBaseHandler.getInstance();
+        addPropertyBtn.prefWidthProperty().bind(hBoxForButtons.widthProperty());
+        addPropertyBtn.prefHeightProperty().bind(hBoxForButtons.heightProperty());
+        viewPropertyBtn.prefWidthProperty().bind(hBoxForButtons.widthProperty());
+        viewPropertyBtn.prefHeightProperty().bind(hBoxForButtons.heightProperty());
+        addUserBtn.prefWidthProperty().bind(hBoxForButtons.widthProperty());
+        addUserBtn.prefHeightProperty().bind(hBoxForButtons.heightProperty());
+        viewUserBtn.prefWidthProperty().bind(hBoxForButtons.widthProperty());
+        viewUserBtn.prefHeightProperty().bind(hBoxForButtons.heightProperty());
+        transactionsBtn.prefWidthProperty().bind(hBoxForButtons.widthProperty());
+        transactionsBtn.prefHeightProperty().bind(hBoxForButtons.heightProperty());
+        statisticsBtn.prefWidthProperty().bind(hBoxForButtons.widthProperty());
+        statisticsBtn.prefHeightProperty().bind(hBoxForButtons.heightProperty());
     }
 
 
     public void statistics(ActionEvent actionEvent) {
-        switchBetweenScenes (actionEvent, "/View/statisticsFXML.fxml");
+        switchBetweenScenes(actionEvent, "/View/statisticsFXML.fxml");
     }
 
 
     public void selectHouse(ActionEvent actionEvent) throws IOException {
 
-        switchBetweenScenes (actionEvent, "/View/selectPropertyHouseForAddFXML.fxml");
+        switchBetweenScenes(actionEvent, "/View/selectPropertyHouseForAddFXML.fxml");
 
     }
 
     public void selectApartment(ActionEvent actionEvent) throws IOException {
 
-        switchBetweenScenes (actionEvent, "/View/selectPropertyApartmentForAddFXML.fxml");
+        switchBetweenScenes(actionEvent, "/View/selectPropertyApartmentForAddFXML.fxml");
     }
 
     public void selectLand(ActionEvent actionEvent) throws IOException {
 
-        switchBetweenScenes (actionEvent, "/View/selectPropertyLandForAddFXML.fxml");
+        switchBetweenScenes(actionEvent, "/View/selectPropertyLandForAddFXML.fxml");
     }
 
     public void selectCommercial(ActionEvent actionEvent) throws IOException {
 
-        switchBetweenScenes (actionEvent, "/View/selectPropertyCommercialForAddFXML.fxml");
+        switchBetweenScenes(actionEvent, "/View/selectPropertyCommercialForAddFXML.fxml");
     }
 
     public void addHouseForSale(ActionEvent actionEvent) {
-        createNewStage ("/View/addHouseForSaleFXML.fxml", "House For Sale");
+        createNewStage("/View/addHouseForSaleFXML.fxml", "House For Sale");
 
 
     }
 
     public void addHouseForRent(ActionEvent actionEvent) {
-        createNewStage ("/View/addHouseForRentFXML.fxml", "House For Rent");
+        createNewStage("/View/addHouseForRentFXML.fxml", "House For Rent");
     }
 
     public void addApartmentForSale(ActionEvent actionEvent) {
-        createNewStage ("/View/addApartmentForSaleFXML.fxml", "Apartment For Sale");
+        createNewStage("/View/addApartmentForSaleFXML.fxml", "Apartment For Sale");
 
 
     }
 
     public void addApartmentForRent(ActionEvent actionEvent) {
-        createNewStage ("/View/addApartmentForRentFXML.fxml", "Apartment For Rent");
+        createNewStage("/View/addApartmentForRentFXML.fxml", "Apartment For Rent");
     }
 
     public void addCommercialForSale(ActionEvent actionEvent) {
-        createNewStage ("/View/addCommercialForSaleFXML.fxml", "Commercial Properties For Sale");
+        createNewStage("/View/addCommercialForSaleFXML.fxml", "Commercial Properties For Sale");
     }
 
     public void addCommercialForRent(ActionEvent actionEvent) {
-        createNewStage ("/View/addCommercialForRentFXML.fxml", "Commercial Properties For Rent");
+        createNewStage("/View/addCommercialForRentFXML.fxml", "Commercial Properties For Rent");
 
     }
 
     public void addLandForSale(ActionEvent actionEvent) {
-        createNewStage ("/View/addLandForSaleFXML.fxml", "Land For Sale");
+        createNewStage("/View/addLandForSaleFXML.fxml", "Land For Sale");
     }
 
     public void addLandForRent(ActionEvent actionEvent) {
-        createNewStage ("/View/addLandForRentFXML.fxml", "Land For Rent");
+        createNewStage("/View/addLandForRentFXML.fxml", "Land For Rent");
     }
 
     void createNewStage(String location, String name) {
         try {
-            Parent parent = FXMLLoader.load (getClass ().getResource (location));
-            Stage stage = new Stage (StageStyle.DECORATED);
-            stage.setTitle (name);
-            Scene scene=new Scene (parent);
-            scene.getStylesheets ().add(getClass ().getResource ("/Resources/Table.Css").toExternalForm ());
-            stage.setScene (scene);
-            stage.show ();
+            Parent parent = FXMLLoader.load(getClass().getResource(location));
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setTitle(name);
+            Scene scene = new Scene(parent);
+            scene.getStylesheets().add(getClass().getResource("/Resources/Table.Css").toExternalForm());
+            stage.setScene(scene);
+            stage.show();
         } catch (IOException e) {
-            e.printStackTrace ();
+            e.printStackTrace();
         }
     }
 
@@ -213,14 +202,14 @@ public class MainMenuController implements Initializable {
     void switchBetweenScenes(ActionEvent actionEvent, String location) {
         Parent parent = null;
         try {
-            parent = FXMLLoader.load (getClass ().getResource (location));
-            Scene scene = new Scene (parent);
-            scene.getStylesheets ().add(getClass ().getResource ("/Resources/Table.Css").toExternalForm ());
-            Stage stage = (Stage) ((Node) actionEvent.getSource ()).getScene ().getWindow ();
-            stage.setScene (scene);
-            stage.show ();
+            parent = FXMLLoader.load(getClass().getResource(location));
+            Scene scene = new Scene(parent);
+            scene.getStylesheets().add(getClass().getResource("/Resources/Table.Css").toExternalForm());
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
         } catch (IOException e) {
-            e.printStackTrace ();
+            e.printStackTrace();
         }
 
 
@@ -228,96 +217,88 @@ public class MainMenuController implements Initializable {
 
 
     public void addEmployee(ActionEvent actionEvent) {
-        createNewStage ("/View/addEmployeeFXML.fxml", "Add Employee");
+        createNewStage("/View/addEmployeeFXML.fxml", "Add Employee");
     }
 
     public void addCustomer(ActionEvent actionEvent) {
-        createNewStage ("/View/addCustomerFXML.fxml", "Add Customer");
+        createNewStage("/View/addCustomerFXML.fxml", "Add Customer");
     }
 
     public void viewApartmentForSale(ActionEvent actionEvent) {
-        createNewStage ("/View/viewApartmentForSale.fxml", "Apartment For Sale");
+        createNewStage("/View/viewApartmentForSale.fxml", "Apartment For Sale");
 
     }
 
     public void viewApartmentForRent(ActionEvent actionEvent) {
-        createNewStage ("/View/viewApartmentForRent.fxml", "Apartment For Rent");
+        createNewStage("/View/viewApartmentForRent.fxml", "Apartment For Rent");
     }
 
     public void viewCommercialForSale(ActionEvent actionEvent) {
-        createNewStage ("/View/viewCommercialForSale.fxml", "Commercial Properties For Sale");
+        createNewStage("/View/viewCommercialForSale.fxml", "Commercial Properties For Sale");
     }
 
     public void viewCommercialForRent(ActionEvent actionEvent) {
-        createNewStage ("/View/viewCommercialForRent.fxml", "Commercial Properties For Sale");
+        createNewStage("/View/viewCommercialForRent.fxml", "Commercial Properties For Sale");
     }
 
     public void viewHouseForSale(ActionEvent actionEvent) {
-        createNewStage ("/View/viewHouseForSale.fxml", "House For Sale");
+        createNewStage("/View/viewHouseForSale.fxml", "House For Sale");
     }
 
     public void viewHouseForRent(ActionEvent actionEvent) {
-        createNewStage ("/View/viewHouseForRent.fxml", "House For Rent");
+        createNewStage("/View/viewHouseForRent.fxml", "House For Rent");
     }
 
     public void viewLandForRent(ActionEvent actionEvent) {
-        createNewStage ("/View/viewLandForRent.fxml", "Land For Rent");
+        createNewStage("/View/viewLandForRent.fxml", "Land For Rent");
     }
 
     public void viewLandForSale(ActionEvent actionEvent) {
-        createNewStage ("/View/viewLandForSale.fxml", "Land For Sale");
+        createNewStage("/View/viewLandForSale.fxml", "Land For Sale");
     }
 
-    public void selectHouseForView(ActionEvent actionEvent) {
-        switchBetweenScenes (actionEvent, "/View/selectPropertyHouseForViewFXML.fxml");
+    public void selectHouseForView(ActionEvent actionEvent) throws SQLException, IOException {
+        switchBetweenScenes(actionEvent, "/View/selectPropertyHouseForViewFXML.fxml");
     }
+
 
     public void selectApartmentForView(ActionEvent actionEvent) {
-        switchBetweenScenes (actionEvent, "/View/selectPropertyApartmentForViewFXML.fxml");
+        switchBetweenScenes(actionEvent, "/View/selectPropertyApartmentForViewFXML.fxml");
     }
 
     public void selectLandForView(ActionEvent actionEvent) {
-        switchBetweenScenes (actionEvent, "/View/selectPropertyLandForViewFXML.fxml");
+        switchBetweenScenes(actionEvent, "/View/selectPropertyLandForViewFXML.fxml");
     }
 
     public void selectCommercialForView(ActionEvent actionEvent) {
-        switchBetweenScenes (actionEvent, "/View/selectPropertyCommercialForViewFXML.fxml");
+        switchBetweenScenes(actionEvent, "/View/selectPropertyCommercialForViewFXML.fxml");
     }
 
     public void viewEmployee(ActionEvent actionEvent) {
-        createNewStage ("/View/viewEmployee.fxml", "Employees");
+        createNewStage("/View/viewEmployee.fxml", "Employees");
     }
 
     public void ViewCustomer(ActionEvent actionEvent) {
-        createNewStage ("/View/viewCustomer.fxml", "Customers");
+        createNewStage("/View/viewCustomer.fxml", "Customers");
     }
 
 
-
-
-
-
-
-
-
     public void landAction(ActionEvent actionEvent) {
-        landChart=new PieChart (dataBaseHandler.getLandStatistics ());
-        chartPane.getChildren ().add (landChart);
-        if (landBt.isSelected ()){
-        apartmentBt.setDisable (true);
-        houseBt.setDisable (true);
-        commercialBt.setDisable (true);
-        allBt.setDisable (true);}
-        else {
-            apartmentBt.setDisable (false);
-            houseBt.setDisable (false);
-            commercialBt.setDisable (false);
-            allBt.setDisable (false);}
-
+        landChart = new PieChart(dataBaseHandler.getLandStatistics());
+        chartPane.getChildren().add(landChart);
+        if (landBt.isSelected()) {
+            apartmentBt.setDisable(true);
+            houseBt.setDisable(true);
+            commercialBt.setDisable(true);
+            allBt.setDisable(true);
+        } else {
+            apartmentBt.setDisable(false);
+            houseBt.setDisable(false);
+            commercialBt.setDisable(false);
+            allBt.setDisable(false);
         }
 
-
-
+    }
 
 
     public void apartmentAction(ActionEvent actionEvent) {

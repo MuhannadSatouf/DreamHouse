@@ -1,11 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuForCustomer">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="656.0" prefWidth="818.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainMenuForCustomer">
    <children>
-      <Label layoutX="180.0" layoutY="87.0" prefHeight="99.0" prefWidth="215.0" text="Customer" />
+      <BorderPane fx:id="borderPane" layoutX="10.0" layoutY="10.0" prefHeight="640.0" prefWidth="800.0" style="-fx-background-color: #404040;">
+         <left>
+            <VBox fx:id="hBoxForButtons" prefHeight="639.0" prefWidth="154.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ImageView fitHeight="161.0" fitWidth="161.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Resources/Logo.png" />
+                     </image>
+                  </ImageView>
+                  <JFXButton fx:id="viewPropertyBtn" onAction="#viewProperty" prefHeight="162.0" prefWidth="161.0" text="All Properties" textFill="#5190b9">
+                     <font>
+                        <Font name="System Bold Italic" size="16.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton onAction="#sendEmailWithPdf" prefHeight="160.0" prefWidth="161.0" text="Send pdf to your email" textFill="#5190b9">
+                     <font>
+                        <Font name="System Bold Italic" size="12.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </VBox>
+         </left>
+         <center>
+            <Pane fx:id="paneCenter" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" layoutX="3.0" layoutY="58.0" prefHeight="111.0" prefWidth="632.0" text="Welcome to dream house program! " textFill="#5190b9">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="422.0" fitWidth="515.0" layoutX="108.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Resources/welcome.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </center>
+      </BorderPane>
    </children>
-</AnchorPane>
+</Pane>
