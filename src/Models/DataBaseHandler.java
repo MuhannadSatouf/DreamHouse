@@ -39,8 +39,8 @@ public class DataBaseHandler {
             Class.forName(DRIVER).newInstance();
 
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false&allowPublicKeyRetrieval=true", "root", "root");
-           // useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-           // connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false&allowPublicKeyRetrieval=true", "root", "root");
+            // useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+            // connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false&allowPublicKeyRetrieval=true", "root", "root");
 
 
             //Remote database  // connection = DriverManager.getConnection ("jdbc:mysql://den1.mysql5.gear.host:3306/realestate2?useSSL=false", "realestate2", "Xl9pU?!yN6Rr");
@@ -466,20 +466,11 @@ public class DataBaseHandler {
 
         String updateCommercial = "UPDATE commercial SET Type=?, Floor=? WHERE Property_ID=?";
         try {
-<<<<<<< HEAD
             PreparedStatement preparedStatement = connection.prepareStatement(updateCommercial);
             preparedStatement.setString(1, commercialProperty.getType());
             preparedStatement.setString(2, commercialProperty.getFloor());
             preparedStatement.setInt(3, commercialProperty.getProperty_ID());
-            preparedStatement.setInt(4, commercialProperty.getYear_Built());
             preparedStatement.executeUpdate();
-=======
-            PreparedStatement preparedStatement = connection.prepareStatement (updateCommercial);
-            preparedStatement.setString (1, commercialProperty.getType());
-            preparedStatement.setString (2, commercialProperty.getFloor());
-            preparedStatement.setInt (3, commercialProperty.getProperty_ID());
-            preparedStatement.executeUpdate ();
->>>>>>> 923987b7f0a3750e29eb9a4965d97131ab9384c3
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -648,19 +639,19 @@ public class DataBaseHandler {
         PreparedStatement preparedStatement = null;
 
         String query = "Select Property_ID, Region, Address, Area, Price, fees from property where Property_ID = " + Property_ID;
-        ResultSet resultSet = databaseHandler.execQuery (query);
+        ResultSet resultSet = databaseHandler.execQuery(query);
 
         try {
-            while (resultSet.next ()) {
-                int propertyID = resultSet.getInt ("Property_ID");
-                String region = resultSet.getString ("Region");
-                String address = resultSet.getString ("Address");
-                int area = resultSet.getInt ("Area");
-                int price = resultSet.getInt ("Price");
-                int fees = resultSet.getInt ("fees");
+            while (resultSet.next()) {
+                int propertyID = resultSet.getInt("Property_ID");
+                String region = resultSet.getString("Region");
+                String address = resultSet.getString("Address");
+                int area = resultSet.getInt("Area");
+                int price = resultSet.getInt("Price");
+                int fees = resultSet.getInt("fees");
             }
         } catch (SQLException e) {
-            e.printStackTrace ();
+            e.printStackTrace();
         }
 
     }

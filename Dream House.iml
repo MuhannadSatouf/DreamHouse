@@ -16,7 +16,7 @@
     <orderEntry type="library" name="javax.mail-1.4.4" level="project" />
     <orderEntry type="library" name="activation" level="project" />
     <orderEntry type="library" name="protobuf-java-2.6.0" level="project" />
-    <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="itextpdf-5.5.9" level="project" />
+    <orderEntry type="library" name="lib" level="project" />
   </component>
 </module>

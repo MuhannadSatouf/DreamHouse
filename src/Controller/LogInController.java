@@ -120,7 +120,7 @@ public class LogInController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // These for testing the database and inlogning and will active them only one time to create them in the database if we use local database
 
-<<<<<<< HEAD
+
 //        DataBaseHandler dataBaseHandler = null;
 //        try {
 //            dataBaseHandler = new DataBaseHandler ();
@@ -128,17 +128,6 @@ public class LogInController implements Initializable {
 //           throwables.printStackTrace ();
 //       }
 //        dataBaseHandler.addUsersForTesting();
-=======
-     DataBaseHandler dataBaseHandler = null;
 
-        try {
-            dataBaseHandler = new DataBaseHandler ();
-        } catch (SQLException throwables) {
-           throwables.printStackTrace ();
-       }
-        dataBaseHandler.addUsersForTesting();
-
-        progressBar.setVisible(false);
->>>>>>> 923987b7f0a3750e29eb9a4965d97131ab9384c3
     }
 }
