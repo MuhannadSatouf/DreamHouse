@@ -54,6 +54,8 @@ public class AddApartmentForRentController implements Initializable {
             alert.showAndWait();
             return;
         }
+        String reg = "[0-9]+";
+        if ( propertyID.getText().matches(reg) & area.getText().matches(reg) & price.getText().matches(reg) &  yearBuilt.getText().matches(reg)) {
         if (editMode) {
             apartmentEdit ();
             return;
@@ -117,6 +119,13 @@ public class AddApartmentForRentController implements Initializable {
             stage.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("You should enter numbers only in area,price and fees fields!");
+            alert.showAndWait();
+
         }
     }
 

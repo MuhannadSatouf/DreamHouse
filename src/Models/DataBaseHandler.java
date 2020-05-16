@@ -125,7 +125,7 @@ public class DataBaseHandler {
 
     }
 
-    public void addCustomer(String customer_type, String SSN) {
+    public void addCustomer(String customerSSNText, String customerPasswordText, String s, String nameText, String text, String customer_type, String SSN) {
 
         try {
 

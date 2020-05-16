@@ -49,49 +49,58 @@ public class AddCommercialForRentController implements Initializable {
             alert.showAndWait();
             return;
         }
-        if (editMode) {
-            commercialEdit();
-            return;
-        }
-        String query = "SELECT Property_ID from property WHERE Property_ID='" + propertyID.getText() + "'";
-        ResultSet resultSet = dataBaseHandler.execQuery(query);
-        try {
-            if (resultSet.next()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setContentText("This ID was already entered!");
-                alert.showAndWait();
-                refreshing();
-            } else {
-                int fees=0;
-                dataBaseHandler.addProperty(propertyID.getText(), region.getText(),
-                        address.getText(), area.getText(),String.valueOf(fees), price.getText());
-                try {
-
-                    String qu = "INSERT INTO Commercial (Type, Floor, Property_ID, Year_Built) " + "VALUES (?,?,?,?) ";
-
-                    PreparedStatement pst;
-                    pst = DataBaseHandler.connection.prepareStatement(qu);
-                    pst.setString(1, type.getValue().toString());
-                    pst.setString(2, floor.getValue().toString());
-                    pst.setString(3, propertyID.getText());
-                    pst.setString(4, yearBuilt.getText());
-                    pst.execute();
-                    pst.close();
-
-                } catch (SQLException throwable) {
-                    throwable.printStackTrace();
-                }
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText(null);
-                alert.setContentText("Your information has been stored successfully!");
-                alert.showAndWait();
-
-                Stage stage = (Stage) startPane.getScene().getWindow();
-                stage.close();
+        String reg = "[0-9]+";
+        if (area.getText().matches(reg) & price.getText().matches(reg) & yearBuilt.getText().matches(reg)) {
+            if (editMode) {
+                commercialEdit();
+                return;
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            String query = "SELECT Property_ID from property WHERE Property_ID='" + propertyID.getText() + "'";
+            ResultSet resultSet = dataBaseHandler.execQuery(query);
+            try {
+                if (resultSet.next()) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setContentText("This ID was already entered!");
+                    alert.showAndWait();
+                    refreshing();
+                } else {
+                    int fees = 0;
+                    dataBaseHandler.addProperty(propertyID.getText(), region.getText(),
+                            address.getText(), area.getText(), String.valueOf(fees), price.getText());
+                    try {
+
+                        String qu = "INSERT INTO Commercial (Type, Floor, Property_ID, Year_Built) " + "VALUES (?,?,?,?) ";
+
+                        PreparedStatement pst;
+                        pst = DataBaseHandler.connection.prepareStatement(qu);
+                        pst.setString(1, type.getValue().toString());
+                        pst.setString(2, floor.getValue().toString());
+                        pst.setString(3, propertyID.getText());
+                        pst.setString(4, yearBuilt.getText());
+                        pst.execute();
+                        pst.close();
+
+                    } catch (SQLException throwable) {
+                        throwable.printStackTrace();
+                    }
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setHeaderText(null);
+                    alert.setContentText("Your information has been stored successfully!");
+                    alert.showAndWait();
+
+                    Stage stage = (Stage) startPane.getScene().getWindow();
+                    stage.close();
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("You should enter numbers only in area,price and fees fields!");
+            alert.showAndWait();
+
         }
     }
 
@@ -101,7 +110,7 @@ public class AddCommercialForRentController implements Initializable {
         int fees=0;
         CommercialProperty commercialProperty = new CommercialProperty (Integer.parseInt (propertyID.getText ()),region.getText (), address.getText (),
                 Integer.parseInt (area.getText ()),Integer.parseInt (price.getText ()),fees, true,type.getValue().toString(),
-                floor.getValue().toString());
+                floor.getValue().toString(),Integer.parseInt(yearBuilt.getText()));
         if (dataBaseHandler.editProperty (commercialProperty)) {
             Alert alert = new Alert (Alert.AlertType.INFORMATION);
             alert.setHeaderText (null);
@@ -136,6 +145,7 @@ public class AddCommercialForRentController implements Initializable {
         address.setText ("");
         area.setText ("");
         price.setText ("");
+        yearBuilt.setText("");
         type.setItems(propertyType);
         floor.setItems(floorNumber);
 

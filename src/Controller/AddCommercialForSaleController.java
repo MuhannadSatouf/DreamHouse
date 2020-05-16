@@ -41,9 +41,9 @@ public class AddCommercialForSaleController implements Initializable {
     ObservableList<String> propertyType = FXCollections.observableArrayList ("OFFICES","RETAIL_PROPERTIES","GAS_STATIONS","STORES","RESTAURANTS");
     ObservableList<String> floorNumber = FXCollections.observableArrayList ("GROUND_FLOOR","ONE","TWO","THREE","FOUR","FIVE","SIX","SEVEN","NONE","MORE");
 
-    public void save(ActionEvent actionEvent) {
+    public void save(ActionEvent actionEvent) throws Exception {
         if (propertyID.getText().isEmpty() || type.getValue().toString().isEmpty() || region.getText().isEmpty() ||
-                address.getText().isEmpty() || area.getText().isEmpty() || yearBuilt.getText().isEmpty()
+                address.getText().isEmpty() || area.getText().isEmpty()
                 || fees.getText().isEmpty() || yearBuilt.getText().isEmpty() || price.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
@@ -51,6 +51,8 @@ public class AddCommercialForSaleController implements Initializable {
             alert.showAndWait();
             return;
         }
+        String reg = "[0-9]+";
+        if (area.getText().matches(reg) & price.getText().matches(reg) & fees.getText().matches(reg) & yearBuilt.getText().matches(reg)) {
         if (editMode) {
             commercialEdit();
             return;
@@ -94,6 +96,13 @@ public class AddCommercialForSaleController implements Initializable {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("You should enter numbers only in area,price and fees fields!");
+            alert.showAndWait();
+
+        }
     }
 
     public void cancel(ActionEvent actionEvent) {
@@ -105,7 +114,7 @@ public class AddCommercialForSaleController implements Initializable {
         int fees=0;
         CommercialProperty commercialProperty = new CommercialProperty (Integer.parseInt (propertyID.getText ()),region.getText (), address.getText (),
                 Integer.parseInt (area.getText ()),Integer.parseInt (price.getText ()),fees, true,type.getValue().toString(),
-                floor.getValue().toString());
+                floor.getValue().toString(),Integer.parseInt(yearBuilt.getText()));
         if (dataBaseHandler.editProperty (commercialProperty)) {
             Alert alert = new Alert (Alert.AlertType.INFORMATION);
             alert.setHeaderText (null);
@@ -142,6 +151,7 @@ public class AddCommercialForSaleController implements Initializable {
         area.setText ("");
         price.setText ("");
         fees.setText ("");
+        yearBuilt.setText("");
       type.setItems(propertyType);
       floor.setItems(floorNumber);
 

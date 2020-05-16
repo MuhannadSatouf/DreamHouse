@@ -53,7 +53,7 @@ public class AddLandForSaleController implements Initializable {
         }
 //add this to all add controller
         String reg = "[0-9]+";
-        if (area.getText ().matches (reg) & price.getText ().matches (reg) & fees.getText ().matches (reg)) {
+        if (propertyID.getText().matches(reg) & area.getText ().matches (reg) & price.getText ().matches (reg) & fees.getText ().matches (reg)) {
             if (editMode) {
                 landEdit ();
                 return;

@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddEmployeeController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddEmployeeController">
    <children>
       <Pane prefHeight="81.0" prefWidth="400.0" style="-fx-background-color: #404040;">
          <children>
@@ -47,20 +50,20 @@
             <Image url="@../Resources/mail%20(1).png" />
          </image>
       </ImageView>
-      <JFXTextField fx:id="name" focusColor="#5190b9" layoutX="138.0" layoutY="232.0" prefHeight="34.0" prefWidth="210.0" promptText="Name">
+      <JFXTextField fx:id="name" focusColor="#5190b9" layoutX="132.0" layoutY="204.0" prefHeight="34.0" prefWidth="210.0" promptText="Name">
          <font>
             <Font size="15.0" />
          </font></JFXTextField>
-      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="238.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/name.png" />
          </image>
       </ImageView>
-      <JFXTextField fx:id="customerSSN" focusColor="#5190b9" layoutX="138.0" layoutY="102.0" prefHeight="34.0" prefWidth="210.0" promptText="Social Security Number">
+      <JFXTextField fx:id="ssnEmployee" focusColor="#5190b9" layoutX="138.0" layoutY="81.0" prefHeight="34.0" prefWidth="210.0" promptText="Social Security Number">
          <font>
             <Font size="15.0" />
          </font></JFXTextField>
-      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/shield.png" />
          </image>
@@ -69,15 +72,21 @@
          <font>
             <Font size="18.0" />
          </font></JFXButton>
-      <JFXTextField fx:id="employeePassword" focusColor="#5190b9" layoutX="138.0" layoutY="161.0" prefHeight="34.0" prefWidth="210.0" promptText="Password">
+      <JFXTextField fx:id="employeePassword" focusColor="#5190b9" layoutX="132.0" layoutY="144.0" prefHeight="34.0" prefWidth="210.0" promptText="Password">
          <font>
             <Font size="15.0" />
          </font>
       </JFXTextField>
-      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/password.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Resources/type%20(1).png" />
+         </image>
+      </ImageView>
+      <JFXComboBox fx:id="type" layoutX="138.0" layoutY="266.0" prefHeight="25.0" prefWidth="204.0" />
    </children>
 </Pane>

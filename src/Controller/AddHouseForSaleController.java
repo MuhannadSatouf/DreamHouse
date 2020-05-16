@@ -58,78 +58,87 @@ public class AddHouseForSaleController implements Initializable {
             alert.showAndWait ();
             return;
         }
-        if (editMode) {
-            houseEdit();
-            return;
-        }
-        String query = "SELECT Property_ID from property WHERE Property_ID='" + propertyID.getText() + "'";
-        ResultSet resultSet = dataBaseHandler.execQuery(query);
-
-        try {
-            if (resultSet.next()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setContentText("This ID was already entered!");
-                alert.showAndWait();
-                refreshing ();
-            } else {
-
-                dataBaseHandler.addProperty (propertyID.getText (), region.getText (), address.getText (), area.getText (), fees.getText(), price.getText ());
-
-                try {
-
-                    String qu ="INSERT INTO Resident (Heating,Parking,Balcony,Rooms,Bathrooms,Property_ID,Year) " +"VALUES (?,?,?,?,?,?,?) ";
-
-                    PreparedStatement pst;
-                    pst = DataBaseHandler.connection.prepareStatement (qu);
-                    pst.setBoolean(1,heating.isSelected());
-                    pst.setBoolean (2, parking.isSelected ());
-                    pst.setBoolean (3, balcony.isSelected ());
-                    pst.setString (4, roomsNumber.getValue().toString());
-                    pst.setString (5, bathroomsNumber.getValue().toString());
-                    pst.setString (6, propertyID.getText ());
-                    pst.setString (7, yearBuilt.getText ());
-                    pst.execute ();
-                    pst.close ();
-
-                } catch (SQLException throwable) {
-                    throwable.printStackTrace ();
-                }
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText(null);
-                alert.setContentText("Your information has been stored successfully!");
-                alert.showAndWait();
-
-                Stage stage = (Stage) startPane.getScene().getWindow();
-                stage.close();
+        String reg = "[0-9]+";
+        if ( propertyID.getText().matches(reg) & area.getText().matches(reg) & price.getText().matches(reg) & fees.getText().matches(reg)& yearBuilt.getText().matches(reg)) {
+            if (editMode) {
+                houseEdit();
+                return;
             }
-        } catch (SQLException e) {
-            e.printStackTrace ();
+            String query = "SELECT Property_ID from property WHERE Property_ID='" + propertyID.getText() + "'";
+            ResultSet resultSet = dataBaseHandler.execQuery(query);
+
+            try {
+                if (resultSet.next()) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setHeaderText(null);
+                    alert.setContentText("This ID was already entered!");
+                    alert.showAndWait();
+                    refreshing();
+                } else {
+
+                    dataBaseHandler.addProperty(propertyID.getText(), region.getText(), address.getText(), area.getText(), fees.getText(), price.getText());
+
+                    try {
+
+                        String qu = "INSERT INTO Resident (Heating,Parking,Balcony,Rooms,Bathrooms,Property_ID,Year) " + "VALUES (?,?,?,?,?,?,?) ";
+
+                        PreparedStatement pst;
+                        pst = DataBaseHandler.connection.prepareStatement(qu);
+                        pst.setBoolean(1, heating.isSelected());
+                        pst.setBoolean(2, parking.isSelected());
+                        pst.setBoolean(3, balcony.isSelected());
+                        pst.setString(4, roomsNumber.getValue().toString());
+                        pst.setString(5, bathroomsNumber.getValue().toString());
+                        pst.setString(6, propertyID.getText());
+                        pst.setString(7, yearBuilt.getText());
+                        pst.execute();
+                        pst.close();
+
+                    } catch (SQLException throwable) {
+                        throwable.printStackTrace();
+                    }
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setHeaderText(null);
+                    alert.setContentText("Your information has been stored successfully!");
+                    alert.showAndWait();
+
+                    Stage stage = (Stage) startPane.getScene().getWindow();
+                    stage.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+
+                String qu = "INSERT INTO House (Garage, property_ID) " + "VALUES (?,?) ";
+
+
+                PreparedStatement pst;
+                pst = DataBaseHandler.connection.prepareStatement(qu);
+                pst.setBoolean(1, garage.isSelected());
+                pst.setString(2, propertyID.getText());
+
+                pst.execute();
+                pst.close();
+
+            } catch (SQLException throwable) {
+                throwable.printStackTrace();
+            }
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("Your information has been stored successfully!");
+            alert.showAndWait();
+
+            Stage stage = (Stage) startPane.getScene().getWindow();
+            stage.close();
+        } else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("You should enter numbers only in area,price and fees fields!");
+            alert.showAndWait();
+
         }
-
-        try {
-
-            String qu ="INSERT INTO House (Garage, property_ID) " +"VALUES (?,?) ";
-
-
-            PreparedStatement pst;
-            pst = DataBaseHandler.connection.prepareStatement (qu);
-            pst.setBoolean (1, garage.isSelected());
-            pst.setString (2, propertyID.getText ());
-
-            pst.execute ();
-            pst.close ();
-
-        } catch (SQLException throwable) {
-            throwable.printStackTrace ();
-        }
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText(null);
-        alert.setContentText("Your information has been stored successfully!");
-        alert.showAndWait();
-
-        Stage stage = (Stage) startPane.getScene().getWindow();
-        stage.close();
     }
 
     public void cancel(ActionEvent actionEvent) {

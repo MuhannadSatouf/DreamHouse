@@ -48,10 +48,10 @@ public class AddLandForRentController implements Initializable {
             return;
         }
 
-//        if (editMode) {
-//            landEdit ();
-//            return;
-//        }
+        if (editMode) {
+            landEdit ();
+            return;
+        }
         String query = "SELECT Property_ID from property WHERE Property_ID='" + propertyID.getText() + "'";
         ResultSet resultSet = dataBaseHandler.execQuery(query);
         try {
@@ -60,7 +60,7 @@ public class AddLandForRentController implements Initializable {
                 alert.setHeaderText(null);
                 alert.setContentText("This ID was already entered!");
                 alert.showAndWait();
-                //refreshing ();
+                refreshing ();
             } else {
                 int fees = 0;
                 dataBaseHandler.addProperty(propertyID.getText(), region.getText(), address.getText(), area.getText(), String.valueOf(fees), price.getText());
