@@ -3,7 +3,10 @@ package Controller;
 import Models.DataBaseHandler;
 import Models.Land;
 import Models.Property;
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,7 +20,6 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class AddLandForRentController implements Initializable {
@@ -41,26 +43,20 @@ public class AddLandForRentController implements Initializable {
     public void save(ActionEvent actionEvent) {
         if (propertyID.getText().isEmpty() || region.getText().isEmpty() || address.getText().isEmpty() ||
                 price.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Please enter in all fields");
-            alert.showAndWait();
+            createAlert("Please enter in all fields");
             return;
         }
 
         if (editMode) {
-            landEdit ();
+            landEdit();
             return;
         }
         String query = "SELECT Property_ID from property WHERE Property_ID='" + propertyID.getText() + "'";
         ResultSet resultSet = dataBaseHandler.execQuery(query);
         try {
             if (resultSet.next()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setContentText("This ID was already entered!");
-                alert.showAndWait();
-                refreshing ();
+                createAlert("This ID was already entered!");
+                refreshing();
             } else {
                 int fees = 0;
                 dataBaseHandler.addProperty(propertyID.getText(), region.getText(), address.getText(), area.getText(), String.valueOf(fees), price.getText());
@@ -77,10 +73,7 @@ public class AddLandForRentController implements Initializable {
                 } catch (SQLException throwable) {
                     throwable.printStackTrace();
                 }
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText(null);
-                alert.setContentText("Your information has been stored successfully!");
-                alert.showAndWait();
+                createAlert("Your information has been stored successfully!");
 
                 Stage stage = (Stage) startPane.getScene().getWindow();
                 stage.close();
@@ -104,16 +97,10 @@ public class AddLandForRentController implements Initializable {
                 Integer.parseInt(price.getText()), fees,
                 type.getValue().toString(), irrigated.isSelected(), includesResidence.isSelected(), true);
         if (dataBaseHandler.editProperty(land)) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText(null);
-            alert.setContentText("Land has been edited successfully!");
-            alert.show();
+            createAlert("Land has been edited successfully!");
 
         } else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("FAILED");
-            alert.show();
+            createAlert("FAILED");
 
         }
     }
@@ -151,5 +138,12 @@ public class AddLandForRentController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dataBaseHandler = DataBaseHandler.getInstance();
         type.setItems(propertyType);
+    }
+
+    public void createAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

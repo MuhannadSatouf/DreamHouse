@@ -38,148 +38,134 @@ public class AddLandForSaleController implements Initializable {
     public JFXButton cancelBtn;
     public JFXCheckBox includesResidence;
     DataBaseHandler dataBaseHandler;
-    ObservableList<String> propertyType = FXCollections.observableArrayList ("Vacant Land", "Ranch", "Farm", "Timberland");
+    ObservableList<String> propertyType = FXCollections.observableArrayList("Vacant Land", "Ranch", "Farm", "Timberland");
 
     public void save(ActionEvent actionEvent) throws SQLException {
 
 
-        if (propertyID.getText ().isEmpty () || region.getText ().isEmpty () || address.getText ().isEmpty () ||
-                price.getText ().isEmpty () || fees.getText ().isEmpty ()) {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
-            alert.setHeaderText (null);
-            alert.setContentText ("Please enter in all fields");
-            alert.showAndWait ();
+        if (propertyID.getText().isEmpty() || region.getText().isEmpty() || address.getText().isEmpty() ||
+                price.getText().isEmpty() || fees.getText().isEmpty()) {
+            createAlert("Please enter in all fields");
             return;
         }
 //add this to all add controller
         String reg = "[0-9]+";
-        if (propertyID.getText().matches(reg) & area.getText ().matches (reg) & price.getText ().matches (reg) & fees.getText ().matches (reg)) {
+        if (propertyID.getText().matches(reg) & area.getText().matches(reg) & price.getText().matches(reg) & fees.getText().matches(reg)) {
             if (editMode) {
-                landEdit ();
+                landEdit();
                 return;
             }
-            String query = "SELECT Property_ID from property WHERE Property_ID='" + propertyID.getText () + "'";
-            ResultSet resultSet = dataBaseHandler.execQuery (query);
+            String query = "SELECT Property_ID from property WHERE Property_ID='" + propertyID.getText() + "'";
+            ResultSet resultSet = dataBaseHandler.execQuery(query);
          /*   PreparedStatement pst;
             pst = DataBaseHandler.connection.prepareStatement (query);
             pst.execute ();*/
 
             try {
-                if (resultSet.next ()) {
-                    Alert alert = new Alert (Alert.AlertType.ERROR);
-                    alert.setHeaderText (null);
-                    alert.setContentText ("This ID was already entered!");
-                    alert.showAndWait ();
-                    refreshing ();
+                if (resultSet.next()) {
+                    createAlert("This ID was already entered!");
+                    refreshing();
                 } else {
-                    dataBaseHandler.addProperty (propertyID.getText (), region.getText (), address.getText (), area.getText (), fees.getText (), price.getText ());
+                    dataBaseHandler.addProperty(propertyID.getText(), region.getText(), address.getText(), area.getText(), fees.getText(), price.getText());
                     try {
                         String qu = "INSERT INTO land (Type,Irrigated,Includes_Residence,Property_ID) " + "VALUES (?,?,?,?) ";
                         PreparedStatement pst;
-                        pst = DataBaseHandler.connection.prepareStatement (qu);
+                        pst = DataBaseHandler.connection.prepareStatement(qu);
                         try {
-                            pst.setString (1, type.getValue ().toString ());
+                            pst.setString(1, type.getValue().toString());
                         } catch (NullPointerException e) {
-                            Alert alert = new Alert (Alert.AlertType.ERROR);
-                            alert.setHeaderText (null);
-                            alert.setContentText ("Please enter land type first!");
-                            alert.showAndWait ();
+                            createAlert("Please enter land type first!");
                             return;
 
                         }
 
-                        pst.setBoolean (2, irrigated.isSelected ());
-                        pst.setBoolean (3, includesResidence.isSelected ());
-                        pst.setString (4, propertyID.getText ());
-                        pst.execute ();
-                        pst.close ();
+                        pst.setBoolean(2, irrigated.isSelected());
+                        pst.setBoolean(3, includesResidence.isSelected());
+                        pst.setString(4, propertyID.getText());
+                        pst.execute();
+                        pst.close();
                     } catch (SQLException throwable) {
-                        throwable.printStackTrace ();
+                        throwable.printStackTrace();
                     }
-                    Alert alert = new Alert (Alert.AlertType.INFORMATION);
-                    alert.setHeaderText (null);
-                    alert.setContentText ("Your information has been stored successfully!");
-                    alert.showAndWait ();
+                    createAlert("Your information has been stored successfully!");
 
-                    Stage stage = (Stage) startPane.getScene ().getWindow ();
-                    stage.close ();
+                    Stage stage = (Stage) startPane.getScene().getWindow();
+                    stage.close();
                 }
 
             } catch (SQLException e) {
-                e.printStackTrace ();
+                e.printStackTrace();
             }
 
         } else {
-            Alert alert = new Alert (Alert.AlertType.INFORMATION);
-            alert.setHeaderText (null);
-            alert.setContentText ("You should enter numbers only in area,price and fees fields!");
-            alert.showAndWait ();
+            createAlert("You should enter numbers only in area,price and fees fields!");
 
         }
 
     }
 
     public void cancel(ActionEvent actionEvent) {
-        Stage stage = (Stage) startPane.getScene ().getWindow ();
-        stage.close ();
+        Stage stage = (Stage) startPane.getScene().getWindow();
+        stage.close();
     }
 
 
     public void landEdit() {
-        Land land = new Land (Integer.parseInt (propertyID.getText ()), region.getText (), address.getText (), Integer.parseInt (area.getText ()),
-                Integer.parseInt (price.getText ()), Integer.parseInt (fees.getText ()),
-                type.getValue ().toString (), irrigated.isSelected (), includesResidence.isSelected (), true);
-        if (dataBaseHandler.editProperty (land)) {
-            Alert alert = new Alert (Alert.AlertType.INFORMATION);
-            alert.setHeaderText (null);
-            alert.setContentText ("Land has been edited successfully!");
-            alert.show ();
+        Land land = new Land(Integer.parseInt(propertyID.getText()), region.getText(), address.getText(), Integer.parseInt(area.getText()),
+                Integer.parseInt(price.getText()), Integer.parseInt(fees.getText()),
+                type.getValue().toString(), irrigated.isSelected(), includesResidence.isSelected(), true);
+        if (dataBaseHandler.editProperty(land)) {
+            createAlert("Land has been edited successfully!");
 
         } else {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
-            alert.setHeaderText (null);
-            alert.setContentText ("FAILED");
-            alert.show ();
+            createAlert("FAILED");
 
         }
     }
 
     public void refreshLand(Land land) {
-        type.setItems (propertyType);
-        irrigated.selectedProperty ().set (false);
-        includesResidence.selectedProperty ().set (false);
+        type.setItems(propertyType);
+        irrigated.selectedProperty().set(false);
+        includesResidence.selectedProperty().set(false);
         editMode = Boolean.TRUE;
     }
 
     public void refreshProperty(Property property) {
-        propertyID.setText (String.valueOf (property.getProperty_ID ()));
-        region.setText (property.getRegion ());
-        address.setText (property.getAddress ());
-        area.setText (String.valueOf (property.getArea ()));
-        price.setText (String.valueOf (property.getPrice ()));
-        fees.setText (String.valueOf (property.getFees ()));
+        propertyID.setText(String.valueOf(property.getProperty_ID()));
+        region.setText(property.getRegion());
+        address.setText(property.getAddress());
+        area.setText(String.valueOf(property.getArea()));
+        price.setText(String.valueOf(property.getPrice()));
+        fees.setText(String.valueOf(property.getFees()));
         editMode = Boolean.TRUE;
-        propertyID.setEditable (false);
+        propertyID.setEditable(false);
     }
 
     public void refreshing() {
-        propertyID.setText ("");
-        region.setText ("");
-        address.setText ("");
-        area.setText ("");
-        price.setText ("");
-        fees.setText ("");
-        irrigated.selectedProperty ().set (false);
-        includesResidence.selectedProperty ().set (false);
-        type.setItems (propertyType);
+        propertyID.setText("");
+        region.setText("");
+        address.setText("");
+        area.setText("");
+        price.setText("");
+        fees.setText("");
+        irrigated.selectedProperty().set(false);
+        includesResidence.selectedProperty().set(false);
+        type.setItems(propertyType);
 
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        dataBaseHandler = DataBaseHandler.getInstance ();
-        type.setItems (propertyType);
+        dataBaseHandler = DataBaseHandler.getInstance();
+        type.setItems(propertyType);
+    }
+
+    public void createAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
 

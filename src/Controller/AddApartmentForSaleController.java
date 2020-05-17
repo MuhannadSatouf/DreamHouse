@@ -2,7 +2,6 @@ package Controller;
 
 import Models.Apartment;
 import Models.DataBaseHandler;
-import Models.Land;
 import Models.Property;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
@@ -49,14 +48,11 @@ public class AddApartmentForSaleController implements Initializable {
     public void save(ActionEvent actionEvent) {
         if (propertyID.getText().isEmpty() || region.getText().isEmpty() || address.getText().isEmpty() ||
                 price.getText().isEmpty() || area.getText().isEmpty() || fees.getText().isEmpty() || yearBuilt.getText().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Please enter in all fields");
-            alert.showAndWait();
+            createAlert("Please enter in all fields");
             return;
         }
         String reg = "[0-9]+";
-        if ( propertyID.getText().matches(reg) & area.getText().matches(reg) & price.getText().matches(reg) & fees.getText().matches(reg)& yearBuilt.getText().matches(reg)) {
+        if (propertyID.getText().matches(reg) & area.getText().matches(reg) & price.getText().matches(reg) & fees.getText().matches(reg) & yearBuilt.getText().matches(reg)) {
             if (editMode) {
                 apartmentEdit();
                 return;
@@ -65,10 +61,7 @@ public class AddApartmentForSaleController implements Initializable {
             ResultSet resultSet = dataBaseHandler.execQuery(query);
             try {
                 if (resultSet.next()) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setHeaderText(null);
-                    alert.setContentText("This ID was already entered!");
-                    alert.showAndWait();
+                    createAlert("This ID was already entered!");
                     refreshing();
                 } else {
 
@@ -91,10 +84,7 @@ public class AddApartmentForSaleController implements Initializable {
                     } catch (SQLException throwable) {
                         throwable.printStackTrace();
                     }
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setHeaderText(null);
-                    alert.setContentText("Your information has been stored successfully!");
-                    alert.showAndWait();
+                    createAlert("Your information has been stored successfully!");
 
                     Stage stage = (Stage) startPane.getScene().getWindow();
                     stage.close();
@@ -118,77 +108,75 @@ public class AddApartmentForSaleController implements Initializable {
             } catch (SQLException throwable) {
                 throwable.printStackTrace();
             }
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText(null);
-            alert.setContentText("Your information has been stored successfully!");
-            alert.showAndWait();
+            createAlert("Your information has been stored successfully!");
 
             Stage stage = (Stage) startPane.getScene().getWindow();
             stage.close();
-        } else{
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText(null);
-        alert.setContentText("You should enter numbers only in area,price and fees fields!");
-        alert.showAndWait();
+        } else {
+            createAlert("You should enter numbers only in area,price and fees fields!");
+
+        }
 
     }
 
-}
-
     public void cancel(ActionEvent actionEvent) {
-        Stage stage = (Stage) startPane.getScene ().getWindow ();
-        stage.close ();
+        Stage stage = (Stage) startPane.getScene().getWindow();
+        stage.close();
     }
 
     public void apartmentEdit() {
-        Apartment apartment = new Apartment (Integer.parseInt (propertyID.getText ()), region.getText (), address.getText (),
-                Integer.parseInt (area.getText ()), Integer.parseInt(yearBuilt.getText()),Integer.parseInt (fees.getText ()),
-                Integer.parseInt (price.getText ()), heating.isSelected(), parking.isSelected (), balcony.isSelected (),
-                floor.getValue().toString(), roomsNumber.getValue().toString(),bathroomsNumber.getValue().toString(),true);
-        if (dataBaseHandler.editProperty (apartment)) {
-            Alert alert = new Alert (Alert.AlertType.INFORMATION);
-            alert.setHeaderText (null);
-            alert.setContentText ("Apartment has been edited successfully!");
-            alert.show ();
+        Apartment apartment = new Apartment(Integer.parseInt(propertyID.getText()), region.getText(), address.getText(),
+                Integer.parseInt(area.getText()), Integer.parseInt(yearBuilt.getText()), Integer.parseInt(fees.getText()),
+                Integer.parseInt(price.getText()), heating.isSelected(), parking.isSelected(), balcony.isSelected(),
+                floor.getValue().toString(), roomsNumber.getValue().toString(), bathroomsNumber.getValue().toString(), true);
+        if (dataBaseHandler.editProperty(apartment)) {
+            createAlert("Apartment has been edited successfully!");
 
         } else {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
-            alert.setHeaderText (null);
-            alert.setContentText ("FAILED");
-            alert.show ();
-
+            createAlert("FAILED");
         }
     }
-    public void refreshApartment (Apartment apartment) {
+
+    public void refreshApartment(Apartment apartment) {
         floor.setItems(floorNumber);
         editMode = Boolean.TRUE;
     }
+
     public void refreshProperty(Property property) {
-        propertyID.setText (String.valueOf (property.getProperty_ID ()));
-        region.setText (property.getRegion ());
-        address.setText (property.getAddress ());
-        area.setText (String.valueOf (property.getArea ()));
-        price.setText (String.valueOf (property.getPrice ()));
-        fees.setText (String.valueOf (property.getFees ()));
+        propertyID.setText(String.valueOf(property.getProperty_ID()));
+        region.setText(property.getRegion());
+        address.setText(property.getAddress());
+        area.setText(String.valueOf(property.getArea()));
+        price.setText(String.valueOf(property.getPrice()));
+        fees.setText(String.valueOf(property.getFees()));
         editMode = Boolean.TRUE;
-        propertyID.setEditable (false);
+        propertyID.setEditable(false);
     }
+
     public void refreshing() {
-        propertyID.setText ("");
-        region.setText ("");
-        address.setText ("");
-        area.setText ("");
-        price.setText ("");
-        fees.setText ("");
+        propertyID.setText("");
+        region.setText("");
+        address.setText("");
+        area.setText("");
+        price.setText("");
+        fees.setText("");
         floor.setItems(floorNumber);
 
 
     }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        dataBaseHandler = DataBaseHandler.getInstance ();
-        roomsNumber.setItems (numberOfRooms);
-        bathroomsNumber.setItems (numberOfBathrooms);
-        floor.setItems (floorNumber);
+        dataBaseHandler = DataBaseHandler.getInstance();
+        roomsNumber.setItems(numberOfRooms);
+        bathroomsNumber.setItems(numberOfBathrooms);
+        floor.setItems(floorNumber);
+    }
+
+    public void createAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
