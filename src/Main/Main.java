@@ -1,6 +1,5 @@
 package Main;
 
-import com.sun.javafx.css.StyleManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +14,7 @@ public class Main extends Application {
 
 
         Parent root = FXMLLoader.load(getClass().getResource("/View/logIn.fxml"));
-        primaryStage.setTitle("Register");
+        primaryStage.setTitle("Log in");
         Scene scene=new Scene (root);
         scene.getStylesheets ().add(getClass ().getResource ("/Resources/Table.Css").toExternalForm ());
         primaryStage.setScene(scene);

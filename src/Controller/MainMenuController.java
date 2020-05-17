@@ -71,11 +71,9 @@ public class MainMenuController implements Initializable {
     DataBaseHandler dataBaseHandler;
     PieChart landChart;
     ObservableList<String> combo = FXCollections.observableArrayList("All Properties", "Land", "House", "Apartment", "Commercial Properties");
-    int isCustomer;
 
     public void backToRegister(ActionEvent actionEvent) {
         createNewStage("/View/logIn.fxml", "Register");
-
 
     }
 
@@ -150,7 +148,6 @@ public class MainMenuController implements Initializable {
     public void addHouseForSale(ActionEvent actionEvent) {
         createNewStage("/View/addHouseForSaleFXML.fxml", "House For Sale");
 
-
     }
 
     public void addHouseForRent(ActionEvent actionEvent) {
@@ -159,7 +156,6 @@ public class MainMenuController implements Initializable {
 
     public void addApartmentForSale(ActionEvent actionEvent) {
         createNewStage("/View/addApartmentForSaleFXML.fxml", "Apartment For Sale");
-
 
     }
 
@@ -211,7 +207,6 @@ public class MainMenuController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
     }
 
