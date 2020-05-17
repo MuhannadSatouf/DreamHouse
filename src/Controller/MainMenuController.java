@@ -64,14 +64,14 @@ public class MainMenuController implements Initializable {
     public JFXButton viewCustomerBtn;
     public Pane chartPane;
     public JFXRadioButton allBt;
-    public JFXRadioButton commercialBt;
-    public JFXRadioButton houseBt;
-    public JFXRadioButton apartmentBt;
-    public JFXRadioButton landBt;
+    public Pane chartPaneForAll;
+    public Pane chartPaneForSaleAndRent;
+    public JFXRadioButton rentOrSaleBt;
     DataBaseHandler dataBaseHandler;
-    PieChart landChart;
-    ObservableList<String> combo = FXCollections.observableArrayList("All Properties", "Land", "House", "Apartment", "Commercial Properties");
-    int isCustomer;
+    PieChart allPropertiesChart;
+    PieChart allPropertiesForSaleOrRentChart;
+
+
 
     public void backToRegister(ActionEvent actionEvent) {
         createNewStage("/View/logIn.fxml", "Register");
@@ -283,36 +283,36 @@ public class MainMenuController implements Initializable {
     }
 
 
-    public void landAction(ActionEvent actionEvent) {
-        landChart = new PieChart(dataBaseHandler.getLandStatistics());
-        chartPane.getChildren().add(landChart);
-        if (landBt.isSelected()) {
-            apartmentBt.setDisable(true);
-            houseBt.setDisable(true);
-            commercialBt.setDisable(true);
-            allBt.setDisable(true);
-        } else {
-            apartmentBt.setDisable(false);
-            houseBt.setDisable(false);
-            commercialBt.setDisable(false);
-            allBt.setDisable(false);
-        }
-
-    }
-
-
-    public void apartmentAction(ActionEvent actionEvent) {
-    }
-
-    public void houseAction(ActionEvent actionEvent) {
-    }
-
-    public void commercialAction(ActionEvent actionEvent) {
-    }
 
     public void AllAction(ActionEvent actionEvent) {
+        chartPaneForAll.getChildren ().clear ();
+        allPropertiesChart = new PieChart(dataBaseHandler.getAllPropertiesStatistics ());
+        chartPaneForAll.getChildren().add(allPropertiesChart);
+        if (allBt.isSelected()) {
+            rentOrSaleBt.setDisable (true);
+
+        } else {
+            rentOrSaleBt.setDisable(false);
+
+        }
     }
-}
+
+
+    public void rentOrSaleAction(ActionEvent actionEvent) {
+        chartPaneForAll.getChildren ().clear ();
+        allPropertiesForSaleOrRentChart = new PieChart(dataBaseHandler.getRentOrSaleStatistics ());
+        chartPaneForAll.getChildren().add(allPropertiesForSaleOrRentChart);
+        if (rentOrSaleBt.isSelected()) {
+            allBt.setDisable (true);
+
+        } else {
+            allBt.setDisable(false);
+
+        }
+    }
+    }
+
+
 
 
 

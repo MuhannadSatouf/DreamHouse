@@ -2,7 +2,6 @@ package Controller;
 
 import Models.Apartment;
 import Models.DataBaseHandler;
-import Models.Land;
 import Models.Property;
 import com.jfoenix.controls.*;
 import javafx.collections.FXCollections;

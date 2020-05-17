@@ -37,33 +37,33 @@ public class LogInController implements Initializable {
 
     public void register(ActionEvent actionEvent) throws IOException {
 
-        viewWindow("/View/addCustomerFXML.fxml", "Add Customer");
+        viewWindow ("/View/addCustomerFXML.fxml", "Add Customer");
 
     }
 
     public void signIn(ActionEvent actionEvent) throws IOException, SQLException {
-        progressBar.setVisible(true);
-        validateLogin();
+        progressBar.setVisible (true);
+        validateLogin ();
         if (isManager) {
-            viewWindow("/View/mainMenuForManager.fxml", "Menu");
+            viewWindow ("/View/mainMenuForManager.fxml", "Menu");
         } else if (isEmployee) {
-            viewWindow("/View/mainMenuForEmployee.fxml", "Menu");
+            viewWindow ("/View/mainMenuForEmployee.fxml", "Menu");
         } else if (isCustomer) {
-            viewWindow("/View/mainMenuForCustomer.fxml", "Menu");
+            viewWindow ("/View/mainMenuForCustomer.fxml", "Menu");
         }
-        Stage stage = (Stage) startPane.getScene().getWindow();
-        stage.close();
+        Stage stage = (Stage) startPane.getScene ().getWindow ();
+        stage.close ();
     }
 
 
     public boolean validateLogin() throws SQLException {
         final String secretKey = "ssshhhhhhhhhhh!!!!";
 
-        if (SSNInput.getText().equals("") || passwordInput.getText().equals("")) {
-            errorMassage();
+        if (SSNInput.getText ().equals ("") || passwordInput.getText ().equals ("")) {
+            errorMassage ();
         } else {
-            DataBaseHandler DBHandler = new DataBaseHandler();
-            String check = DBHandler.checkLogInIfEmployee(SSNInput.getText(), new PassWordHash().encrypt(passwordInput.getText(), secretKey));
+            DataBaseHandler DBHandler = new DataBaseHandler ();
+            String check = DBHandler.checkLogInIfEmployee (SSNInput.getText (), new PassWordHash ().encrypt (passwordInput.getText (), secretKey));
             switch (check) {
                 case "1":
                     isManager = true;
@@ -72,14 +72,14 @@ public class LogInController implements Initializable {
                     isEmployee = true;
                     return true;
                 case "10":
-                    DataBaseHandler dataBaseHandler = new DataBaseHandler();
-                    String check2 = dataBaseHandler.checkLogInIfCustomer(SSNInput.getText(), new PassWordHash().encrypt(passwordInput.getText(), secretKey));
+                    DataBaseHandler dataBaseHandler = new DataBaseHandler ();
+                    String check2 = dataBaseHandler.checkLogInIfCustomer (SSNInput.getText (), new PassWordHash ().encrypt (passwordInput.getText (), secretKey));
                     switch (check2) {
                         case "1":
                             isCustomer = true;
                             return true;
                         case "0":
-                            errorMassage();
+                            errorMassage ();
                             return false;
                     }
             }
@@ -89,30 +89,30 @@ public class LogInController implements Initializable {
 
 
     private void errorMassage() {
-        Alert alert = new Alert(Alert.AlertType.ERROR, "The username or password are incorrect", ButtonType.OK);
-        alert.setTitle("Error");
-        alert.setHeaderText("Error: Information missing!");
-        SSNInput.setText("");
-        passwordInput.setText("");
-        alert.showAndWait();
+        Alert alert = new Alert (Alert.AlertType.ERROR, "The username or password are incorrect", ButtonType.OK);
+        alert.setTitle ("Error");
+        alert.setHeaderText ("Error: Information missing!");
+        SSNInput.setText ("");
+        passwordInput.setText ("");
+        alert.showAndWait ();
     }
 
     void viewWindow(String location, String name) {
         try {
-            Parent parent = FXMLLoader.load(getClass().getResource(location));
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setTitle(name);
-            stage.setScene(new Scene(parent));
-            stage.show();
+            Parent parent = FXMLLoader.load (getClass ().getResource (location));
+            Stage stage = new Stage (StageStyle.DECORATED);
+            stage.setTitle (name);
+            stage.setScene (new Scene (parent));
+            stage.show ();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace ();
         }
     }
 
     @FXML
     void forgetPassword(ActionEvent event) {
-        viewWindow("/View/forgetPassword.fxml", "Forget password");
+        viewWindow ("/View/forgetPassword.fxml", "Forget password");
     }
 
 
@@ -120,14 +120,16 @@ public class LogInController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // These for testing the database and inlogning and will active them only one time to create them in the database if we use local database
 
+/*
+       DataBaseHandler dataBaseHandler = null;
+        try {
+           dataBaseHandler = new DataBaseHandler ();
+       } catch (SQLException throwables) {
+           throwables.printStackTrace ();
+       }
+       dataBaseHandler.addUsersForTesting();
 
-//        DataBaseHandler dataBaseHandler = null;
-//        try {
-//            dataBaseHandler = new DataBaseHandler ();
-//        } catch (SQLException throwables) {
-//           throwables.printStackTrace ();
-//       }
-//        dataBaseHandler.addUsersForTesting();
+    }*/
 
     }
 }

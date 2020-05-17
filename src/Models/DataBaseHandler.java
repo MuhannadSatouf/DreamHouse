@@ -265,7 +265,7 @@ public class DataBaseHandler {
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
-       /* try {
+        try {
             String qu3 = "INSERT INTO user (SSN,Password,Name,Address,Phone,Email) " +
                     "VALUES(?,?,?,?,?,?)  ";
             String SSN = "22";
@@ -346,7 +346,7 @@ public class DataBaseHandler {
 
         } catch (SQLException throwable) {
             throwable.printStackTrace();
-        }*/
+        }
     }
 
 
@@ -570,10 +570,61 @@ public class DataBaseHandler {
     }
 
 
-    public ObservableList<PieChart.Data> getLandStatistics() {
+
+
+    public ObservableList<PieChart.Data> getAllPropertiesStatistics() {
         ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
 
-        String qu = "SELECT count(Property_ID) From Land";
+        String qu = "SELECT count(Property_ID) From Property";
+        String qu2 = "SELECT count(Property_ID) From Land";
+        String qu3 = "SELECT count(Property_ID) From House";
+        String qu4 = "SELECT count(Property_ID) From Commercial";
+        String qu5 = "SELECT count(Property_ID) From Apartment";
+
+
+        ResultSet rs = execQuery(qu);
+        try {
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                data.add(new PieChart.Data("Total Properties: (" + count + ")", count));
+            }
+            rs = execQuery(qu2);
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                data.add(new PieChart.Data("Total lands : (" + count + ")", count));
+            }
+            rs = execQuery(qu3);
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                data.add(new PieChart.Data("Total Houses: (" + count + ")", count));
+            }
+            rs = execQuery(qu4);
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                data.add(new PieChart.Data("Total Apartments: (" + count + ")", count));
+            }
+            rs = execQuery(qu5);
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                data.add(new PieChart.Data("Total Commercial Properties: (" + count + ")", count));
+            }
+
+
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return data;
+    }
+
+
+
+    public ObservableList<PieChart.Data> getRentOrSaleStatistics() {
+        ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
+
+        String qu = "SELECT count(Property_ID) From Property";
         String qu2 = "SELECT count(*) From Property WHERE fees>0 ";
         String qu3 = "SELECT count(*) From Property where fees IS NULL";
 
@@ -581,17 +632,17 @@ public class DataBaseHandler {
         try {
             if (rs.next()) {
                 int count = rs.getInt(1);
-                data.add(new PieChart.Data("Total lands: (" + count + ")", count));
+                data.add(new PieChart.Data("Total Properties: (" + count + ")", count));
             }
             rs = execQuery(qu2);
             if (rs.next()) {
                 int count = rs.getInt(1);
-                data.add(new PieChart.Data("Total lands for sale: (" + count + ")", count));
+                data.add(new PieChart.Data("Total Properties for sale: (" + count + ")", count));
             }
             rs = execQuery(qu3);
             if (rs.next()) {
                 int count = rs.getInt(1);
-                data.add(new PieChart.Data("Total lands for rent: (" + count + ")", count));
+                data.add(new PieChart.Data("Total Properties for rent: (" + count + ")", count));
             }
 
         } catch (SQLException throwables) {
@@ -600,6 +651,8 @@ public class DataBaseHandler {
 
         return data;
     }
+
+
 
 
     public String checkIfEmail(String email) throws SQLException {

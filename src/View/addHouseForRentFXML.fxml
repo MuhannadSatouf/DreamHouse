@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddHouseForRentController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddHouseForRentController">
    <children>
       <Pane fx:id="startPane" prefHeight="81.0" prefWidth="400.0" style="-fx-background-color: #404040;">
          <children>
@@ -18,16 +22,16 @@
       </Pane>
       <JFXTextField fx:id="area" focusColor="#5190b9" layoutX="138.0" layoutY="197.0" prefHeight="34.0" prefWidth="210.0" promptText="Area" />
       <JFXTextField fx:id="yearBuilt" focusColor="#5190b9" layoutX="138.0" layoutY="246.0" prefHeight="25.0" prefWidth="210.0" promptText="Year built" />
-      <JFXCheckBox fx:id="parking" checkedColor="#5190b9" layoutX="291.0" layoutY="380.0" text="Parking" textFill="#9c9898" unCheckedColor="#5190b9" />
-      <JFXCheckBox fx:id="heating" checkedColor="#5190b9" layoutX="127.0" layoutY="380.0" text="Heating" textFill="#9c9898" unCheckedColor="#5190b9" />
-      <JFXCheckBox fx:id="garage" checkedColor="#5190b9" layoutX="292.0" layoutY="421.0" text="Garage" textFill="#9c9898" unCheckedColor="#5190b9" />
-      <JFXCheckBox fx:id="balcony" checkedColor="#5190b9" layoutX="127.0" layoutY="421.0" text="Balcony" textFill="#9c9898" unCheckedColor="#5190b9" />
-      <JFXComboBox fx:id="roomsNumber" focusColor="#5190b9" layoutX="138.0" layoutY="451.0" prefHeight="25.0" prefWidth="210.0" promptText="Rooms" />
+      <JFXCheckBox fx:id="parking" checkedColor="#5190b9" layoutX="298.0" layoutY="347.0" text="Parking" textFill="#9c9898" unCheckedColor="#5190b9" />
+      <JFXCheckBox fx:id="heating" checkedColor="#5190b9" layoutX="134.0" layoutY="347.0" text="Heating" textFill="#9c9898" unCheckedColor="#5190b9" />
+      <JFXCheckBox fx:id="garage" checkedColor="#5190b9" layoutX="299.0" layoutY="388.0" text="Garage" textFill="#9c9898" unCheckedColor="#5190b9" />
+      <JFXCheckBox fx:id="balcony" checkedColor="#5190b9" layoutX="134.0" layoutY="388.0" text="Balcony" textFill="#9c9898" unCheckedColor="#5190b9" />
+      <JFXComboBox fx:id="roomsNumber" focusColor="#5190b9" layoutX="145.0" layoutY="418.0" prefHeight="25.0" prefWidth="210.0" promptText="Rooms" />
       <JFXButton fx:id="saveBtn" layoutX="1.0" layoutY="531.0" onAction="#save" prefHeight="67.0" prefWidth="190.0" ripplerFill="#18e233" text="Save" textFill="#9c9898">
          <font>
             <Font size="18.0" />
          </font></JFXButton>
-      <JFXComboBox fx:id="bathroomsNumber" focusColor="#5190b9" layoutX="138.0" layoutY="499.0" prefHeight="25.0" prefWidth="210.0" promptText="Bathrooms" />
+      <JFXComboBox fx:id="bathroomsNumber" focusColor="#5190b9" layoutX="145.0" layoutY="466.0" prefHeight="25.0" prefWidth="210.0" promptText="Bathrooms" />
       <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/area%20(1).png" />
@@ -43,32 +47,32 @@
             <Image url="@../Resources/price-tag.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="375.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="77.0" layoutY="342.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/radiator.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="416.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="77.0" layoutY="383.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/balcony%20(1).png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="229.0" layoutY="370.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="236.0" layoutY="337.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/park.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="229.0" layoutY="416.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="236.0" layoutY="383.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/garage.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="451.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="77.0" layoutY="418.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/room%20(2).png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="70.0" layoutY="497.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="34.0" fitWidth="28.0" layoutX="77.0" layoutY="464.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Resources/bathroom.png" />
          </image>
