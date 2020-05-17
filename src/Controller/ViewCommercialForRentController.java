@@ -23,8 +23,8 @@ public class ViewCommercialForRentController implements Initializable {
     public TableColumn<CommercialProperty,String> typeCol;
     public TableColumn<CommercialProperty,String> floorCol;
     public TableColumn<CommercialProperty,Boolean> availabilityCol;
-   // public TableColumn<CommercialProperty,String> availableFromDateCol;
     public TableView<CommercialProperty> tableOfCommercialForRent;
+    public TableColumn <CommercialProperty,Integer>yearCol;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

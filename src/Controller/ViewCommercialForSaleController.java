@@ -42,6 +42,7 @@ public class ViewCommercialForSaleController implements Initializable {
     public TableColumn<CommercialProperty, String> floorCol;
     public TableColumn<CommercialProperty, Boolean> availabilityCol;
     public TableView<CommercialProperty> tableOfCommercialForSale;
+    public TableColumn <CommercialProperty, Integer> yearCol;
     ObservableList<CommercialProperty> listOfCommercial = FXCollections.observableArrayList();
 
     private void editCol() {
@@ -53,6 +54,7 @@ public class ViewCommercialForSaleController implements Initializable {
         feesCol.setCellValueFactory(new PropertyValueFactory<>("fees"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         floorCol.setCellValueFactory(new PropertyValueFactory<>("floor"));
+        yearCol.setCellValueFactory(new PropertyValueFactory<>("yearBuilt"));
         availabilityCol.setCellValueFactory(new PropertyValueFactory<>("propertyAvailability"));
     }
 
@@ -78,7 +80,8 @@ public class ViewCommercialForSaleController implements Initializable {
                 String type = resultSet.getString("Type");
                 String floor = resultSet.getString("Floor");
                 int fees = resultSet.getInt("fees");
-                listOfCommercial.add(new CommercialProperty(propertyID, region, address, area, price, fees, isAvail, type, floor));
+                int yearBuilt =resultSet.getInt("Year_Built");
+                listOfCommercial.add(new CommercialProperty(propertyID, region, address, area, price, fees, isAvail, type, floor,yearBuilt));
             }
 
         } catch (SQLException e) {

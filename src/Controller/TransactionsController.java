@@ -89,6 +89,7 @@ public class TransactionsController implements Initializable {
 
 
     public void rentProperty(javafx.event.ActionEvent actionEvent) {
+
     }
 
     public void loadCustomerSaleInfo(ActionEvent actionEvent) {

@@ -15,6 +15,7 @@ public class DataBaseHandler {
     public static Statement statement = null;
     String passwordFromDatabase = "";
     final String secretKey = "ssshhhhhhhhhhh!!!!";
+    PreparedStatement preparedStatement;
 
     public static DataBaseHandler getInstance() {
         if (databaseHandler == null) {
@@ -107,11 +108,12 @@ public class DataBaseHandler {
         try {
             String qu = "INSERT INTO user (SSN,Password,Name,Address,Phone,Email) " +
                     "VALUES(?,?,?,?,?,?)  ";
+            String UserPassword = new PassWordHash().encrypt(customerPassword, secretKey);
 
             PreparedStatement pst;
             pst = DataBaseHandler.connection.prepareStatement(qu);
             pst.setString(1, customerSSn);
-            pst.setString(2, customerPassword);
+            pst.setString(2, UserPassword);
             pst.setString(3, name);
             pst.setString(4, address);
             pst.setString(5, phone);
@@ -125,7 +127,7 @@ public class DataBaseHandler {
 
     }
 
-    public void addCustomer(String customer_type, String SSN) {
+    public void addCustomer(String customerSSNText, String customerPasswordText, String s, String nameText, String text, String customer_type, String SSN) {
 
         try {
 
@@ -707,6 +709,21 @@ public class DataBaseHandler {
             e.printStackTrace();
         }
 
+    }
+
+    public String checkIfUserExist (String SSN){
+
+        String query ="Select SSN from user where SSN =" + SSN;
+        ResultSet resultSet = databaseHandler.execQuery(query);
+        try {
+            while (resultSet.next()){
+                String ssn = resultSet.getString("SSN");
+                return ssn;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return "";
     }
 }
 
