@@ -16,20 +16,20 @@
             </ImageView>
          </children>
       </Pane>
-      <JFXTextField fx:id="address" focusColor="#5190b9" layoutX="138.0" layoutY="300.0" prefHeight="34.0" prefWidth="210.0" promptText="Address">
+      <JFXTextField fx:id="addressTextField" focusColor="#5190b9" layoutX="138.0" layoutY="300.0" prefHeight="34.0" prefWidth="210.0" promptText="Address">
          <font>
             <Font size="15.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="phone" focusColor="#5190b9" layoutX="138.0" layoutY="364.0" prefHeight="25.0" prefWidth="210.0" promptText="Phone">
+      <JFXTextField fx:id="phoneTextField" focusColor="#5190b9" layoutX="138.0" layoutY="364.0" prefHeight="25.0" prefWidth="210.0" promptText="Phone">
          <font>
             <Font size="15.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="email" focusColor="#5190b9" layoutX="138.0" layoutY="422.0" prefHeight="25.0" prefWidth="210.0" promptText="Email">
+      <JFXTextField fx:id="emailTextField" focusColor="#5190b9" layoutX="138.0" layoutY="422.0" prefHeight="25.0" prefWidth="210.0" promptText="Email">
          <font>
             <Font size="15.0" />
          </font></JFXTextField>
       <JFXComboBox fx:id="customerType" editable="true" focusColor="#5190b9" layoutX="138.0" layoutY="213.0" prefHeight="25.0" prefWidth="210.0" promptText="Customer Type" />
-      <JFXButton fx:id="saveBtn" layoutX="1.0" layoutY="531.0" onAction="#saveCustomer" prefHeight="69.0" prefWidth="210.0" ripplerFill="#18e233" text="Save" textFill="#9c9898">
+      <JFXButton fx:id="saveBtnTextField" layoutX="1.0" layoutY="531.0" onAction="#saveCustomer" prefHeight="69.0" prefWidth="210.0" ripplerFill="#18e233" text="Save" textFill="#9c9898">
          <font>
             <Font size="18.0" />
          </font></JFXButton>
@@ -48,7 +48,7 @@
             <Image url="@../Resources/mail%20(1).png" />
          </image>
       </ImageView>
-      <JFXTextField fx:id="name" focusColor="#5190b9" layoutX="138.0" layoutY="254.0" prefHeight="34.0" prefWidth="210.0" promptText="Name">
+      <JFXTextField fx:id="nameTextField" focusColor="#5190b9" layoutX="138.0" layoutY="254.0" prefHeight="34.0" prefWidth="210.0" promptText="Name">
          <font>
             <Font size="15.0" />
          </font></JFXTextField>
@@ -62,7 +62,7 @@
             <Image url="@../Resources/type%20(1).png" />
          </image>
       </ImageView>
-      <JFXTextField fx:id="customerSSN" focusColor="#5190b9" layoutX="138.0" layoutY="92.0" prefHeight="34.0" prefWidth="210.0" promptText="Social Security Number">
+      <JFXTextField fx:id="customerSSNTextField" focusColor="#5190b9" layoutX="138.0" layoutY="92.0" prefHeight="34.0" prefWidth="210.0" promptText="Social Security Number">
          <font>
             <Font size="15.0" />
          </font></JFXTextField>
@@ -75,7 +75,7 @@
          <font>
             <Font size="18.0" />
          </font></JFXButton>
-      <JFXTextField fx:id="customerPassword" focusColor="#5190b9" layoutX="138.0" layoutY="153.0" prefHeight="34.0" prefWidth="210.0" promptText="Passwaord">
+      <JFXTextField fx:id="customerPasswordTextField" focusColor="#5190b9" layoutX="138.0" layoutY="153.0" prefHeight="34.0" prefWidth="210.0" promptText="Passwaord">
          <font>
             <Font size="15.0" />
          </font>
