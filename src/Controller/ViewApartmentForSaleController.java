@@ -138,6 +138,7 @@ public class ViewApartmentForSaleController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader (getClass ().getResource ("/View/addApartmentForSaleFXML.fxml"));
             Parent parent = fxmlLoader.load ();
             AddApartmentForSaleController controllerForAddApartmentForSale = fxmlLoader.getController ();
+
            // controllerForAddApartmentForSale.refreshProperty (apartmentToEdit);
            // controllerForAddApartmentForSale.refreshApartment (apartmentToEdit);
             Stage stage = new Stage (StageStyle.DECORATED);

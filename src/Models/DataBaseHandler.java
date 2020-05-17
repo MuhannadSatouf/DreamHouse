@@ -15,6 +15,7 @@ public class DataBaseHandler {
     public static Statement statement = null;
     String passwordFromDatabase = "";
     final String secretKey = "ssshhhhhhhhhhh!!!!";
+    PreparedStatement preparedStatement;
 
     public static DataBaseHandler getInstance() {
         if (databaseHandler == null) {
@@ -107,11 +108,12 @@ public class DataBaseHandler {
         try {
             String qu = "INSERT INTO user (SSN,Password,Name,Address,Phone,Email) " +
                     "VALUES(?,?,?,?,?,?)  ";
+            String UserPassword = new PassWordHash().encrypt(customerPassword, secretKey);
 
             PreparedStatement pst;
             pst = DataBaseHandler.connection.prepareStatement(qu);
             pst.setString(1, customerSSn);
-            pst.setString(2, customerPassword);
+            pst.setString(2, UserPassword);
             pst.setString(3, name);
             pst.setString(4, address);
             pst.setString(5, phone);
@@ -125,7 +127,7 @@ public class DataBaseHandler {
 
     }
 
-    public void addCustomer(String customer_type, String SSN) {
+    public void addCustomer(String customerSSNText, String customerPasswordText, String s, String nameText, String text, String customer_type, String SSN) {
 
         try {
 
@@ -226,7 +228,7 @@ public class DataBaseHandler {
                     "VALUES(?,?,?,?,?,?)  ";
 
             String SSN = "11";
-            String customerPassword = new PassWordHash().encrypt("44", secretKey);
+            String customerPassword = new PassWordHash().encrypt("11", secretKey);
 
             String name = "Muhannad";
             String address = "Kristianstad";
@@ -265,7 +267,7 @@ public class DataBaseHandler {
         } catch (SQLException throwable) {
             throwable.printStackTrace();
         }
-       /* try {
+        try {
             String qu3 = "INSERT INTO user (SSN,Password,Name,Address,Phone,Email) " +
                     "VALUES(?,?,?,?,?,?)  ";
             String SSN = "22";
@@ -346,7 +348,7 @@ public class DataBaseHandler {
 
         } catch (SQLException throwable) {
             throwable.printStackTrace();
-        }*/
+        }
     }
 
 
@@ -570,10 +572,61 @@ public class DataBaseHandler {
     }
 
 
-    public ObservableList<PieChart.Data> getLandStatistics() {
+
+
+    public ObservableList<PieChart.Data> getAllPropertiesStatistics() {
         ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
 
-        String qu = "SELECT count(Property_ID) From Land";
+        String qu = "SELECT count(Property_ID) From Property";
+        String qu2 = "SELECT count(Property_ID) From Land";
+        String qu3 = "SELECT count(Property_ID) From House";
+        String qu4 = "SELECT count(Property_ID) From Commercial";
+        String qu5 = "SELECT count(Property_ID) From Apartment";
+
+
+        ResultSet rs = execQuery(qu);
+        try {
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                data.add(new PieChart.Data("Total Properties: (" + count + ")", count));
+            }
+            rs = execQuery(qu2);
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                data.add(new PieChart.Data("Total lands : (" + count + ")", count));
+            }
+            rs = execQuery(qu3);
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                data.add(new PieChart.Data("Total Houses: (" + count + ")", count));
+            }
+            rs = execQuery(qu4);
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                data.add(new PieChart.Data("Total Apartments: (" + count + ")", count));
+            }
+            rs = execQuery(qu5);
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                data.add(new PieChart.Data("Total Commercial Properties: (" + count + ")", count));
+            }
+
+
+
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return data;
+    }
+
+
+
+    public ObservableList<PieChart.Data> getRentOrSaleStatistics() {
+        ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
+
+        String qu = "SELECT count(Property_ID) From Property";
         String qu2 = "SELECT count(*) From Property WHERE fees>0 ";
         String qu3 = "SELECT count(*) From Property where fees IS NULL";
 
@@ -581,17 +634,17 @@ public class DataBaseHandler {
         try {
             if (rs.next()) {
                 int count = rs.getInt(1);
-                data.add(new PieChart.Data("Total lands: (" + count + ")", count));
+                data.add(new PieChart.Data("Total Properties: (" + count + ")", count));
             }
             rs = execQuery(qu2);
             if (rs.next()) {
                 int count = rs.getInt(1);
-                data.add(new PieChart.Data("Total lands for sale: (" + count + ")", count));
+                data.add(new PieChart.Data("Total Properties for sale: (" + count + ")", count));
             }
             rs = execQuery(qu3);
             if (rs.next()) {
                 int count = rs.getInt(1);
-                data.add(new PieChart.Data("Total lands for rent: (" + count + ")", count));
+                data.add(new PieChart.Data("Total Properties for rent: (" + count + ")", count));
             }
 
         } catch (SQLException throwables) {
@@ -600,6 +653,8 @@ public class DataBaseHandler {
 
         return data;
     }
+
+
 
 
     public String checkIfEmail(String email) throws SQLException {
@@ -654,6 +709,21 @@ public class DataBaseHandler {
             e.printStackTrace();
         }
 
+    }
+
+    public String checkIfUserExist (String SSN){
+
+        String query ="Select SSN from user where SSN =" + SSN;
+        ResultSet resultSet = databaseHandler.execQuery(query);
+        try {
+            while (resultSet.next()){
+                String ssn = resultSet.getString("SSN");
+                return ssn;
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return "";
     }
 }
 

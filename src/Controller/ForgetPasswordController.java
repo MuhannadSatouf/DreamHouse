@@ -6,6 +6,7 @@ import Models.PassWordHash;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 
 import java.sql.SQLException;
 
@@ -27,13 +28,22 @@ public class ForgetPasswordController {
                 emailSend.sendEmailWithPassword(emailTextField.getText(), "Welcome to Dream house\n " +
                                 "You have sent a request to remember your password. \n This is your password: ",
                         new PassWordHash().decrypt(dataBaseHandler.getPasswordFromDatabase(emailTextField.getText()), secretKey));
+
+                createAlert("The email has been sent, Thanks");
                 break;
             case "0":
                 System.out.println("The email not correct");
                 break;
-                // will be here an alert
+            // will be here an alert
         }
     }
 
+
+    public void createAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
 }

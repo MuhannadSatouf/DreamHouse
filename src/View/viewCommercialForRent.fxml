@@ -18,7 +18,6 @@
                   <TableColumn fx:id="addressCol" prefWidth="75.0" text="Address" />
                   <TableColumn fx:id="areaCol" prefWidth="75.0" text="Area" />
                   <TableColumn fx:id="yearCol" prefWidth="75.0" text="Year built" />
-                  <TableColumn fx:id="availableFromDateCol" prefWidth="75.0" text="AvailableFrom" />
                   <TableColumn fx:id="priceCol" prefWidth="75.0" text="Price per month" />
                   <TableColumn fx:id="typeCol" prefWidth="75.0" text="Type" />
                   <TableColumn fx:id="floorCol" prefWidth="75.0" text="Floor" />
