@@ -48,15 +48,9 @@ public class LogInController implements Initializable {
 
             viewWindow ("/View/mainMenuForManager.fxml", "Menu");
         } else if (isEmployee) {
-            viewWindow ("/View/mainMenuForEmployee.fxml", "Menu");
+            viewWindow ("/View/mainMenuForManager.fxml", "Menu");
         } else if (isCustomer) {
             viewWindow ("/View/mainMenuForCustomer.fxml", "Menu");
-
-            viewWindow("/View/mainMenuForManager.fxml", "Manager menu");
-        } else if (isEmployee) {
-            viewWindow("/View/mainMenuForManager.fxml", "Employee menu");
-        } else if (isCustomer) {
-            viewWindow("/View/mainMenuForCustomer.fxml", "Customer menu");
 
         }
         Stage stage = (Stage) startPane.getScene ().getWindow ();
@@ -128,8 +122,8 @@ public class LogInController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // These for testing the database and inlogning and will active them only one time to create them in the database if we use local database
 
-/*
-       DataBaseHandler dataBaseHandler = null;
+
+/*       DataBaseHandler dataBaseHandler = null;
         try {
            dataBaseHandler = new DataBaseHandler ();
        } catch (SQLException throwables) {
@@ -141,3 +135,4 @@ public class LogInController implements Initializable {
 
     }
 }
+

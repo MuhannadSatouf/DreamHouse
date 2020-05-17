@@ -228,7 +228,7 @@ public class DataBaseHandler {
                     "VALUES(?,?,?,?,?,?)  ";
 
             String SSN = "11";
-            String customerPassword = new PassWordHash().encrypt("44", secretKey);
+            String customerPassword = new PassWordHash().encrypt("11", secretKey);
 
             String name = "Muhannad";
             String address = "Kristianstad";
