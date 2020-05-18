@@ -71,7 +71,7 @@ public class ViewApartmentForRentController implements Initializable {
             if (availabilityValue) {
                 isAvailable = "Available";
             } else {
-                isAvailable = "Sold";
+                isAvailable = "Rented";
             }
 
             return new ReadOnlyStringWrapper(isAvailable);
