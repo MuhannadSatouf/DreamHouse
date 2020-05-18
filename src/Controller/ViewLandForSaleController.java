@@ -226,7 +226,6 @@ public class ViewLandForSaleController implements Initializable {
         try {
             while (resultSet.next()) {
                 int propertyID = resultSet.getInt("Property_ID");
-
                 String address = resultSet.getString("Address");
                 int area = resultSet.getInt("Area");
                 int price = resultSet.getInt("Price");

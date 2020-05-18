@@ -1,6 +1,6 @@
 package Controller;
 
-import Models.DataBaseHandler;
+import Models.*;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -24,9 +24,9 @@ public class AddEmployeeController implements Initializable {
     public JFXTextField nameTextField;
     public JFXButton cancelBtn;
     public JFXTextField employeePasswordTextField;
-    public JFXComboBox type;
+    public JFXComboBox type; // WHY!!!
     public JFXTextField ssnEmployeeTextField;
-
+    private boolean editMode = Boolean.FALSE;
 
     DataBaseHandler dataBaseHandler;
 
@@ -53,12 +53,13 @@ public class AddEmployeeController implements Initializable {
                 pst.execute();
                 pst.close();
 
-                createMessage("Thank your, the employee has been added to the system");
+                createMessage("The employee has been added to the system");
             } catch (SQLException throwable) {
                 throwable.printStackTrace();
             }
         } else if (check.equals(ssnEmployeeTextField.getText())) {
             createMessage("The user already exist");
+            refreshing();
         }
     }
 
@@ -71,6 +72,28 @@ public class AddEmployeeController implements Initializable {
         employeePasswordTextField.setText("");
         ssnEmployeeTextField.setText("");
 
+    }
+
+    public void refreshEmployee(Employee employee) {
+        editMode = Boolean.TRUE;
+    }
+
+    public void refreshUser(User user) {
+        ssnEmployeeTextField.setText(user.getSsn());
+        phoneTextField.setText(user.getPhone());
+        emailTextField.setText(user.getEmail());
+        nameTextField.setText((user.getName()));
+        addressTextField.setText(user.getAddress());
+        editMode = Boolean.TRUE;
+        ssnEmployeeTextField.setEditable(false);
+        employeePasswordTextField.setEditable(false); // Does not work, need to modify methods
+    }
+    public void refreshing() {
+        ssnEmployeeTextField.setText("");
+        phoneTextField.setText("");
+        emailTextField.setText("");
+        nameTextField.setText("");
+        addressTextField.setText("");
     }
 
 

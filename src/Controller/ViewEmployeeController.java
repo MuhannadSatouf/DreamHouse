@@ -2,18 +2,29 @@ package Controller;
 
 import Models.DataBaseHandler;
 import Models.Employee;
+import Models.Land;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ViewEmployeeController implements Initializable {
@@ -81,5 +92,64 @@ public class ViewEmployeeController implements Initializable {
 
         downPane.prefWidthProperty().bind(mainPane.widthProperty());
         downPane.prefHeightProperty().bind(mainPane.heightProperty());
+    }
+
+    public void editInfo(ActionEvent actionEvent) {
+        Employee employeeToEdit = tableOfEmployee.getSelectionModel().getSelectedItem();
+        if (employeeToEdit == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Please choose an employee first!");
+            return;
+        }
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/addEmployeeFXML.fxml"));
+            Parent parent = fxmlLoader.load();
+            AddEmployeeController controllerForAddEmployee = fxmlLoader.getController();
+            controllerForAddEmployee.refreshUser(employeeToEdit);
+            controllerForAddEmployee.refreshEmployee(employeeToEdit);
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setTitle("Edit Employee");
+            stage.setScene(new Scene(parent));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteInfo(ActionEvent actionEvent) {
+        Employee employeeToDelete = tableOfEmployee.getSelectionModel().getSelectedItem();
+        if (employeeToDelete == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Please choose an employee first!");
+            return;
+        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Employee");
+        alert.setContentText("Are you sure you want to delete this employee: " + employeeToDelete.getSsn() + " ?");
+
+        Optional<ButtonType> answerOfUser = alert.showAndWait();
+        if (answerOfUser.get() == ButtonType.OK) {
+            boolean result = DataBaseHandler.getInstance().deleteEmployee(employeeToDelete);
+            if (result) {
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText(null);
+                alert.setContentText("Employee has been deleted successfully!");
+                alert.show();
+                employeeList.remove(employeeToDelete);
+            } else {
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText(null);
+                alert.setContentText("Operation has been cancelled!");
+                alert.show();
+            }
+        }
+    }
+
+    public void refresh(ActionEvent actionEvent) {
+        employeeList.clear();
+        editCol();
+        loadData();
     }
 }

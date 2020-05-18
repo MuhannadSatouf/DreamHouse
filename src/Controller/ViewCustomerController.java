@@ -5,6 +5,7 @@ import Models.Customer;
 import Models.DataBaseHandler;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -87,5 +88,14 @@ public class ViewCustomerController implements Initializable {
         downPane.prefHeightProperty().bind(mainPane.heightProperty());
 
 
+    }
+
+    public void editInfo(ActionEvent actionEvent) {
+    }
+
+    public void deleteInfo(ActionEvent actionEvent) {
+    }
+
+    public void refresh(ActionEvent actionEvent) {
     }
 }

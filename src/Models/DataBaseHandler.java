@@ -422,6 +422,67 @@ public class DataBaseHandler {
         }
     }
 
+    public void deleteFromUser(User user) {
+        try {
+            String deleteStat = "DELETE FROM User WHERE SSN = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(deleteStat);
+            preparedStatement.setString(1, user.getSsn());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean deleteEmployee(User user) {
+        try {
+            String deleteStat = "DELETE FROM Employee WHERE SSN=? ";
+            PreparedStatement preparedStatement = connection.prepareStatement(deleteStat);
+            preparedStatement.setString(1, user.getSsn());
+            preparedStatement.executeUpdate();
+            deleteFromUser(user);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    public boolean editUser(Employee employee) {
+        try {
+            String editUser = "UPDATE user SET SSN=?, Name=?, Address=?," +
+                    "Phone=?, Email=?" +
+                    "WHERE SSN=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(editUser);
+            preparedStatement.setString(1, employee.getSsn());
+            preparedStatement.setString(2, employee.getName());
+            preparedStatement.setString(3, employee.getAddress());
+            preparedStatement.setString(4, employee.getPhone());
+            preparedStatement.setString(5, employee.getEmail());
+            preparedStatement.setString(6, employee.getSsn());
+            int res = preparedStatement.executeUpdate();
+            editEmployee(employee);
+
+            return (res > 0);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+    public void editEmployee(Employee employee) {
+
+        String updateEmployee = "UPDATE land SET Type=?, Irrigated=?, Includes_Residence=? WHERE Property_ID=?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(updateEmployee);
+            preparedStatement.setString(1, employee.getSsn());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public void editLand(Land land) {
 
         String updateLand = "UPDATE land SET Type=?, Irrigated=?, Includes_Residence=? WHERE Property_ID=?";
