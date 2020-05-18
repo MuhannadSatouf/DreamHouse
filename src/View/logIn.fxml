@@ -37,5 +37,10 @@
       </ImageView>
       <ProgressIndicator fx:id="progressBar" cache="true" layoutX="314.0" layoutY="345.0" opacity="0.65" prefHeight="69.0" prefWidth="26.0" />
       <JFXButton layoutX="26.0" layoutY="388.0" onAction="#forgetPassword" prefHeight="35.0" prefWidth="133.0" text="Forget Password!" textFill="#5190b9" />
+      <JFXButton layoutX="548.0" layoutY="388.0" onAction="#aboutUsButton" prefHeight="35.0" prefWidth="68.0" ripplerFill="#abba26" text="About us" textFill="#b8b451">
+         <font>
+            <Font name="System Bold Italic" size="10.0" />
+         </font>
+      </JFXButton>
    </children>
 </Pane>

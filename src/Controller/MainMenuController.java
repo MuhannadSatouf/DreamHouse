@@ -62,16 +62,13 @@ public class MainMenuController implements Initializable {
     public JFXButton selectCommercialForViewBtn;
     public JFXButton viewEmployeeBtn;
     public JFXButton viewCustomerBtn;
-    public Pane chartPane;
     public JFXRadioButton allBt;
     public Pane chartPaneForAll;
-    public Pane chartPaneForSaleAndRent;
     public JFXRadioButton rentOrSaleBt;
     DataBaseHandler dataBaseHandler;
 
     PieChart allPropertiesChart;
     PieChart allPropertiesForSaleOrRentChart;
-
 
 
     PieChart landChart;
@@ -102,8 +99,6 @@ public class MainMenuController implements Initializable {
 
     public void transactions(ActionEvent actionEvent) {
         createNewStage("/View/transactionsFXML.fxml", "Transactions");
-
-
     }
 
     @Override
@@ -284,13 +279,12 @@ public class MainMenuController implements Initializable {
     }
 
 
-
     public void AllAction(ActionEvent actionEvent) {
-        chartPaneForAll.getChildren ().clear ();
-        allPropertiesChart = new PieChart(dataBaseHandler.getAllPropertiesStatistics ());
+        chartPaneForAll.getChildren().clear();
+        allPropertiesChart = new PieChart(dataBaseHandler.getAllPropertiesStatistics());
         chartPaneForAll.getChildren().add(allPropertiesChart);
         if (allBt.isSelected()) {
-            rentOrSaleBt.setDisable (true);
+            rentOrSaleBt.setDisable(true);
 
         } else {
             rentOrSaleBt.setDisable(false);
@@ -300,18 +294,18 @@ public class MainMenuController implements Initializable {
 
 
     public void rentOrSaleAction(ActionEvent actionEvent) {
-        chartPaneForAll.getChildren ().clear ();
-        allPropertiesForSaleOrRentChart = new PieChart(dataBaseHandler.getRentOrSaleStatistics ());
+        chartPaneForAll.getChildren().clear();
+        allPropertiesForSaleOrRentChart = new PieChart(dataBaseHandler.getRentOrSaleStatistics());
         chartPaneForAll.getChildren().add(allPropertiesForSaleOrRentChart);
         if (rentOrSaleBt.isSelected()) {
-            allBt.setDisable (true);
+            allBt.setDisable(true);
 
         } else {
             allBt.setDisable(false);
 
         }
     }
-    }
+}
 
 
 

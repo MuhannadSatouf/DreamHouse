@@ -39,9 +39,9 @@ public class DataBaseHandler {
 
             Class.forName(DRIVER).newInstance();
 
-            //connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false&allowPublicKeyRetrieval=true", "root", "root");
-            // useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "root");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false&allowPublicKeyRetrieval=true", "root", "root");
+            //  useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+            //connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "root");
 
 
             //Remote database  // connection = DriverManager.getConnection ("jdbc:mysql://den1.mysql5.gear.host:3306/realestate2?useSSL=false", "realestate2", "Xl9pU?!yN6Rr");
@@ -271,7 +271,7 @@ public class DataBaseHandler {
             String qu3 = "INSERT INTO user (SSN,Password,Name,Address,Phone,Email) " +
                     "VALUES(?,?,?,?,?,?)  ";
             String SSN = "22";
-            String customerPassword = new PassWordHash().encrypt("22",secretKey);
+            String customerPassword = new PassWordHash().encrypt("22", secretKey);
             String name = "Mohamad";
             String address = "Karlistad";
             String phone = "0768837489";
@@ -312,7 +312,7 @@ public class DataBaseHandler {
             String qu3 = "INSERT INTO user (SSN,Password,Name,Address,Phone,Email) " +
                     "VALUES(?,?,?,?,?,?)  ";
             String SSN = "33";
-            String customerPassword = new PassWordHash().encrypt("33",secretKey);
+            String customerPassword = new PassWordHash().encrypt("33", secretKey);
             String name = "Ahmad";
             String address = "Stockholm";
             String phone = "0768837489";
@@ -572,8 +572,6 @@ public class DataBaseHandler {
     }
 
 
-
-
     public ObservableList<PieChart.Data> getAllPropertiesStatistics() {
         ObservableList<PieChart.Data> data = FXCollections.observableArrayList();
 
@@ -612,15 +610,12 @@ public class DataBaseHandler {
             }
 
 
-
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
         return data;
     }
-
 
 
     public ObservableList<PieChart.Data> getRentOrSaleStatistics() {
@@ -653,8 +648,6 @@ public class DataBaseHandler {
 
         return data;
     }
-
-
 
 
     public String checkIfEmail(String email) throws SQLException {
@@ -711,16 +704,16 @@ public class DataBaseHandler {
 
     }
 
-    public String checkIfUserExist (String SSN){
+    public String checkIfUserExist(String SSN) {
 
-        String query ="Select SSN from user where SSN =" + SSN;
+        String query = "Select SSN from user where SSN =" + SSN;
         ResultSet resultSet = databaseHandler.execQuery(query);
         try {
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 String ssn = resultSet.getString("SSN");
                 return ssn;
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return "";
