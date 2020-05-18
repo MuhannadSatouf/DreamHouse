@@ -35,7 +35,6 @@ public class CommercialProperty extends Property {
     public int getYearBuilt() {
         return yearBuilt.get();
     }
-
     public SimpleStringProperty floorProperty() {
         return floor;
     }

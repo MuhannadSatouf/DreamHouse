@@ -58,6 +58,7 @@ public class AddCommercialForSaleController implements Initializable {
             try {
                 if (resultSet.next()) {
                     createAlert("This ID was already entered!");
+                    refreshing();
                 } else {
                     dataBaseHandler.addProperty(propertyID.getText(), region.getText(),
                             address.getText(), area.getText(), fees.getText(), price.getText());
@@ -97,12 +98,12 @@ public class AddCommercialForSaleController implements Initializable {
     }
 
     public void commercialEdit() {
-        int fees = 0;
+       // int fees = 0;
         CommercialProperty commercialProperty = new CommercialProperty(Integer.parseInt(propertyID.getText()), region.getText(), address.getText(),
-                Integer.parseInt(area.getText()), Integer.parseInt(price.getText()), fees, true, type.getValue().toString(),
+                Integer.parseInt(area.getText()), Integer.parseInt(price.getText()),Integer.parseInt(fees.getText()), true, type.getValue().toString(),
                 floor.getValue().toString(), Integer.parseInt(yearBuilt.getText()));
         if (dataBaseHandler.editProperty(commercialProperty)) {
-            createAlert("Apartment has been edited successfully!");
+            createAlert("Property has been edited successfully!");
 
         } else {
             createAlert("FAILED");
@@ -110,7 +111,7 @@ public class AddCommercialForSaleController implements Initializable {
         }
     }
 
-    public void refreshCommercial() {
+    public void refreshCommercial(CommercialProperty commercialProperty) {
         type.setItems(propertyType);
         floor.setItems(floorNumber);
         editMode = Boolean.TRUE;
@@ -153,4 +154,5 @@ public class AddCommercialForSaleController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
 }

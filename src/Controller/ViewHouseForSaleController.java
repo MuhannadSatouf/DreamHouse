@@ -3,6 +3,9 @@ package Controller;
 import Models.DataBaseHandler;
 import Models.House;
 import Models.Land;
+import com.jfoenix.controls.JFXSlider;
+import com.jfoenix.controls.JFXTextField;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +18,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -32,6 +36,8 @@ public class ViewHouseForSaleController implements Initializable {
     public Pane downPane;
     public Pane upPane;
     public HBox hbox;
+    public JFXTextField search;
+    public JFXSlider slideFroPrice;
     public TableColumn<House,Integer> propertyIDCol;
     public TableColumn<House,String> regionCol;
     public TableColumn<House,String> addressCol;
@@ -39,13 +45,13 @@ public class ViewHouseForSaleController implements Initializable {
     public TableColumn<House,Integer> yearCol;
     public TableColumn<House,Integer> feesCol;
     public TableColumn<House,Integer> priceCol;
-    public TableColumn<House,Boolean> heatingCol;
-    public TableColumn<House,Boolean> parkingCol;
-    public TableColumn<House,Boolean> balconyCol;
-    public TableColumn<House,Boolean> garageCol;
+    public TableColumn<House,String> heatingCol;
+    public TableColumn<House,String> parkingCol;
+    public TableColumn<House,String> balconyCol;
+    public TableColumn<House,String> garageCol;
     public TableColumn<House,String> roomsCol;
     public TableColumn<House,String> bathroomsCol;
-    public TableColumn<House,Boolean> availabilityCol;
+    public TableColumn<House,String> availabilityCol;
     public TableView<House> tableOfHouseForSale;
 
     ObservableList<House> listOfHouse = FXCollections.observableArrayList ();
@@ -58,24 +64,77 @@ public class ViewHouseForSaleController implements Initializable {
         yearCol.setCellValueFactory (new PropertyValueFactory<> ("yearBuilt"));
         feesCol.setCellValueFactory (new PropertyValueFactory<> ("fees"));
         priceCol.setCellValueFactory (new PropertyValueFactory<> ("price"));
-        heatingCol.setCellValueFactory(new PropertyValueFactory<>("heating"));
         parkingCol.setCellValueFactory(new PropertyValueFactory<>("parking"));
         balconyCol.setCellValueFactory(new PropertyValueFactory<>("balcony"));
         garageCol.setCellValueFactory(new PropertyValueFactory<>("garage"));
         roomsCol.setCellValueFactory(new PropertyValueFactory<>("room"));
         bathroomsCol.setCellValueFactory(new PropertyValueFactory<>("bathroom"));
-        availabilityCol.setCellValueFactory (new PropertyValueFactory<> ("propertyAvailability"));
+        availabilityCol.setCellValueFactory(cellData -> {
+            boolean availabilityValue = cellData.getValue().isPropertyAvailability();
+            String isAvailable;
+            if (availabilityValue) {
+                isAvailable = "Available";
+            } else {
+                isAvailable = "Sold";
+            }
+
+            return new ReadOnlyStringWrapper(isAvailable);
+        });
+        heatingCol.setCellValueFactory(cellData -> {
+            boolean availabilityValue = cellData.getValue().isHeating();
+            String isAvailable;
+            if (availabilityValue) {
+                isAvailable = "✔";
+            } else {
+                isAvailable = "✘";
+            }
+
+            return new ReadOnlyStringWrapper(isAvailable);
+        });
+        parkingCol.setCellValueFactory(cellData -> {
+            boolean availabilityValue = cellData.getValue().isParking();
+            String isAvailable;
+            if (availabilityValue) {
+                isAvailable = "✔";
+            } else {
+                isAvailable = "✘";
+            }
+
+            return new ReadOnlyStringWrapper(isAvailable);
+        });
+        balconyCol.setCellValueFactory(cellData -> {
+            boolean availabilityValue = cellData.getValue().isBalcony();
+            String isAvailable;
+            if (availabilityValue) {
+                isAvailable = "✔";
+            } else {
+                isAvailable = "✘";
+            }
+
+            return new ReadOnlyStringWrapper(isAvailable);
+        });
+        garageCol.setCellValueFactory(cellData -> {
+            boolean availabilityValue = cellData.getValue().isGarage();
+            String isAvailable;
+            if (availabilityValue) {
+                isAvailable = "✔";
+            } else {
+                isAvailable = "✘";
+            }
+
+            return new ReadOnlyStringWrapper(isAvailable);
+        });
     }
     private void loadData() {
         DataBaseHandler databaseHandler = DataBaseHandler.getInstance ();
 
         String qu = "SELECT property.Property_ID,property.Region,property.Address," +
-                "property.Area,property.Price,Property.Availability,Resident.heating,Resident.parking,Resident.balcony,Resident.rooms,Resident.bathrooms,Resident.year,house.garage,property.fees " +
+                "property.Area,property.Price,Property.Availability,Resident.heating,Resident.parking," +
+                "Resident.balcony,Resident.rooms,Resident.bathrooms,Resident.year,house.garage,property.fees " +
                 "FROM property,resident,house " +
                 "WHERE property.Property_ID=house.Property_ID " +
                 "AND property.Property_ID=Resident.Property_ID " +
                 "And fees > 0";
-
 
         ResultSet resultSet = databaseHandler.execQuery (qu);
         try {
@@ -131,8 +190,8 @@ public class ViewHouseForSaleController implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader (getClass ().getResource ("/View/addHouseForSaleFXML.fxml"));
             Parent parent = fxmlLoader.load ();
             AddHouseForSaleController controllerForAddHouseForSale = fxmlLoader.getController ();
-          //  controllerForAddHouseForSale.refreshProperty (HouseToEdit);
-          //  controllerForAddHouseForSale.refreshHouse (HouseToEdit);
+            controllerForAddHouseForSale.refreshProperty (HouseToEdit);
+            controllerForAddHouseForSale.refreshHouse (HouseToEdit);
             Stage stage = new Stage (StageStyle.DECORATED);
             stage.setTitle ("Edit House");
             stage.setScene (new Scene(parent));
@@ -157,7 +216,7 @@ public class ViewHouseForSaleController implements Initializable {
 
         Optional<ButtonType> answerOfUser = alert.showAndWait ();
         if (answerOfUser.get () == ButtonType.OK) {
-           /* boolean result = DataBaseHandler.getInstance ().deleteHouse (HouseToDelete);
+            boolean result = DataBaseHandler.getInstance ().deleteHouse (HouseToDelete);
             if (result) {
                 alert = new Alert (Alert.AlertType.INFORMATION);
                 alert.setHeaderText (null);
@@ -169,7 +228,7 @@ public class ViewHouseForSaleController implements Initializable {
                 alert.setHeaderText (null);
                 alert.setContentText ("Operation has been cancelled!");
                 alert.show ();
-            }*/
+            }
         }
     }
 
@@ -178,5 +237,89 @@ public class ViewHouseForSaleController implements Initializable {
         listOfHouse.clear ();
         editCol ();
         loadData ();
+    }
+
+    public void mouseClick(MouseEvent mouseEvent) {
+        DataBaseHandler databaseHandler = DataBaseHandler.getInstance();
+        listOfHouse.clear();
+        String qu = "SELECT property.Property_ID,property.Region,property.Address," +
+                "property.Area,property.Price,Property.Availability,Resident.heating,Resident.parking," +
+                "Resident.balcony,Resident.rooms,Resident.bathrooms,Resident.year,house.garage,property.fees " +
+                "FROM property,resident,house " +
+                "WHERE property.Property_ID=house.Property_ID " +
+                "AND property.Property_ID=Resident.Property_ID " +
+                "AND property.Price > '" + slideFroPrice.getValue() + "' " +
+                "And fees > 0";
+
+        ResultSet resultSet = databaseHandler.execQuery(qu);
+        try {
+            while (resultSet.next()) {
+                int propertyID = resultSet.getInt("Property_ID");
+                String region = resultSet.getString("Region");
+                String address = resultSet.getString("Address");
+                int area = resultSet.getInt("Area");
+                int year = resultSet.getInt("Year");
+                int price = resultSet.getInt("Price");
+                boolean isAvail = resultSet.getBoolean("Availability");
+                boolean heating = resultSet.getBoolean("Heating");
+                boolean parking = resultSet.getBoolean("Parking");
+                boolean balcony = resultSet.getBoolean("Balcony");
+                boolean garage = resultSet.getBoolean("Garage");
+                String rooms = resultSet.getString("Rooms");
+                String bathrooms = resultSet.getString("Bathrooms");
+                int fees = resultSet.getInt("fees");
+                listOfHouse.add(new House(propertyID, region, address, area, year, fees, price, heating, parking, balcony, rooms, bathrooms, isAvail, garage));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        tableOfHouseForSale.setItems(listOfHouse);
+
+        slideFroPrice.valueProperty().addListener((observable, oldValue, newValue) -> {
+
+            tableOfHouseForSale.setItems(listOfHouse);
+
+        });
+
+    }
+
+    public void searchForRegion(ActionEvent actionEvent) {
+        DataBaseHandler databaseHandler = DataBaseHandler.getInstance();
+        listOfHouse.clear();
+        String qu =  "SELECT property.Property_ID,property.Region,property.Address," +
+                "property.Area,property.Price,Property.Availability,Resident.heating,Resident.parking," +
+                "Resident.balcony,Resident.rooms,Resident.bathrooms,Resident.year,house.garage,property.fees " +
+                "FROM property,resident,house " +
+                "WHERE property.Property_ID=house.Property_ID " +
+                "AND property.Property_ID=Resident.Property_ID " +
+                "AND property.Region='" + search.getText() + "'" +
+                "And fees > 0";
+
+        ResultSet resultSet = databaseHandler.execQuery(qu);
+        try {
+            while (resultSet.next()) {
+                int propertyID = resultSet.getInt("Property_ID");
+                String region = resultSet.getString("Region");
+                String address = resultSet.getString("Address");
+                int area = resultSet.getInt("Area");
+                int year = resultSet.getInt("Year");
+                int price = resultSet.getInt("Price");
+                boolean isAvail = resultSet.getBoolean("Availability");
+                boolean heating = resultSet.getBoolean("Heating");
+                boolean parking = resultSet.getBoolean("Parking");
+                boolean balcony = resultSet.getBoolean("Balcony");
+                boolean garage = resultSet.getBoolean("Garage");
+                String rooms = resultSet.getString("Rooms");
+                String bathrooms = resultSet.getString("Bathrooms");
+                int fees = resultSet.getInt("fees");
+                listOfHouse.add(new House(propertyID, region, address, area, year, fees, price, heating, parking, balcony, rooms, bathrooms, isAvail, garage));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        tableOfHouseForSale.setItems(listOfHouse);
     }
 }

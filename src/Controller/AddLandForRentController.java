@@ -33,7 +33,6 @@ public class AddLandForRentController implements Initializable {
     public JFXButton cancelBtn;
     public JFXCheckBox includesResidence;
     public JFXCheckBox irrigated;
-    public DatePicker availableFrom;
     public Pane startPane;
     private boolean editMode = Boolean.FALSE;
     DataBaseHandler dataBaseHandler;

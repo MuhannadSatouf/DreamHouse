@@ -3,6 +3,9 @@ package Controller;
 import Models.CommercialProperty;
 import Models.DataBaseHandler;
 import Models.Land;
+import com.jfoenix.controls.JFXSlider;
+import com.jfoenix.controls.JFXTextField;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +18,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -32,6 +36,8 @@ public class ViewCommercialForSaleController implements Initializable {
     public Pane downPane;
     public Pane upPane;
     public HBox hbox;
+    public JFXTextField search;
+    public JFXSlider slideFroPrice;
     public TableColumn<CommercialProperty, Integer> propertyIDCol;
     public TableColumn<CommercialProperty, String> regionCol;
     public TableColumn<CommercialProperty, String> addressCol;
@@ -40,9 +46,10 @@ public class ViewCommercialForSaleController implements Initializable {
     public TableColumn<CommercialProperty, String> feesCol;
     public TableColumn<CommercialProperty, String> typeCol;
     public TableColumn<CommercialProperty, String> floorCol;
-    public TableColumn<CommercialProperty, Boolean> availabilityCol;
+    public TableColumn<CommercialProperty, String> availabilityCol;
     public TableView<CommercialProperty> tableOfCommercialForSale;
     public TableColumn <CommercialProperty, Integer> yearCol;
+
     ObservableList<CommercialProperty> listOfCommercial = FXCollections.observableArrayList();
 
     private void editCol() {
@@ -55,17 +62,27 @@ public class ViewCommercialForSaleController implements Initializable {
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
         floorCol.setCellValueFactory(new PropertyValueFactory<>("floor"));
         yearCol.setCellValueFactory(new PropertyValueFactory<>("yearBuilt"));
-        availabilityCol.setCellValueFactory(new PropertyValueFactory<>("propertyAvailability"));
+        availabilityCol.setCellValueFactory(cellData -> {
+            boolean availabilityValue = cellData.getValue().isPropertyAvailability();
+            String isAvailable;
+            if (availabilityValue) {
+                isAvailable = "Available";
+            } else {
+                isAvailable = "Sold";
+            }
+
+            return new ReadOnlyStringWrapper(isAvailable);
+        });
     }
 
     private void loadData() {
         DataBaseHandler databaseHandler = DataBaseHandler.getInstance();
 
         String qu = "SELECT property.Property_ID,property.Region,property.Address," +
-                "property.Area,property.Price,Availability,commercial.Type,commercial.floor,property.fees " +
+                "property.Area,property.Price,Availability,commercial.Type,commercial.floor,commercial.Year_Built,property.fees " +
                 "FROM property,commercial " +
                 "WHERE property.Property_ID=commercial.Property_ID " +
-                "And fees > 0";
+                "AND fees > 0";
 
 
         ResultSet resultSet = databaseHandler.execQuery(qu);
@@ -116,9 +133,9 @@ public class ViewCommercialForSaleController implements Initializable {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader (getClass ().getResource ("/View/addCommercialForSaleFXML.fxml"));
             Parent parent = fxmlLoader.load ();
-            AddCommercialForRentController controllerForAddCommercialForSale = fxmlLoader.getController ();
-           // controllerForAddCommercialForSale.refreshProperty (commercialToEdit);
-           // controllerForAddCommercialForSale.refreshCommercial (commercialToEdit);
+            AddCommercialForSaleController controllerForAddCommercialForSale = fxmlLoader.getController ();
+            controllerForAddCommercialForSale.refreshProperty (commercialToEdit);
+            controllerForAddCommercialForSale.refreshCommercial (commercialToEdit);
             Stage stage = new Stage (StageStyle.DECORATED);
             stage.setTitle ("Edit Commercial");
             stage.setScene (new Scene(parent));
@@ -142,7 +159,7 @@ public class ViewCommercialForSaleController implements Initializable {
         alert.setContentText ("Are you sure you want to delete this property ID number: " + commercialToDelete.getProperty_ID () + " ?");
 
         Optional<ButtonType> answerOfUser = alert.showAndWait ();
-       /* if (answerOfUser.get () == ButtonType.OK) {
+        if (answerOfUser.get () == ButtonType.OK) {
             boolean result = DataBaseHandler.getInstance ().deleteCommercial (commercialToDelete);
             if (result) {
                 alert = new Alert (Alert.AlertType.INFORMATION);
@@ -156,13 +173,88 @@ public class ViewCommercialForSaleController implements Initializable {
                 alert.setContentText ("Operation has been cancelled!");
                 alert.show ();
             }
-        }*/
+        }
     }
+
 
 
     public void refresh(ActionEvent actionEvent) {
         listOfCommercial.clear ();
         editCol ();
         loadData ();
+    }
+
+    public void mouseClick(MouseEvent mouseEvent) {
+        DataBaseHandler databaseHandler = DataBaseHandler.getInstance();
+        listOfCommercial.clear();
+        String qu = "SELECT property.Property_ID,property.Region,property.Address," +
+                "property.Area,property.Price,Availability,commercial.Type,commercial.floor,commercial.Year_Built,property.fees " +
+                "FROM property,commercial " +
+                "WHERE property.Property_ID=commercial.Property_ID " +
+                "AND property.Price > '" + slideFroPrice.getValue() + "' " +
+                "And fees > 0";
+
+
+        ResultSet resultSet = databaseHandler.execQuery(qu);
+        try {
+            while (resultSet.next()) {
+                int propertyID = resultSet.getInt("Property_ID");
+                String region = resultSet.getString("Region");
+                String address = resultSet.getString("Address");
+                int area = resultSet.getInt("Area");
+                int price = resultSet.getInt("Price");
+                boolean isAvail = resultSet.getBoolean("Availability");
+                String type = resultSet.getString("Type");
+                String floor = resultSet.getString("Floor");
+                int fees = resultSet.getInt("fees");
+                int yearBuilt =resultSet.getInt("Year_Built");
+                listOfCommercial.add(new CommercialProperty(propertyID, region, address, area, price, fees, isAvail, type, floor,yearBuilt));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        tableOfCommercialForSale.setItems(listOfCommercial);
+
+        slideFroPrice.valueProperty().addListener((observable, oldValue, newValue) -> {
+
+            tableOfCommercialForSale.setItems(listOfCommercial);
+
+        });
+
+    }
+
+    public void searchForRegion(ActionEvent actionEvent) {
+        DataBaseHandler databaseHandler = DataBaseHandler.getInstance();
+        listOfCommercial.clear();
+        String qu = "SELECT property.Property_ID,property.Region,property.Address," +
+                "property.Area,property.Price,Availability,commercial.Type,commercial.floor,commercial.Year_Built,property.fees " +
+                "FROM property,commercial " +
+                "WHERE property.Property_ID=commercial.Property_ID " +
+                "AND property.Region='" + search.getText() + "'" +
+                "And fees > 0";
+
+
+        ResultSet resultSet = databaseHandler.execQuery(qu);
+        try {
+            while (resultSet.next()) {
+                int propertyID = resultSet.getInt("Property_ID");
+                String region = resultSet.getString("Region");
+                String address = resultSet.getString("Address");
+                int area = resultSet.getInt("Area");
+                int price = resultSet.getInt("Price");
+                boolean isAvail = resultSet.getBoolean("Availability");
+                String type = resultSet.getString("Type");
+                String floor = resultSet.getString("Floor");
+                int fees = resultSet.getInt("fees");
+                int yearBuilt =resultSet.getInt("Year_Built");
+                listOfCommercial.add(new CommercialProperty(propertyID, region, address, area, price, fees, isAvail, type, floor,yearBuilt));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        tableOfCommercialForSale.setItems(listOfCommercial);
     }
 }

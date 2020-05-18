@@ -35,6 +35,8 @@ public class ViewLandForSaleController implements Initializable {
     public Pane downPane;
     public Pane upPane;
     public HBox hbox;
+    public JFXTextField search;
+    public JFXSlider slideFroPrice;
     public TableView<Land> tableOfLandForSale;
     public TableColumn<Land, Integer> propertyIDCol;
     public TableColumn<Land, String> regionCol;
@@ -47,8 +49,6 @@ public class ViewLandForSaleController implements Initializable {
     public TableColumn<Land, String> availabilityCol;
     public TableColumn<Land, String> residentialCol;
     public TableColumn<Land, Integer> feesCol;
-    public JFXTextField search;
-    public JFXSlider slideFroPrice;
 
 
     ObservableList<Land> listOfLand = FXCollections.observableArrayList();
@@ -61,8 +61,6 @@ public class ViewLandForSaleController implements Initializable {
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         feesCol.setCellValueFactory(new PropertyValueFactory<>("fees"));
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
-
-
         IrrigatedCol.setCellValueFactory(cellData -> {
             boolean availabilityValue = cellData.getValue().isIrrigated();
             String isAvailable;
@@ -74,7 +72,6 @@ public class ViewLandForSaleController implements Initializable {
 
             return new ReadOnlyStringWrapper(isAvailable);
         });
-
 
         //residentialCol.setCellValueFactory (new PropertyValueFactory<> ("includesResidence"));
         residentialCol.setCellValueFactory(cellData -> {
@@ -109,11 +106,11 @@ public class ViewLandForSaleController implements Initializable {
         DataBaseHandler databaseHandler = DataBaseHandler.getInstance();
 
         String qu = "SELECT property.Property_ID,property.Region,property.Address," +
-                "property.Area,property.Price,Availability,land.Type,land.Irrigated,land.Includes_Residence,property.fees " +
+                "property.Area,property.Price,Availability,land.Type,land.Irrigated," +
+                "land.Includes_Residence,property.fees " +
                 "FROM property,land " +
                 "WHERE property.Property_ID=land.Property_ID " +
                 "And fees > 0";
-
 
         ResultSet resultSet = databaseHandler.execQuery(qu);
         try {
@@ -140,8 +137,6 @@ public class ViewLandForSaleController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
         editCol();
         loadData();
 

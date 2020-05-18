@@ -111,7 +111,7 @@ public class AddCommercialForRentController implements Initializable {
         }
     }
 
-    public void refreshCommercial() {
+    public void refreshCommercial(CommercialProperty commercialProperty) {
         type.setItems(propertyType);
         floor.setItems(floorNumber);
         editMode = Boolean.TRUE;
