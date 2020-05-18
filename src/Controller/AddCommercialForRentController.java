@@ -66,14 +66,14 @@ public class AddCommercialForRentController implements Initializable {
                             address.getText(), area.getText(), String.valueOf(fees), price.getText());
                     try {
 
-                        String qu = "INSERT INTO Commercial (Type, Floor, Property_ID, Year_Built) " + "VALUES (?,?,?,?) ";
+                        String qu = "INSERT INTO Commercial (Type, Floor, Year_Built,Property_ID ) " + "VALUES (?,?,?,?) ";
 
                         PreparedStatement pst;
                         pst = DataBaseHandler.connection.prepareStatement(qu);
                         pst.setString(1, type.getValue().toString());
                         pst.setString(2, floor.getValue().toString());
-                        pst.setString(3, propertyID.getText());
-                        pst.setString(4, yearBuilt.getText());
+                        pst.setString(3, yearBuilt.getText());
+                        pst.setString(4, propertyID.getText());
                         pst.execute();
                         pst.close();
 
@@ -102,8 +102,8 @@ public class AddCommercialForRentController implements Initializable {
         CommercialProperty commercialProperty = new CommercialProperty(Integer.parseInt(propertyID.getText()), region.getText(), address.getText(),
                 Integer.parseInt(area.getText()), Integer.parseInt(price.getText()), fees, true, type.getValue().toString(),
                 floor.getValue().toString(), Integer.parseInt(yearBuilt.getText()));
-        if (dataBaseHandler.editProperty(commercialProperty)) {
-            createAlert("Apartment has been edited successfully!");
+        if (dataBaseHandler.editPropertyForCommercial (commercialProperty)) {
+            createAlert("Commercial property has been edited successfully!");
 
         } else {
             createAlert("FAILED");

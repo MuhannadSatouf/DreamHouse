@@ -131,7 +131,7 @@ public class AddApartmentForRentController implements Initializable {
                 Integer.parseInt(area.getText()), Integer.parseInt(yearBuilt.getText()), fees,
                 Integer.parseInt(price.getText()), heating.isSelected(), parking.isSelected(), balcony.isSelected(),
                 floor.getValue().toString(), roomsNumber.getValue().toString(), bathroomsNumber.getValue().toString(), true);
-        if (dataBaseHandler.editProperty(apartment)) {
+        if (dataBaseHandler.editPropertyForApartment (apartment)) {
             createAlert("Apartment has been edited successfully!");
 
         } else {

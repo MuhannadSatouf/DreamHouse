@@ -95,7 +95,7 @@ public class AddLandForRentController implements Initializable {
         Land land = new Land(Integer.parseInt(propertyID.getText()), region.getText(), address.getText(), Integer.parseInt(area.getText()),
                 Integer.parseInt(price.getText()), fees,
                 type.getValue().toString(), irrigated.isSelected(), includesResidence.isSelected(), true);
-        if (dataBaseHandler.editProperty(land)) {
+        if (dataBaseHandler.editPropertyForLand (land)) {
             createAlert("Land has been edited successfully!");
 
         } else {

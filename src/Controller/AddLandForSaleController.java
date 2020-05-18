@@ -66,7 +66,8 @@ public class AddLandForSaleController implements Initializable {
                     createAlert("This ID was already entered!");
                     refreshing();
                 } else {
-                    dataBaseHandler.addProperty(propertyID.getText(), region.getText(), address.getText(), area.getText(), fees.getText(), price.getText());
+                    dataBaseHandler.addProperty(propertyID.getText(), region.getText(), address.getText(),
+                            area.getText(), fees.getText(), price.getText());
                     try {
                         String qu = "INSERT INTO land (Type,Irrigated,Includes_Residence,Property_ID) " + "VALUES (?,?,?,?) ";
                         PreparedStatement pst;
@@ -114,7 +115,7 @@ public class AddLandForSaleController implements Initializable {
         Land land = new Land(Integer.parseInt(propertyID.getText()), region.getText(), address.getText(), Integer.parseInt(area.getText()),
                 Integer.parseInt(price.getText()), Integer.parseInt(fees.getText()),
                 type.getValue().toString(), irrigated.isSelected(), includesResidence.isSelected(), true);
-        if (dataBaseHandler.editProperty(land)) {
+        if (dataBaseHandler.editPropertyForLand (land)) {
             createAlert("Land has been edited successfully!");
 
         } else {

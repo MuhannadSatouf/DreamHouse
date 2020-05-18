@@ -501,7 +501,23 @@ public class DataBaseHandler {
 
     public void editApartment(Apartment apartment) {
 
-        String updateApartment = "UPDATE apartment SET Floor=? WHERE Property_ID=?";
+        String updateApartmentForResident = "UPDATE Resident SET  Heating=?,  Parking=?, Balcony=?, Rooms=?, Bathrooms=?, Year=?    WHERE Property_ID=?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(updateApartmentForResident);
+            preparedStatement.setBoolean (1, apartment.isHeating ());
+            preparedStatement.setBoolean (2, apartment.isParking ());
+            preparedStatement.setBoolean (3, apartment.isBalcony ());
+            preparedStatement.setString (4, apartment.getRoom ());
+            preparedStatement.setString(5, apartment.getBathroom ());
+            preparedStatement.setInt (6, apartment.getYearBuilt ());
+            preparedStatement.setInt (7, apartment.getProperty_ID ());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        String updateApartment = "UPDATE apartment SET Floor=?   WHERE Property_ID=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(updateApartment);
             preparedStatement.setString(1, apartment.getFloor());
@@ -510,11 +526,31 @@ public class DataBaseHandler {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
     }
 
     public void editHouse(House house) {
 
-        String updateHouse = "UPDATE house SET Floor=? WHERE Property_ID=?";
+
+        String updateHouseForResident = "UPDATE Resident SET  Heating=?,  Parking=?, Balcony=?, Rooms=?, Bathrooms=?, Year=?    WHERE Property_ID=?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(updateHouseForResident);
+            preparedStatement.setBoolean (1, house.isHeating ());
+            preparedStatement.setBoolean (2, house.isParking ());
+            preparedStatement.setBoolean (3, house.isBalcony ());
+            preparedStatement.setString (4, house.getRoom ());
+            preparedStatement.setString(5, house.getBathroom ());
+            preparedStatement.setInt (6, house.getYearBuilt ());
+            preparedStatement.setInt (7, house.getProperty_ID ());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
+        String updateHouse = "UPDATE house SET Garage=? WHERE Property_ID=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(updateHouse);
             preparedStatement.setBoolean(1, house.isGarage());
@@ -527,22 +563,26 @@ public class DataBaseHandler {
 
     public void editCommercial(CommercialProperty commercialProperty) {
 
-        String updateCommercial = "UPDATE commercial SET Type=?, Floor=? WHERE Property_ID=?";
+        String updateCommercial = "UPDATE commercial SET Type=?, Floor=? ,Year_Built=? WHERE Property_ID=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(updateCommercial);
             preparedStatement.setString(1, commercialProperty.getType());
             preparedStatement.setString(2, commercialProperty.getFloor());
-            preparedStatement.setInt(3, commercialProperty.getProperty_ID());
+            preparedStatement.setInt (3, commercialProperty.getYearBuilt ());
+            preparedStatement.setInt(4, commercialProperty.getProperty_ID());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public boolean editProperty(Land land) {
+
+
+
+    public boolean editPropertyForLand(Land land) {
         try {
             String editProperty = "UPDATE property SET Property_ID=?, Region=?, Address=?," +
-                    "Area=?, Price=?, fees=? " +
+                    "Area=?, fees=?, Price=? " +
                     "WHERE Property_ID=?";
             PreparedStatement preparedStatement = connection.prepareStatement(editProperty);
             preparedStatement.setInt(1, land.getProperty_ID());
@@ -563,10 +603,10 @@ public class DataBaseHandler {
         return false;
     }
 
-    public boolean editProperty(Apartment apartment) {
+    public boolean editPropertyForApartment(Apartment apartment) {
         try {
             String editProperty = "UPDATE property SET Property_ID=?, Region=?, Address=?," +
-                    "Area=?, Price=?, availableFrom=? " +
+                    "Area=?, Price=?, fees=? " +
                     "WHERE Property_ID=?";
             PreparedStatement preparedStatement = connection.prepareStatement(editProperty);
             preparedStatement.setInt(1, apartment.getProperty_ID());
@@ -576,6 +616,7 @@ public class DataBaseHandler {
             preparedStatement.setInt(5, apartment.getPrice());
             preparedStatement.setInt(6, apartment.getFees());
             preparedStatement.setInt(7, apartment.getProperty_ID());
+
             int res = preparedStatement.executeUpdate();
             editApartment(apartment);
             return (res > 0);
@@ -586,10 +627,10 @@ public class DataBaseHandler {
         return false;
     }
 
-    public boolean editProperty(House house) {
+    public boolean editPropertyForHouse(House house) {
         try {
             String editProperty = "UPDATE property SET Property_ID=?, Region=?, Address=?," +
-                    "Area=?, Fess=?, Price=? " +
+                    "Area=?, fees=?, Price=? " +
                     "WHERE Property_ID=?";
             PreparedStatement preparedStatement = connection.prepareStatement(editProperty);
             preparedStatement.setInt(1, house.getProperty_ID());
@@ -609,18 +650,19 @@ public class DataBaseHandler {
         return false;
     }
 
-    public boolean editProperty(CommercialProperty commercialProperty) {
+
+    public boolean editPropertyForCommercial(CommercialProperty commercialProperty) {
         try {
-            String editProperty = "UPDATE commercial SET Property_ID=?, Region=?, Address=?," +
-                    "Area=?, fees=? , Price=?" +
+            String editProperty = "UPDATE Property SET Property_ID=?, Region=?, Address=?, " +
+                    "Area=?, fees=? , Price=?  " +
                     "WHERE Property_ID=?";
             PreparedStatement preparedStatement = connection.prepareStatement(editProperty);
             preparedStatement.setInt(1, commercialProperty.getProperty_ID());
             preparedStatement.setString(2, commercialProperty.getRegion());
             preparedStatement.setString(3, commercialProperty.getAddress());
             preparedStatement.setInt(4, commercialProperty.getArea());
-            preparedStatement.setInt(5, commercialProperty.getPrice());
-            preparedStatement.setInt(6, commercialProperty.getFees());
+            preparedStatement.setInt(5, commercialProperty.getFees());
+            preparedStatement.setInt(6, commercialProperty.getPrice());
             preparedStatement.setInt(7, commercialProperty.getProperty_ID());
             int res = preparedStatement.executeUpdate();
             editCommercial(commercialProperty);

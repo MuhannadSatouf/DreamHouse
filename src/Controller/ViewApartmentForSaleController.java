@@ -65,7 +65,7 @@ public class ViewApartmentForSaleController implements Initializable {
         feesCol.setCellValueFactory(new PropertyValueFactory<>("fees"));
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         floorCol.setCellValueFactory(new PropertyValueFactory<>("floor"));
-        roomsCol.setCellValueFactory(new PropertyValueFactory<>("rooms"));
+        roomsCol.setCellValueFactory(new PropertyValueFactory<>("room"));
         bathroomsCol.setCellValueFactory(new PropertyValueFactory<>("bathroom"));
         availabilityCol.setCellValueFactory(cellData -> {
             boolean availabilityValue = cellData.getValue().isPropertyAvailability();
