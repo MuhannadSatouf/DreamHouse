@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #404040;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -12,6 +13,10 @@
             <Image url="@../Resources/Logo.png" />
          </image>
       </ImageView>
-      <Label layoutX="78.0" prefHeight="269.0" prefWidth="471.0" text="About deam house will be here " textFill="#fff0f0" />
+      <JFXTextArea layoutX="60.0" layoutY="97.0" prefHeight="287.0" prefWidth="490.0" text="DreamHouse is a real estate company that believes in the idea of ​​housing that people long for and want to go home to. We own, manage, and develop rental and sale apartments, villas, commercial properties, and Lands in growth locations around the world. Today we have properties in the USA, KSA, UAE, Turkey, Germany, Russia, and more. Our owner is Första AP-fonden.&#10;&#10;Vision:&#10;&quot;A world  full of  happy people and proud of their properties - everyone wants a home.&quot;&#10;&#10;Business concept:&#10;&quot;DreamHouse owns, manages, and develops secure housing in growth places in the world with a service that simplifies the life of tenants and owners .&quot;&#10;&#10;Core values:&#10;DreamHouse runs the business long-term and is characterized by the desire to be value-creating, business-oriented, customer-focused, innovative, and responsible.&#10;&#10;Before and after DreamHouse:&#10;By constantly changing and developing the company, we want to make such a strong impression on the housing industry that there will be talking about how to do before and after DreamHouse - a guiding star for our employees who work every day for both houses and people to feel good.&#10;&#10;Goal:&#10;DreamHouse's overall goal is to provide a good and stable return to our owners and secure sustainable living that creates long-term values ​​for customers and society.&#10;&#10;Economy:&#10;DreamHouse's goal is to provide a stable total return over time well in line with the best in the industry.&#10;&#10;customers:&#10;DreamHouse will have customers who are satisfied and loyal, who choose us and recommend us to others because we offer attractive and safe housing and are best at service.&#10;&#10;Real Estate:&#10;DreamHouse's property portfolio should be long-term sustainable, consisting of well-managed and attractive residential properties at selected growth places in the world.&#10;&#10;Internet:&#10;DreamHouse will be the most attractive employer in the housing industry, our employees recommend us to others.&#10;&#10;Environment:&#10;DreamHouse will be perceived as an innovative and confident company with a long-term perspective that contributes to sustainable development.">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXTextArea>
    </children>
 </Pane>
