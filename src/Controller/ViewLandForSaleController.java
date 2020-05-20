@@ -87,7 +87,7 @@ public class ViewLandForSaleController implements Initializable {
         });
 
 
-        //Delete setCellFactory for available and add this
+
         availabilityCol.setCellValueFactory(cellData -> {
             boolean availabilityValue = cellData.getValue().isPropertyAvailability();
             String isAvailable;

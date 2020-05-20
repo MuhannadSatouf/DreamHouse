@@ -32,14 +32,12 @@ public class TransactionsController implements Initializable {
     public Label getFeesSale;
     public Label availableForSale;
     public Label getAddressSale;
-    public Label availableCustomerSale;
-    public Label getAvailableFrom;
     public Label availableForRent;
-    public Label availableCustomerRent;
-    public JFXTextField customerSSNRent;
-    public JFXTextField propertyIDRent;
+
     public JFXTextField customerSSNSale;
     public JFXTextField propertySaleID;
+    public JFXTextField customerRentSSN;
+    public JFXTextField propertyRentID;
     DataBaseHandler dataBaseHandler;
     public void sellProperty(ActionEvent actionEvent) {
         String customerSSN =customerSSNSale.getText ();
@@ -89,6 +87,48 @@ public class TransactionsController implements Initializable {
 
 
     public void rentProperty(javafx.event.ActionEvent actionEvent) {
+        String customerSSN =customerRentSSN.getText ();
+        String propertyIDRent =propertyRentID.getText();
+        Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
+        alert.setTitle ("Rent Confirmation");
+        alert.setHeaderText (null);
+        alert.setContentText ("Are you sure to Rent this property?");
+        Optional<ButtonType> response = alert.showAndWait ();
+        if (response.get () == ButtonType.OK) {
+            String st = "INSERT INTO user_has_property (Property_ID,SSN) VALUES ("
+                    + "'" + propertyIDRent+ "'," +
+                    "'" + customerSSN + "')";
+            String st2 = "UPDATE Property SET Availability = false WHERE Property_ID= '" + propertyIDRent + "'";
+
+            String qu = "SELECT * FROM Property WHERE Property_ID = '" + propertyIDRent + "'";
+            ResultSet resultSet = dataBaseHandler.execQuery (qu);
+
+            try {
+                while (resultSet.next ()) {
+                    boolean available = resultSet.getBoolean ("Availability");
+                    if (available&&dataBaseHandler.execAction (st) && dataBaseHandler.execAction (st2)){
+
+                        Alert alert2 = new Alert (Alert.AlertType.INFORMATION);
+                        alert2.setTitle ("SUCCESS");
+                        alert2.setHeaderText (null);
+                        alert2.setContentText ("Property has been RENT!");
+                        alert2.showAndWait ();
+                    } else {
+                        Alert alert2 = new Alert (Alert.AlertType.ERROR);
+                        alert2.setTitle ("FAILED");
+                        alert2.setHeaderText (null);
+                        alert2.setContentText ("This property is already Rented!");
+                        alert2.showAndWait ();
+                        return;
+                    }
+
+                }
+            }catch (SQLException throwables) {
+                throwables.printStackTrace ();
+            }
+
+
+        }
 
     }
 
@@ -178,9 +218,79 @@ public class TransactionsController implements Initializable {
 
 
     public void loadPropertyRentInfo(ActionEvent actionEvent) {
+        clearPropertyRentLabel();
+        String propertyIDRent =propertyRentID.getText ();
+        String qu = "SELECT * FROM Property WHERE Property_ID = '" + propertyIDRent + "'";
+        ResultSet resultSet = dataBaseHandler.execQuery (qu);
+        boolean cont = false;
+
+        try {
+            while (resultSet.next ()) {
+                boolean available = resultSet.getBoolean ("Availability");
+                String region = resultSet.getString ("Region");
+                String propertyAddress = resultSet.getString ("Address");
+                String price = resultSet.getString ("Price");
+                if (available){
+                    availableForRent.setText ("Available");
+                    availableForRent.setStyle ("-fx-background-color: GREEN");
+                }
+                else {
+                    availableForRent.setText ("Rent");
+                    availableForRent.setStyle ("-fx-background-color: RED" );
+                }
+                getRegionRent.setText (region);
+                getAddressRent.setText (propertyAddress);
+                getPriceRent.setText (price);
+
+                cont = true;
+            }
+            if (!cont) {
+                Alert alert2 = new Alert (Alert.AlertType.INFORMATION);
+                alert2.setTitle ("Property ID");
+                alert2.setHeaderText (null);
+                alert2.setContentText ("Please enter a correct Property ID");
+                alert2.showAndWait ();
+                propertyRentID.setText ("");
+                availableForRent.setText ("");
+                availableForRent.setStyle ("-fx-background-color: ");
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace ();
+        }
     }
 
     public void loadCustomerRentInfo(ActionEvent actionEvent) {
+        clearCustomerRentLabel ();
+        String customerSSN =customerRentSSN.getText ();
+        String qu = "SELECT * FROM User WHERE SSN = '" + customerSSN + "'";
+        ResultSet resultSet = dataBaseHandler.execQuery (qu);
+        boolean cont = false;
+
+        try {
+            while (resultSet.next ()) {
+                String name = resultSet.getString ("Name");
+                String address = resultSet.getString ("Address");
+                String phone = resultSet.getString ("Phone");
+                String email = resultSet.getString ("Email");
+
+                getNameRent.setText (name);
+                getAddressRentCustomer.setText (address);
+                getPhoneRent.setText (phone);
+                getEmailRent.setText (email);
+                cont = true;
+            }
+            if (!cont) {
+                Alert alert2 = new Alert (Alert.AlertType.INFORMATION);
+                alert2.setTitle ("Property ID");
+                alert2.setHeaderText (null);
+                alert2.setContentText ("Please enter a correct Social Security Number!");
+                alert2.showAndWait ();
+                customerRentSSN.setText ("");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace ();
+        }
     }
 
     void clearPropertySaleLabel (){
@@ -191,18 +301,22 @@ public class TransactionsController implements Initializable {
         getFeesSale.setText ("");
     }
     void clearCustomerSaleLabel (){
+        getNameSale.setText ("");
+        getAddressSaleCustomer.setText ("");
+        getPhoneSale.setText ("");
+        getEmailSale.setText ("");
 
     }
 
     void clearPropertyRentLabel (){
-        availableForRent.setText ("");
+
         getRegionRent.setText ("");
         getAddressRent.setText ("");
         getPriceRent.setText ("");
-        getAvailableFrom.setText ("");
+
     }
     void clearCustomerRentLabel (){
-        availableCustomerRent.setText ("");
+
         getNameRent.setText ("");
         getAddressRentCustomer.setText ("");
         getPhoneRent.setText ("");
