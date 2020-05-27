@@ -2,7 +2,6 @@ package Controller;
 
 import Models.Apartment;
 import Models.DataBaseHandler;
-import Models.House;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -44,9 +43,9 @@ public class ViewApartmentForRentController implements Initializable {
     public TableColumn<Apartment, Integer> areaCol;
     public TableColumn<Apartment, Integer> yearCol;
     public TableColumn<Apartment, Integer> priceCol;
-    public TableColumn<Apartment,String> heatingCol;
-    public TableColumn<Apartment,String> parkingCol;
-    public TableColumn<Apartment,String> balconyCol;
+    public TableColumn<Apartment, String> heatingCol;
+    public TableColumn<Apartment, String> parkingCol;
+    public TableColumn<Apartment, String> balconyCol;
     public TableColumn<Apartment, String> floorCol;
     public TableColumn<Apartment, String> roomsCol;
     public TableColumn<Apartment, String> bathroomsCol;
@@ -110,8 +109,9 @@ public class ViewApartmentForRentController implements Initializable {
             return new ReadOnlyStringWrapper(isAvailable);
         });
     }
+
     private void loadData() {
-        DataBaseHandler databaseHandler = DataBaseHandler.getInstance ();
+        DataBaseHandler databaseHandler = DataBaseHandler.getInstance();
 
         String qu = "SELECT property.Property_ID,property.Region,property.Address," +
                 "property.Area,property.Price,Property.Availability,Resident.heating," +
@@ -123,30 +123,30 @@ public class ViewApartmentForRentController implements Initializable {
                 "And fees = 0";
 
 
-        ResultSet resultSet = databaseHandler.execQuery (qu);
+        ResultSet resultSet = databaseHandler.execQuery(qu);
         try {
-            while (resultSet.next ()) {
-                int propertyID = resultSet.getInt ("Property_ID");
-                String region = resultSet.getString ("Region");
-                String address = resultSet.getString ("Address");
-                int area = resultSet.getInt ("Area");
+            while (resultSet.next()) {
+                int propertyID = resultSet.getInt("Property_ID");
+                String region = resultSet.getString("Region");
+                String address = resultSet.getString("Address");
+                int area = resultSet.getInt("Area");
                 int year = resultSet.getInt("Year");
-                int price = resultSet.getInt ("Price");
-                boolean isAvail = resultSet.getBoolean ("Availability");
-                boolean heating = resultSet.getBoolean ("Heating");
-                boolean parking = resultSet.getBoolean ("Parking");
-                boolean balcony = resultSet.getBoolean ("Balcony");
-                String floor = resultSet.getString ("Floor");
-                String rooms = resultSet.getString ("Rooms");
-                String bathrooms = resultSet.getString ("Bathrooms");
+                int price = resultSet.getInt("Price");
+                boolean isAvail = resultSet.getBoolean("Availability");
+                boolean heating = resultSet.getBoolean("Heating");
+                boolean parking = resultSet.getBoolean("Parking");
+                boolean balcony = resultSet.getBoolean("Balcony");
+                String floor = resultSet.getString("Floor");
+                String rooms = resultSet.getString("Rooms");
+                String bathrooms = resultSet.getString("Bathrooms");
                 int fees = 0;
-                listOfApartment.add (new Apartment(propertyID, region, address, area, year, fees, price, heating, parking,balcony,floor,rooms,bathrooms,isAvail));
+                listOfApartment.add(new Apartment(propertyID, region, address, area, year, fees, price, heating, parking, balcony, floor, rooms, bathrooms, isAvail));
             }
 
         } catch (SQLException e) {
-            e.printStackTrace ();
+            e.printStackTrace();
         }
-        tableOfApartmentForRent.setItems (listOfApartment);
+        tableOfApartmentForRent.setItems(listOfApartment);
     }
 
     @Override
@@ -154,74 +154,70 @@ public class ViewApartmentForRentController implements Initializable {
         editCol();
         loadData();
 
-        hbox.prefWidthProperty ().bind (upPane.widthProperty ());
-        hbox.prefHeightProperty ().bind (upPane.heightProperty ());
-        upPane.prefWidthProperty ().bind (mainPane.widthProperty ());
+        hbox.prefWidthProperty().bind(upPane.widthProperty());
+        hbox.prefHeightProperty().bind(upPane.heightProperty());
+        upPane.prefWidthProperty().bind(mainPane.widthProperty());
 
 
-        tableOfApartmentForRent.prefWidthProperty ().bind (downPane.widthProperty ());
-        tableOfApartmentForRent.prefHeightProperty ().bind (downPane.heightProperty ());
+        tableOfApartmentForRent.prefWidthProperty().bind(downPane.widthProperty());
+        tableOfApartmentForRent.prefHeightProperty().bind(downPane.heightProperty());
 
-        downPane.prefWidthProperty ().bind (mainPane.widthProperty ());
-        downPane.prefHeightProperty ().bind (mainPane.heightProperty ());
+        downPane.prefWidthProperty().bind(mainPane.widthProperty());
+        downPane.prefHeightProperty().bind(mainPane.heightProperty());
     }
+
     public void editInfo(ActionEvent actionEvent) {
-        Apartment apartmentToEdit = tableOfApartmentForRent.getSelectionModel ().getSelectedItem ();
+        Apartment apartmentToEdit = tableOfApartmentForRent.getSelectionModel().getSelectedItem();
         if (apartmentToEdit == null) {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
-            alert.setHeaderText (null);
-            alert.setContentText ("Please choose an item first!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Please choose an item first!");
             return;
         }
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader (getClass ().getResource ("/View/addApartmentForRentFXML.fxml"));
-            Parent parent = fxmlLoader.load ();
-            AddApartmentForRentController controllerForAddApartmentForRent = fxmlLoader.getController ();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/addApartmentForRentFXML.fxml"));
+            Parent parent = fxmlLoader.load();
+            AddApartmentForRentController controllerForAddApartmentForRent = fxmlLoader.getController();
 
-            controllerForAddApartmentForRent.refreshProperty (apartmentToEdit);
-            controllerForAddApartmentForRent.refreshApartment (apartmentToEdit);
-            Stage stage = new Stage (StageStyle.DECORATED);
-            stage.setTitle ("Edit Apartment");
-            stage.setScene (new Scene(parent));
-            stage.show ();
+            controllerForAddApartmentForRent.refreshProperty(apartmentToEdit);
+            controllerForAddApartmentForRent.refreshApartment(apartmentToEdit);
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setTitle("Edit Apartment");
+            stage.setScene(new Scene(parent));
+            stage.show();
         } catch (IOException e) {
-            e.printStackTrace ();
+            e.printStackTrace();
         }
     }
+
     public void deleteInfo(ActionEvent actionEvent) {
-        Apartment apartmentToDelete = tableOfApartmentForRent.getSelectionModel ().getSelectedItem ();
+        Apartment apartmentToDelete = tableOfApartmentForRent.getSelectionModel().getSelectedItem();
         if (apartmentToDelete == null) {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
-            alert.setHeaderText (null);
-            alert.setContentText ("Please choose an item first!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Please choose an item first!");
             return;
         }
-        Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-        alert.setTitle ("Delete Apartment");
-        alert.setContentText ("Are you sure you want to delete this property ID number: " + apartmentToDelete.getProperty_ID () + " ?");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Apartment");
+        alert.setContentText("Are you sure you want to delete this property ID number: " + apartmentToDelete.getProperty_ID() + " ?");
 
-        Optional<ButtonType> answerOfUser = alert.showAndWait ();
-        if (answerOfUser.get () == ButtonType.OK) {
-            boolean result = DataBaseHandler.getInstance ().deleteApartment (apartmentToDelete);
+        Optional<ButtonType> answerOfUser = alert.showAndWait();
+        if (answerOfUser.get() == ButtonType.OK) {
+            boolean result = DataBaseHandler.getInstance().deleteApartment(apartmentToDelete);
             if (result) {
-                alert = new Alert (Alert.AlertType.INFORMATION);
-                alert.setHeaderText (null);
-                alert.setContentText ("The apartment has been deleted successfully!");
-                alert.show ();
-                listOfApartment.remove (apartmentToDelete);
+                createMessage("The apartment has been deleted successfully!");
+                listOfApartment.remove(apartmentToDelete);
             } else {
-                alert = new Alert (Alert.AlertType.INFORMATION);
-                alert.setHeaderText (null);
-                alert.setContentText ("Operation has been cancelled!");
-                alert.show ();
+                createMessage("Operation has been cancelled!");
             }
         }
     }
 
     public void refresh(ActionEvent actionEvent) {
-        listOfApartment.clear ();
-        editCol ();
-        loadData ();
+        listOfApartment.clear();
+        editCol();
+        loadData();
     }
 
     public void searchForRegion(ActionEvent actionEvent) {
@@ -237,22 +233,22 @@ public class ViewApartmentForRentController implements Initializable {
 
         ResultSet resultSet = databaseHandler.execQuery(qu);
         try {
-            while (resultSet.next ()) {
-                int propertyID = resultSet.getInt ("Property_ID");
-                String region = resultSet.getString ("Region");
-                String address = resultSet.getString ("Address");
-                int area = resultSet.getInt ("Area");
+            while (resultSet.next()) {
+                int propertyID = resultSet.getInt("Property_ID");
+                String region = resultSet.getString("Region");
+                String address = resultSet.getString("Address");
+                int area = resultSet.getInt("Area");
                 int year = resultSet.getInt("Year");
-                int price = resultSet.getInt ("Price");
-                boolean isAvail = resultSet.getBoolean ("Availability");
-                boolean heating = resultSet.getBoolean ("Heating");
-                boolean parking = resultSet.getBoolean ("Parking");
-                boolean balcony = resultSet.getBoolean ("Balcony");
-                String floor = resultSet.getString ("Floor");
-                String rooms = resultSet.getString ("Rooms");
-                String bathrooms = resultSet.getString ("Bathrooms");
+                int price = resultSet.getInt("Price");
+                boolean isAvail = resultSet.getBoolean("Availability");
+                boolean heating = resultSet.getBoolean("Heating");
+                boolean parking = resultSet.getBoolean("Parking");
+                boolean balcony = resultSet.getBoolean("Balcony");
+                String floor = resultSet.getString("Floor");
+                String rooms = resultSet.getString("Rooms");
+                String bathrooms = resultSet.getString("Bathrooms");
                 int fees = 0;
-                listOfApartment.add (new Apartment(propertyID, region, address, area, year, fees, price, heating, parking,balcony,floor,rooms,bathrooms,isAvail));
+                listOfApartment.add(new Apartment(propertyID, region, address, area, year, fees, price, heating, parking, balcony, floor, rooms, bathrooms, isAvail));
             }
 
         } catch (SQLException e) {
@@ -275,22 +271,22 @@ public class ViewApartmentForRentController implements Initializable {
 
         ResultSet resultSet = databaseHandler.execQuery(qu);
         try {
-            while (resultSet.next ()) {
-                int propertyID = resultSet.getInt ("Property_ID");
-                String region = resultSet.getString ("Region");
-                String address = resultSet.getString ("Address");
-                int area = resultSet.getInt ("Area");
+            while (resultSet.next()) {
+                int propertyID = resultSet.getInt("Property_ID");
+                String region = resultSet.getString("Region");
+                String address = resultSet.getString("Address");
+                int area = resultSet.getInt("Area");
                 int year = resultSet.getInt("Year");
-                int price = resultSet.getInt ("Price");
-                boolean isAvail = resultSet.getBoolean ("Availability");
-                boolean heating = resultSet.getBoolean ("Heating");
-                boolean parking = resultSet.getBoolean ("Parking");
-                boolean balcony = resultSet.getBoolean ("Balcony");
-                String floor = resultSet.getString ("Floor");
-                String rooms = resultSet.getString ("Rooms");
-                String bathrooms = resultSet.getString ("Bathrooms");
+                int price = resultSet.getInt("Price");
+                boolean isAvail = resultSet.getBoolean("Availability");
+                boolean heating = resultSet.getBoolean("Heating");
+                boolean parking = resultSet.getBoolean("Parking");
+                boolean balcony = resultSet.getBoolean("Balcony");
+                String floor = resultSet.getString("Floor");
+                String rooms = resultSet.getString("Rooms");
+                String bathrooms = resultSet.getString("Bathrooms");
                 int fees = 0;
-                listOfApartment.add (new Apartment(propertyID, region, address, area, year, fees, price, heating, parking,balcony,floor,rooms,bathrooms,isAvail));
+                listOfApartment.add(new Apartment(propertyID, region, address, area, year, fees, price, heating, parking, balcony, floor, rooms, bathrooms, isAvail));
             }
 
         } catch (SQLException e) {
@@ -304,5 +300,12 @@ public class ViewApartmentForRentController implements Initializable {
 
         });
 
+    }
+
+    public void createMessage(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

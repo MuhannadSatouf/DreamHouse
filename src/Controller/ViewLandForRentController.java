@@ -99,6 +99,7 @@ public class ViewLandForRentController implements Initializable {
         });
 
     }
+
     private void loadData() {
         DataBaseHandler databaseHandler = DataBaseHandler.getInstance();
 
@@ -136,24 +137,22 @@ public class ViewLandForRentController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         editCol();
         loadData();
-        hbox.prefWidthProperty ().bind (upPane.widthProperty ());
-        hbox.prefHeightProperty ().bind (upPane.heightProperty ());
-        upPane.prefWidthProperty ().bind (mainPane.widthProperty ());
+        hbox.prefWidthProperty().bind(upPane.widthProperty());
+        hbox.prefHeightProperty().bind(upPane.heightProperty());
+        upPane.prefWidthProperty().bind(mainPane.widthProperty());
 
 
-        tableOfLandForRent.prefWidthProperty ().bind (downPane.widthProperty ());
-        tableOfLandForRent.prefHeightProperty ().bind (downPane.heightProperty ());
+        tableOfLandForRent.prefWidthProperty().bind(downPane.widthProperty());
+        tableOfLandForRent.prefHeightProperty().bind(downPane.heightProperty());
 
-        downPane.prefWidthProperty ().bind (mainPane.widthProperty ());
-        downPane.prefHeightProperty ().bind (mainPane.heightProperty ());
+        downPane.prefWidthProperty().bind(mainPane.widthProperty());
+        downPane.prefHeightProperty().bind(mainPane.heightProperty());
     }
 
     public void editInfo(ActionEvent actionEvent) {
         Land landToEdit = tableOfLandForRent.getSelectionModel().getSelectedItem();
         if (landToEdit == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Please choose an item first!");
+            createMessage("Please choose an item first!");
             return;
         }
         try {
@@ -211,9 +210,7 @@ public class ViewLandForRentController implements Initializable {
     public void deleteInfo(ActionEvent actionEvent) {
         Land landToDelete = tableOfLandForRent.getSelectionModel().getSelectedItem();
         if (landToDelete == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Please choose an item first!");
+            createMessage("Please choose an item first!");
             return;
         }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -224,16 +221,10 @@ public class ViewLandForRentController implements Initializable {
         if (answerOfUser.get() == ButtonType.OK) {
             boolean result = DataBaseHandler.getInstance().deleteLand(landToDelete);
             if (result) {
-                alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText(null);
-                alert.setContentText("Land has been deleted successfully!");
-                alert.show();
+                createMessage("Land has been deleted successfully!");
                 listOfLand.remove(landToDelete);
             } else {
-                alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText(null);
-                alert.setContentText("Operation has been cancelled!");
-                alert.show();
+                createMessage("Operation has been cancelled!");
             }
         }
     }
@@ -319,5 +310,12 @@ public class ViewLandForRentController implements Initializable {
         }
 
         tableOfLandForRent.setItems(listOfLand);
+    }
+
+    public void createMessage(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

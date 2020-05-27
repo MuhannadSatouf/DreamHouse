@@ -87,7 +87,6 @@ public class ViewLandForSaleController implements Initializable {
         });
 
 
-
         availabilityCol.setCellValueFactory(cellData -> {
             boolean availabilityValue = cellData.getValue().isPropertyAvailability();
             String isAvailable;
@@ -153,9 +152,7 @@ public class ViewLandForSaleController implements Initializable {
     public void editInfo(ActionEvent actionEvent) {
         Land landToEdit = tableOfLandForSale.getSelectionModel().getSelectedItem();
         if (landToEdit == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Please choose an item first!");
+            createMessage("Please choose an item first!");
             return;
         }
         try {
@@ -177,9 +174,7 @@ public class ViewLandForSaleController implements Initializable {
     public void deleteInfo(ActionEvent actionEvent) {
         Land landToDelete = tableOfLandForSale.getSelectionModel().getSelectedItem();
         if (landToDelete == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Please choose an item first!");
+            createMessage("Please choose an item first!");
             return;
         }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -190,16 +185,10 @@ public class ViewLandForSaleController implements Initializable {
         if (answerOfUser.get() == ButtonType.OK) {
             boolean result = DataBaseHandler.getInstance().deleteLand(landToDelete);
             if (result) {
-                alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText(null);
-                alert.setContentText("Land has been deleted successfully!");
-                alert.show();
+                createMessage("Land has been deleted successfully!");
                 listOfLand.remove(landToDelete);
             } else {
-                alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText(null);
-                alert.setContentText("Operation has been cancelled!");
-                alert.show();
+                createMessage("Operation has been cancelled!");
             }
         }
     }
@@ -284,6 +273,13 @@ public class ViewLandForSaleController implements Initializable {
 
         });
 
+    }
+
+    public void createMessage(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
 

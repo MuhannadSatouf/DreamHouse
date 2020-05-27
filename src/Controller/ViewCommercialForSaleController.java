@@ -2,7 +2,6 @@ package Controller;
 
 import Models.CommercialProperty;
 import Models.DataBaseHandler;
-import Models.Land;
 import com.jfoenix.controls.JFXSlider;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -48,7 +47,7 @@ public class ViewCommercialForSaleController implements Initializable {
     public TableColumn<CommercialProperty, String> floorCol;
     public TableColumn<CommercialProperty, String> availabilityCol;
     public TableView<CommercialProperty> tableOfCommercialForSale;
-    public TableColumn <CommercialProperty, Integer> yearCol;
+    public TableColumn<CommercialProperty, Integer> yearCol;
 
     ObservableList<CommercialProperty> listOfCommercial = FXCollections.observableArrayList();
 
@@ -97,8 +96,8 @@ public class ViewCommercialForSaleController implements Initializable {
                 String type = resultSet.getString("Type");
                 String floor = resultSet.getString("Floor");
                 int fees = resultSet.getInt("fees");
-                int yearBuilt =resultSet.getInt("Year_Built");
-                listOfCommercial.add(new CommercialProperty(propertyID, region, address, area, price, fees, isAvail, type, floor,yearBuilt));
+                int yearBuilt = resultSet.getInt("Year_Built");
+                listOfCommercial.add(new CommercialProperty(propertyID, region, address, area, price, fees, isAvail, type, floor, yearBuilt));
             }
 
         } catch (SQLException e) {
@@ -122,66 +121,60 @@ public class ViewCommercialForSaleController implements Initializable {
         downPane.prefWidthProperty().bind(mainPane.widthProperty());
         downPane.prefHeightProperty().bind(mainPane.heightProperty());
     }
+
     public void editInfo(ActionEvent actionEvent) {
-        CommercialProperty commercialToEdit = tableOfCommercialForSale.getSelectionModel ().getSelectedItem ();
+        CommercialProperty commercialToEdit = tableOfCommercialForSale.getSelectionModel().getSelectedItem();
         if (commercialToEdit == null) {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
-            alert.setHeaderText (null);
-            alert.setContentText ("Please choose an item first!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Please choose an item first!");
             return;
         }
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader (getClass ().getResource ("/View/addCommercialForSaleFXML.fxml"));
-            Parent parent = fxmlLoader.load ();
-            AddCommercialForSaleController controllerForAddCommercialForSale = fxmlLoader.getController ();
-            controllerForAddCommercialForSale.refreshProperty (commercialToEdit);
-            controllerForAddCommercialForSale.refreshCommercial (commercialToEdit);
-            Stage stage = new Stage (StageStyle.DECORATED);
-            stage.setTitle ("Edit Commercial");
-            stage.setScene (new Scene(parent));
-            stage.show ();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/addCommercialForSaleFXML.fxml"));
+            Parent parent = fxmlLoader.load();
+            AddCommercialForSaleController controllerForAddCommercialForSale = fxmlLoader.getController();
+            controllerForAddCommercialForSale.refreshProperty(commercialToEdit);
+            controllerForAddCommercialForSale.refreshCommercial(commercialToEdit);
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setTitle("Edit Commercial");
+            stage.setScene(new Scene(parent));
+            stage.show();
         } catch (IOException e) {
-            e.printStackTrace ();
+            e.printStackTrace();
         }
     }
 
 
     public void deleteInfo(ActionEvent actionEvent) {
-        CommercialProperty commercialToDelete = tableOfCommercialForSale.getSelectionModel ().getSelectedItem ();
+        CommercialProperty commercialToDelete = tableOfCommercialForSale.getSelectionModel().getSelectedItem();
         if (commercialToDelete == null) {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
-            alert.setHeaderText (null);
-            alert.setContentText ("Please choose an item first!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Please choose an item first!");
             return;
         }
-        Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-        alert.setTitle ("Delete Commercial");
-        alert.setContentText ("Are you sure you want to delete this property ID number: " + commercialToDelete.getProperty_ID () + " ?");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Commercial");
+        alert.setContentText("Are you sure you want to delete this property ID number: " + commercialToDelete.getProperty_ID() + " ?");
 
-        Optional<ButtonType> answerOfUser = alert.showAndWait ();
-        if (answerOfUser.get () == ButtonType.OK) {
-            boolean result = DataBaseHandler.getInstance ().deleteCommercial (commercialToDelete);
+        Optional<ButtonType> answerOfUser = alert.showAndWait();
+        if (answerOfUser.get() == ButtonType.OK) {
+            boolean result = DataBaseHandler.getInstance().deleteCommercial(commercialToDelete);
             if (result) {
-                alert = new Alert (Alert.AlertType.INFORMATION);
-                alert.setHeaderText (null);
-                alert.setContentText ("Commercial has been deleted successfully!");
-                alert.show ();
-                listOfCommercial.remove (commercialToDelete);
+                createMessage("Commercial has been deleted successfully!");
+                listOfCommercial.remove(commercialToDelete);
             } else {
-                alert = new Alert (Alert.AlertType.INFORMATION);
-                alert.setHeaderText (null);
-                alert.setContentText ("Operation has been cancelled!");
-                alert.show ();
+                createMessage("Operation has been cancelled!");
             }
         }
     }
 
 
-
     public void refresh(ActionEvent actionEvent) {
-        listOfCommercial.clear ();
-        editCol ();
-        loadData ();
+        listOfCommercial.clear();
+        editCol();
+        loadData();
     }
 
     public void mouseClick(MouseEvent mouseEvent) {
@@ -207,8 +200,8 @@ public class ViewCommercialForSaleController implements Initializable {
                 String type = resultSet.getString("Type");
                 String floor = resultSet.getString("Floor");
                 int fees = resultSet.getInt("fees");
-                int yearBuilt =resultSet.getInt("Year_Built");
-                listOfCommercial.add(new CommercialProperty(propertyID, region, address, area, price, fees, isAvail, type, floor,yearBuilt));
+                int yearBuilt = resultSet.getInt("Year_Built");
+                listOfCommercial.add(new CommercialProperty(propertyID, region, address, area, price, fees, isAvail, type, floor, yearBuilt));
             }
 
         } catch (SQLException e) {
@@ -247,8 +240,8 @@ public class ViewCommercialForSaleController implements Initializable {
                 String type = resultSet.getString("Type");
                 String floor = resultSet.getString("Floor");
                 int fees = resultSet.getInt("fees");
-                int yearBuilt =resultSet.getInt("Year_Built");
-                listOfCommercial.add(new CommercialProperty(propertyID, region, address, area, price, fees, isAvail, type, floor,yearBuilt));
+                int yearBuilt = resultSet.getInt("Year_Built");
+                listOfCommercial.add(new CommercialProperty(propertyID, region, address, area, price, fees, isAvail, type, floor, yearBuilt));
             }
 
         } catch (SQLException e) {
@@ -256,5 +249,12 @@ public class ViewCommercialForSaleController implements Initializable {
         }
 
         tableOfCommercialForSale.setItems(listOfCommercial);
+    }
+
+    public void createMessage(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

@@ -102,7 +102,7 @@ public class AddCommercialForRentController implements Initializable {
         CommercialProperty commercialProperty = new CommercialProperty(Integer.parseInt(propertyID.getText()), region.getText(), address.getText(),
                 Integer.parseInt(area.getText()), Integer.parseInt(price.getText()), fees, true, type.getValue().toString(),
                 floor.getValue().toString(), Integer.parseInt(yearBuilt.getText()));
-        if (dataBaseHandler.editPropertyForCommercial (commercialProperty)) {
+        if (dataBaseHandler.editPropertyForCommercial(commercialProperty)) {
             createAlert("Commercial property has been edited successfully!");
 
         } else {

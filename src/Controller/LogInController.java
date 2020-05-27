@@ -120,7 +120,7 @@ public class LogInController implements Initializable {
 
     @FXML
     void aboutUsButton(ActionEvent event) {
-        viewWindow("/View/aboutUs.fxml","About DREAM HOUSE");
+        viewWindow("/View/aboutUs.fxml", "About DREAM HOUSE");
     }
 
 
