@@ -146,7 +146,7 @@
                      <children>
                         <Pane layoutX="23.0" layoutY="26.0" prefHeight="304.0" prefWidth="375.0" style="-fx-background-color: #404040;">
                            <children>
-                              <JFXTextField fx:id="propertyIDRent" focusColor="#5190b9" layoutX="38.0" layoutY="25.0" onAction="#loadPropertyRentInfo" prefHeight="47.0" prefWidth="282.0" promptText="Property ID">
+                              <JFXTextField fx:id="propertyRentID" focusColor="#5190b9" layoutX="38.0" layoutY="25.0" onAction="#loadPropertyRentInfo" prefHeight="47.0" prefWidth="282.0" promptText="Property ID">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
@@ -164,11 +164,6 @@
                               <Label layoutX="38.0" layoutY="203.0" prefHeight="20.0" prefWidth="40.0" text="Price:" textFill="#5190b9">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="38.0" layoutY="238.0" prefHeight="17.0" prefWidth="81.0" text="Available Date:" textFill="#5190b9">
-                                 <font>
-                                    <Font name="System Bold" size="10.0" />
                                  </font>
                               </Label>
                               <Label fx:id="getRegionRent" layoutX="134.0" layoutY="135.0" prefHeight="17.0" prefWidth="235.0" textFill="#5190b9">
@@ -200,7 +195,7 @@
                         </Pane>
                         <Pane layoutX="443.0" layoutY="26.0" prefHeight="304.0" prefWidth="375.0" style="-fx-background-color: #404040;">
                            <children>
-                              <JFXTextField fx:id="customerSSNRent" focusColor="#5190b9" layoutX="39.0" layoutY="29.0" onAction="#loadCustomerRentInfo" prefHeight="47.0" prefWidth="297.0" promptText="Customer SSN">
+                              <JFXTextField fx:id="customerRentSSN" focusColor="#5190b9" layoutX="39.0" layoutY="29.0" onAction="#loadCustomerRentInfo" prefHeight="47.0" prefWidth="297.0" promptText="Customer SSN">
                                  <font>
                                     <Font size="20.0" />
                                  </font>

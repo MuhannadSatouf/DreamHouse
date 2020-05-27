@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 public class SendEmailWithPDF {
     @FXML
-    private JFXTextField emailTextField,propertyIdTextField;
+    private JFXTextField emailTextField, propertyIdTextField;
     DataBaseHandler dataBaseHandler = new DataBaseHandler();
 
     public SendEmailWithPDF() throws SQLException {
@@ -24,9 +24,9 @@ public class SendEmailWithPDF {
         EmailSend emailSend = new EmailSend();
         String check = dataBaseHandler.checkIfEmail(emailTextField.getText());
 
-        switch (check){
+        switch (check) {
             case "1":
-                emailSend.sendEmailWithPDF(emailTextField.getText(),3);
+                emailSend.sendEmailWithPDF(emailTextField.getText(), 3);
                 break;
             case "0":
                 break;

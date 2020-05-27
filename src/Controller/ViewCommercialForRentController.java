@@ -37,16 +37,16 @@ public class ViewCommercialForRentController implements Initializable {
     public HBox hbox;
     public JFXTextField search;
     public JFXSlider slideFroPrice;
-    public TableColumn<CommercialProperty,Integer> propertyIDCol;
-    public TableColumn<CommercialProperty,String> regionCol;
-    public TableColumn<CommercialProperty,String> addressCol;
-    public TableColumn<CommercialProperty,Integer> areaCol;
-    public TableColumn<CommercialProperty,Integer> priceCol;
-    public TableColumn<CommercialProperty,String> typeCol;
-    public TableColumn<CommercialProperty,String> floorCol;
-    public TableColumn<CommercialProperty,String> availabilityCol;
+    public TableColumn<CommercialProperty, Integer> propertyIDCol;
+    public TableColumn<CommercialProperty, String> regionCol;
+    public TableColumn<CommercialProperty, String> addressCol;
+    public TableColumn<CommercialProperty, Integer> areaCol;
+    public TableColumn<CommercialProperty, Integer> priceCol;
+    public TableColumn<CommercialProperty, String> typeCol;
+    public TableColumn<CommercialProperty, String> floorCol;
+    public TableColumn<CommercialProperty, String> availabilityCol;
     public TableView<CommercialProperty> tableOfCommercialForRent;
-    public TableColumn <CommercialProperty,Integer>yearCol;
+    public TableColumn<CommercialProperty, Integer> yearCol;
 
     ObservableList<CommercialProperty> listOfCommercial = FXCollections.observableArrayList();
 
@@ -94,8 +94,8 @@ public class ViewCommercialForRentController implements Initializable {
                 String type = resultSet.getString("Type");
                 String floor = resultSet.getString("Floor");
                 int fees = 0;
-                int yearBuilt =resultSet.getInt("Year_Built");
-                listOfCommercial.add(new CommercialProperty(propertyID, region, address, area, price, fees, isAvail, type, floor,yearBuilt));
+                int yearBuilt = resultSet.getInt("Year_Built");
+                listOfCommercial.add(new CommercialProperty(propertyID, region, address, area, price, fees, isAvail, type, floor, yearBuilt));
             }
 
         } catch (SQLException e) {
@@ -105,77 +105,72 @@ public class ViewCommercialForRentController implements Initializable {
     }
 
     public void editInfo(ActionEvent actionEvent) {
-        CommercialProperty commercialToEdit = tableOfCommercialForRent.getSelectionModel ().getSelectedItem ();
+        CommercialProperty commercialToEdit = tableOfCommercialForRent.getSelectionModel().getSelectedItem();
         if (commercialToEdit == null) {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
-            alert.setHeaderText (null);
-            alert.setContentText ("Please choose an item first!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Please choose an item first!");
             return;
         }
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader (getClass ().getResource ("/View/addCommercialForRentFXML.fxml"));
-            Parent parent = fxmlLoader.load ();
-            AddCommercialForRentController controllerForAddCommercialForRent = fxmlLoader.getController ();
-            controllerForAddCommercialForRent.refreshProperty (commercialToEdit);
-            controllerForAddCommercialForRent.refreshCommercial (commercialToEdit);
-            Stage stage = new Stage (StageStyle.DECORATED);
-            stage.setTitle ("Edit Commercial");
-            stage.setScene (new Scene(parent));
-            stage.show ();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/View/addCommercialForRentFXML.fxml"));
+            Parent parent = fxmlLoader.load();
+            AddCommercialForRentController controllerForAddCommercialForRent = fxmlLoader.getController();
+            controllerForAddCommercialForRent.refreshProperty(commercialToEdit);
+            controllerForAddCommercialForRent.refreshCommercial(commercialToEdit);
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setTitle("Edit Commercial");
+            stage.setScene(new Scene(parent));
+            stage.show();
         } catch (IOException e) {
-            e.printStackTrace ();
+            e.printStackTrace();
         }
     }
 
     public void deleteInfo(ActionEvent actionEvent) {
-        CommercialProperty commercialToDelete = tableOfCommercialForRent.getSelectionModel ().getSelectedItem ();
+        CommercialProperty commercialToDelete = tableOfCommercialForRent.getSelectionModel().getSelectedItem();
         if (commercialToDelete == null) {
-            Alert alert = new Alert (Alert.AlertType.ERROR);
-            alert.setHeaderText (null);
-            alert.setContentText ("Please choose an item first!");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Please choose an item first!");
             return;
         }
-        Alert alert = new Alert (Alert.AlertType.CONFIRMATION);
-        alert.setTitle ("Delete Commercial");
-        alert.setContentText ("Are you sure you want to delete this property ID number: " + commercialToDelete.getProperty_ID () + " ?");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete Commercial");
+        alert.setContentText("Are you sure you want to delete this property ID number: " + commercialToDelete.getProperty_ID() + " ?");
 
-        Optional<ButtonType> answerOfUser = alert.showAndWait ();
-        if (answerOfUser.get () == ButtonType.OK) {
-            boolean result = DataBaseHandler.getInstance ().deleteCommercial (commercialToDelete);
+        Optional<ButtonType> answerOfUser = alert.showAndWait();
+        if (answerOfUser.get() == ButtonType.OK) {
+            boolean result = DataBaseHandler.getInstance().deleteCommercial(commercialToDelete);
             if (result) {
-                alert = new Alert (Alert.AlertType.INFORMATION);
-                alert.setHeaderText (null);
-                alert.setContentText ("Commercial has been deleted successfully!");
-                alert.show ();
-                listOfCommercial.remove (commercialToDelete);
+                createMessage("Commercial has been deleted successfully!");
+                listOfCommercial.remove(commercialToDelete);
             } else {
-                alert = new Alert (Alert.AlertType.INFORMATION);
-                alert.setHeaderText (null);
-                alert.setContentText ("Operation has been cancelled!");
-                alert.show ();
+                createMessage("Operation has been cancelled!");
             }
         }
     }
+
     public void refresh(ActionEvent actionEvent) {
-        listOfCommercial.clear ();
-        editCol ();
-        loadData ();
+        listOfCommercial.clear();
+        editCol();
+        loadData();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         editCol();
         loadData();
-        hbox.prefWidthProperty ().bind (upPane.widthProperty ());
-        hbox.prefHeightProperty ().bind (upPane.heightProperty ());
-        upPane.prefWidthProperty ().bind (mainPane.widthProperty ());
+        hbox.prefWidthProperty().bind(upPane.widthProperty());
+        hbox.prefHeightProperty().bind(upPane.heightProperty());
+        upPane.prefWidthProperty().bind(mainPane.widthProperty());
 
 
-        tableOfCommercialForRent.prefWidthProperty ().bind (downPane.widthProperty ());
-       tableOfCommercialForRent.prefHeightProperty ().bind (downPane.heightProperty ());
+        tableOfCommercialForRent.prefWidthProperty().bind(downPane.widthProperty());
+        tableOfCommercialForRent.prefHeightProperty().bind(downPane.heightProperty());
 
-        downPane.prefWidthProperty ().bind (mainPane.widthProperty ());
-        downPane.prefHeightProperty ().bind (mainPane.heightProperty ());
+        downPane.prefWidthProperty().bind(mainPane.widthProperty());
+        downPane.prefHeightProperty().bind(mainPane.heightProperty());
     }
 
     public void mouseClick(MouseEvent mouseEvent) {
@@ -201,8 +196,8 @@ public class ViewCommercialForRentController implements Initializable {
                 String type = resultSet.getString("Type");
                 String floor = resultSet.getString("Floor");
                 int fees = 0;
-                int yearBuilt =resultSet.getInt("Year_Built");
-                listOfCommercial.add(new CommercialProperty(propertyID, region, address, area, price, fees, isAvail, type, floor,yearBuilt));
+                int yearBuilt = resultSet.getInt("Year_Built");
+                listOfCommercial.add(new CommercialProperty(propertyID, region, address, area, price, fees, isAvail, type, floor, yearBuilt));
             }
 
         } catch (SQLException e) {
@@ -241,8 +236,8 @@ public class ViewCommercialForRentController implements Initializable {
                 String type = resultSet.getString("Type");
                 String floor = resultSet.getString("Floor");
                 int fees = 0;
-                int yearBuilt =resultSet.getInt("Year_Built");
-                listOfCommercial.add(new CommercialProperty(propertyID, region, address, area, price, fees, isAvail, type, floor,yearBuilt));
+                int yearBuilt = resultSet.getInt("Year_Built");
+                listOfCommercial.add(new CommercialProperty(propertyID, region, address, area, price, fees, isAvail, type, floor, yearBuilt));
             }
 
         } catch (SQLException e) {
@@ -250,5 +245,12 @@ public class ViewCommercialForRentController implements Initializable {
         }
 
         tableOfCommercialForRent.setItems(listOfCommercial);
+    }
+
+    public void createMessage(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

@@ -133,7 +133,7 @@ public class AddHouseForRentController implements Initializable {
                 Integer.parseInt(area.getText()), Integer.parseInt(yearBuilt.getText()), fees,
                 Integer.parseInt(price.getText()), heating.isSelected(), parking.isSelected(), balcony.isSelected(),
                 roomsNumber.getValue().toString(), bathroomsNumber.getValue().toString(), true, garage.isSelected());
-        if (dataBaseHandler.editPropertyForHouse (house)) {
+        if (dataBaseHandler.editPropertyForHouse(house)) {
             createAlert("House has been edited successfully!");
 
         } else {

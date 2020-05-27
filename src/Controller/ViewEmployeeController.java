@@ -2,7 +2,6 @@ package Controller;
 
 import Models.DataBaseHandler;
 import Models.Employee;
-import Models.Land;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -97,9 +96,8 @@ public class ViewEmployeeController implements Initializable {
     public void editInfo(ActionEvent actionEvent) {
         Employee employeeToEdit = tableOfEmployee.getSelectionModel().getSelectedItem();
         if (employeeToEdit == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Please choose an employee first!");
+            createAlert("Please choose an employee first!");
+
             return;
         }
         try {
@@ -120,9 +118,7 @@ public class ViewEmployeeController implements Initializable {
     public void deleteInfo(ActionEvent actionEvent) {
         Employee employeeToDelete = tableOfEmployee.getSelectionModel().getSelectedItem();
         if (employeeToDelete == null) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setHeaderText(null);
-            alert.setContentText("Please choose an employee first!");
+            createAlert("Please choose an employee first!");
             return;
         }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -133,16 +129,11 @@ public class ViewEmployeeController implements Initializable {
         if (answerOfUser.get() == ButtonType.OK) {
             boolean result = DataBaseHandler.getInstance().deleteEmployee(employeeToDelete);
             if (result) {
-                alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText(null);
-                alert.setContentText("Employee has been deleted successfully!");
-                alert.show();
+                createAlert("Employee has been deleted successfully!");
                 employeeList.remove(employeeToDelete);
             } else {
-                alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText(null);
-                alert.setContentText("Operation has been cancelled!");
-                alert.show();
+
+                createAlert("Operation has been cancelled!");
             }
         }
     }
@@ -151,5 +142,12 @@ public class ViewEmployeeController implements Initializable {
         employeeList.clear();
         editCol();
         loadData();
+    }
+
+    public void createAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

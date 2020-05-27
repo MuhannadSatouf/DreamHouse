@@ -4,7 +4,6 @@ package Controller;
 import Models.DataBaseHandler;
 import Models.House;
 import Models.Property;
-import Models.Resident;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
@@ -133,7 +132,7 @@ public class AddHouseForSaleController implements Initializable {
                 Integer.parseInt(area.getText()), Integer.parseInt(yearBuilt.getText()), Integer.parseInt(fees.getText()),
                 Integer.parseInt(price.getText()), heating.isSelected(), parking.isSelected(), balcony.isSelected(),
                 roomsNumber.getValue().toString(), bathroomsNumber.getValue().toString(), true, garage.isSelected());
-        if (dataBaseHandler.editPropertyForHouse (house)) {
+        if (dataBaseHandler.editPropertyForHouse(house)) {
             createAlert("House has been edited successfully!");
 
         } else {
