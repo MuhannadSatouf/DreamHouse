@@ -1,6 +1,8 @@
 package Controller;
 
-import Models.*;
+import Models.DataBaseHandler;
+import Models.Employee;
+import Models.User;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -8,8 +10,11 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.PreparedStatement;
@@ -17,6 +22,9 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class AddEmployeeController implements Initializable {
+
+    @FXML
+    private Pane startPane;
     public JFXTextField addressTextField;
     public JFXTextField phoneTextField;
     public JFXTextField emailTextField;
@@ -24,7 +32,7 @@ public class AddEmployeeController implements Initializable {
     public JFXTextField nameTextField;
     public JFXButton cancelBtn;
     public JFXTextField employeePasswordTextField;
-    public JFXComboBox type; // WHY!!!
+    public JFXComboBox type;
     public JFXTextField ssnEmployeeTextField;
     private boolean editMode = Boolean.FALSE;
 
@@ -34,32 +42,42 @@ public class AddEmployeeController implements Initializable {
 
         DataBaseHandler dataBaseHandler = new DataBaseHandler();
         String check = dataBaseHandler.checkIfUserExist(ssnEmployeeTextField.getText());
+        String reg1 = "[1-9][0-9]{9}";
+        String reg2 = "[1-9][0-9]{11}";
 
-        if (!check.equals(ssnEmployeeTextField.getText())) {
+        if (ssnEmployeeTextField.getText().matches(reg1) || ssnEmployeeTextField.getText().matches(reg2) && phoneTextField.getText().matches(reg1)) {
+            if (!check.equals(ssnEmployeeTextField.getText())) {
 
-            dataBaseHandler.addUser(ssnEmployeeTextField.getText(), employeePasswordTextField.getText(),
-                    nameTextField.getText(), addressTextField.getText(), phoneTextField.getText(), emailTextField.getText());
+                dataBaseHandler.addUser(ssnEmployeeTextField.getText(), employeePasswordTextField.getText(),
+                        nameTextField.getText(), addressTextField.getText(), phoneTextField.getText(), emailTextField.getText());
 
-            try {
+                try {
 
-                String qu = "INSERT INTO employee (Role,SSN)" +
-                        "VALUES(?,?)";
+                    String qu = "INSERT INTO employee (Role,SSN)" +
+                            "VALUES(?,?)";
 
-                PreparedStatement pst;
-                pst = DataBaseHandler.connection.prepareStatement(qu);
-                pst.setString(1, "Employee");
-                pst.setString(2, ssnEmployeeTextField.getText());
+                    PreparedStatement pst;
+                    pst = DataBaseHandler.connection.prepareStatement(qu);
+                    pst.setString(1, "Employee");
+                    pst.setString(2, ssnEmployeeTextField.getText());
 
-                pst.execute();
-                pst.close();
+                    pst.execute();
+                    pst.close();
 
-                createMessage("The employee has been added to the system");
-            } catch (SQLException throwable) {
-                throwable.printStackTrace();
+                    createMessage("The employee has been added to the system");
+                    Stage stage = (Stage) startPane.getScene().getWindow();
+                    stage.close();
+                } catch (SQLException throwable) {
+                    throwable.printStackTrace();
+                }
+            } else if (check.equals(ssnEmployeeTextField.getText())) {
+                createMessage("The user already exist");
+                refreshing();
             }
-        } else if (check.equals(ssnEmployeeTextField.getText())) {
-            createMessage("The user already exist");
-            refreshing();
+
+
+        } else {
+            createMessage("The customer SSN should be 10-12 numbers and the phone number should be 10 numbers");
         }
     }
 
@@ -88,6 +106,7 @@ public class AddEmployeeController implements Initializable {
         ssnEmployeeTextField.setEditable(false);
         employeePasswordTextField.setEditable(false); // Does not work, need to modify methods
     }
+
     public void refreshing() {
         ssnEmployeeTextField.setText("");
         phoneTextField.setText("");

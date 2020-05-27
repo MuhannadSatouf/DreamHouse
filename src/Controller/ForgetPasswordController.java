@@ -7,12 +7,17 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
 public class ForgetPasswordController {
     final String secretKey = "ssshhhhhhhhhhh!!!!";
-    String passwordFromDatabase = "";
+
+
+    @FXML
+    private AnchorPane startPane;
 
     @FXML
     private JFXTextField emailTextField;
@@ -30,6 +35,8 @@ public class ForgetPasswordController {
                         new PassWordHash().decrypt(dataBaseHandler.getPasswordFromDatabase(emailTextField.getText()), secretKey));
 
                 createAlert("The email has been sent, Thanks");
+                Stage stage = (Stage) startPane.getScene().getWindow();
+                stage.close();
                 break;
             case "0":
                 System.out.println("The email not correct");

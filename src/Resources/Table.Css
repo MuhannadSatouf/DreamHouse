@@ -15,9 +15,6 @@
 
 }
 
-
-
-
 .text-field
 {
     -fx-text-fill: -fx-secondary;
@@ -35,6 +32,14 @@
     -fx-prompt-text-fill: grey
 
 }
+
+.text-field:focused {
+  -fx-text-fill: -fx-secondary;
+    -fx-font-size : 11pt;
+       -jfx-focus-color: -fx-secondary;
+          -fx-prompt-text-fill: grey
+           }
+
 
 .data0.chart-pie{
     -fx-pie-color: -fx-secondary;
