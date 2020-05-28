@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.PreparedStatement;
@@ -40,34 +41,45 @@ public class AddCustomerController implements Initializable {
         DataBaseHandler dataBaseHandler = new DataBaseHandler();
         String check = dataBaseHandler.checkIfUserExist(customerSSNTextField.getText());
 
-        if (!check.equals(customerSSNTextField.getText())) {
+        String reg1 = "[1-9][0-9]{9}";
+        String reg2 = "[1-9][0-9]{11}";
+        if (customerSSNTextField.getText().matches(reg1) || customerSSNTextField.getText().matches(reg2) && phoneTextField.getText().matches(reg1)) {
 
-            dataBaseHandler.addUser(customerSSNTextField.getText(), customerPasswordTextField.getText(),
-                    nameTextField.getText(), addressTextField.getText(), phoneTextField.getText(), emailTextField.getText());
+            if (!check.equals(customerSSNTextField.getText())) {
 
-            try {
+                dataBaseHandler.addUser(customerSSNTextField.getText(), customerPasswordTextField.getText(),
+                        nameTextField.getText(), addressTextField.getText(), phoneTextField.getText(), emailTextField.getText());
 
-                String qu = "INSERT INTO customer (Role,SSN)" +
-                        "VALUES(?,?)";
+                try {
 
-                PreparedStatement pst;
-                pst = DataBaseHandler.connection.prepareStatement(qu);
-                pst.setString(1, customerType.getValue().toString());
-                pst.setString(2, customerSSNTextField.getText());
+                    String qu = "INSERT INTO customer (Customer_type,SSN)" +
+                            "VALUES(?,?)";
 
-                pst.execute();
-                pst.close();
+                    PreparedStatement pst;
+                    pst = DataBaseHandler.connection.prepareStatement(qu);
+                    pst.setString(1, customerType.getValue().toString());
+                    pst.setString(2, customerSSNTextField.getText());
 
-                createMessage("Thank you, The customer has been added to the system");
+                    pst.execute();
+                    pst.close();
 
-            } catch (SQLException throwable) {
-                throwable.printStackTrace();
+                    createMessage("Thank you, The customer has been added to the system");
+                    Stage stage = (Stage) startPane.getScene().getWindow();
+                    stage.close();
+
+                } catch (SQLException throwable) {
+                    throwable.printStackTrace();
+                }
+
+            } else if (check.equals(customerSSNTextField.getText())) {
+                createMessage("The user already exist");
+
             }
-        } else if (check.equals(customerSSNTextField.getText())) {
-            createMessage("The user already exist");
+
+        } else {
+            createMessage("The customer SSN should be 10-12 numbers and the phone number should be 10 numbers");
         }
     }
-
 
     public void cancel(ActionEvent actionEvent) {
         customerPasswordTextField.setText("");
@@ -81,6 +93,7 @@ public class AddCustomerController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        makeSSNAndPhoneOnlyNumbers();
         makeNameOnlyString();
         makeTheSaveButtonActive();
         dataBaseHandler = DataBaseHandler.getInstance();
@@ -125,7 +138,7 @@ public class AddCustomerController implements Initializable {
         });
     }
 
-    private void makeSSNOnlyNumbers() {
+    private void makeSSNAndPhoneOnlyNumbers() {
         // make the textField ssn and phone take only numbers.
         customerSSNTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d") && newValue.length() <= 12) {

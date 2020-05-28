@@ -33,13 +33,30 @@ public class MainMenuForCustomer implements Initializable {
     }
 
 
+    public void selectHouseForView(ActionEvent actionEvent) {
+        makeChangesOnController("/View/selectPropertyHouseForViewFXML.fxml", actionEvent);
+    }
+
+    public void selectApartmentForView(ActionEvent actionEvent) {
+        makeChangesOnController("/View/selectPropertyApartmentForViewFXML.fxml", actionEvent);
+    }
+
+    public void selectLandForView(ActionEvent actionEvent) {
+        makeChangesOnController("/View/selectPropertyLandForViewFXML.fxml", actionEvent);
+    }
+
+    public void selectCommercialForView(ActionEvent actionEvent) {
+        makeChangesOnController("/View/selectPropertyCommercialForViewFXML.fxml", actionEvent);
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
 
     }
 
-    public void makeChangesOnController(String location, ActionEvent actionEvent)  {
+    public void makeChangesOnController(String location, ActionEvent actionEvent) {
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(location));
@@ -59,8 +76,5 @@ public class MainMenuForCustomer implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
-
 }

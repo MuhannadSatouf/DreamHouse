@@ -12,7 +12,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.DatePicker;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -95,7 +94,7 @@ public class AddLandForRentController implements Initializable {
         Land land = new Land(Integer.parseInt(propertyID.getText()), region.getText(), address.getText(), Integer.parseInt(area.getText()),
                 Integer.parseInt(price.getText()), fees,
                 type.getValue().toString(), irrigated.isSelected(), includesResidence.isSelected(), true);
-        if (dataBaseHandler.editPropertyForLand (land)) {
+        if (dataBaseHandler.editPropertyForLand(land)) {
             createAlert("Land has been edited successfully!");
 
         } else {

@@ -120,7 +120,7 @@ public class LogInController implements Initializable {
 
     @FXML
     void aboutUsButton(ActionEvent event) {
-        viewWindow("/View/aboutUs.fxml","About DREAM HOUSE");
+        viewWindow("/View/aboutUs.fxml", "About DREAM HOUSE");
     }
 
 
@@ -129,15 +129,13 @@ public class LogInController implements Initializable {
         // These for testing the database and inlogning and will active them only one time to create them in the database if we use local database
 
 
-/*       DataBaseHandler dataBaseHandler = null;
+      /* DataBaseHandler dataBaseHandler = null;
         try {
            dataBaseHandler = new DataBaseHandler ();
        } catch (SQLException throwables) {
            throwables.printStackTrace ();
        }
-       dataBaseHandler.addUsersForTesting();
-
-    }*/
+       dataBaseHandler.addUsersForTesting();*/
 
     }
 }

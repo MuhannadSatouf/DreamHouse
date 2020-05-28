@@ -43,7 +43,7 @@ public class SelectPropertyForViewForCustomer implements Initializable {
         }
     }
 
-    
+
 
 
     void createNewStage(String location, String name) {
