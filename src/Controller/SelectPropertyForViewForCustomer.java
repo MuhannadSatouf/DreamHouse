@@ -1,5 +1,6 @@
 package Controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -7,36 +8,25 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class SelectPropertyForViewForCustomer implements Initializable {
 
 
-    public SelectPropertyForViewForCustomer() throws SQLException {
-    }
+    public JFXButton selectHouseForSaleViewBtn;
+    public JFXButton selectHouseForRentViewBtn;
+    public JFXButton selectApartmentForSaleViewBtn;
+    public JFXButton selectApartmentForRentViewBtn;
+    public JFXButton selectCommercialForRentViewBtn;
+    public JFXButton selectLandForRentViewBtn;
+    public JFXButton selectCommercialForSaleViewBtn;
+    public JFXButton selectLandForSaleViewBtn;
 
-    public void selectHouseForView(ActionEvent event) throws IOException {
 
-        makeChangesOnController("/View/selectPropertyHouseForViewFXML.fxml", event);
-
-    }
-
-    public void selectApartmentForView(ActionEvent event) {
-        switchBetweenScenes(event, "/View/selectPropertyApartmentForViewFXML.fxml");
-    }
-
-    public void selectLandForView(ActionEvent event) {
-        switchBetweenScenes(event, "/View/selectPropertyLandForViewFXML.fxml");
-    }
-
-    public void selectCommercialForView(ActionEvent event) throws IOException {
-        // switchBetweenScenes(event, "/View/selectPropertyCommercialForViewFXML.fxml");
-        makeChangesOnController("/View/selectPropertyCommercialForViewFXML.fxml", event);
-    }
 
 
     void switchBetweenScenes(ActionEvent actionEvent, String location) {
@@ -53,24 +43,17 @@ public class SelectPropertyForViewForCustomer implements Initializable {
         }
     }
 
-    public void makeChangesOnController(String location, ActionEvent actionEvent) {
+    
 
+
+    void createNewStage(String location, String name) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(location));
-            Parent parent = fxmlLoader.load();
+            Parent parent = FXMLLoader.load(getClass().getResource(location));
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.setTitle(name);
             Scene scene = new Scene(parent);
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            scene.getStylesheets().add(getClass().getResource("/Resources/Table.Css").toExternalForm());
             stage.setScene(scene);
-
-
-            MainMenuController main = fxmlLoader.getController();
-            main.addPropertyBtn.setVisible(false);
-            main.addUserBtn.setVisible(false);
-            main.transactionsBtn.setVisible(false);
-            main.statisticsBtn.setVisible(false);
-            main.viewPropertyBtn.setVisible(false);
-            main.viewUserBtn.setVisible(false);
-
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -80,5 +63,30 @@ public class SelectPropertyForViewForCustomer implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void selectHouseForSaleView(ActionEvent actionEvent) {
+
+    }
+
+    public void selectHouseForRentView(ActionEvent actionEvent) {
+    }
+
+    public void selectApartmentForSaleView(ActionEvent actionEvent) {
+    }
+
+    public void selectApartmentForRentView(ActionEvent actionEvent) {
+    }
+
+    public void selectCommercialForRentView(ActionEvent actionEvent) {
+    }
+
+    public void selectLandForRentView(ActionEvent actionEvent) {
+    }
+
+    public void selectCommercialForSaleView(ActionEvent actionEvent) {
+    }
+
+    public void selectLandForSaleView(ActionEvent actionEvent) {
     }
 }

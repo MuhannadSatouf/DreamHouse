@@ -29,24 +29,9 @@ public class MainMenuForCustomer implements Initializable {
     }
 
     public void viewProperty(ActionEvent event) throws IOException {
-        makeChangesOnController("/View/selectPropertyForViewFXML.fxml", event);
+        makeChangesOnController("/View/SelectPropertyForViewForCustomer.fxml", event);
     }
 
-    public void selectHouseForView(ActionEvent actionEvent) {
-        makeChangesOnController( "/View/selectPropertyHouseForViewFXML.fxml",actionEvent);
-    }
-
-    public void selectApartmentForView(ActionEvent actionEvent) {
-        makeChangesOnController( "/View/selectPropertyApartmentForViewFXML.fxml",actionEvent);
-    }
-
-    public void selectLandForView(ActionEvent actionEvent) {
-        makeChangesOnController( "/View/selectPropertyLandForViewFXML.fxml",actionEvent);
-    }
-
-    public void selectCommercialForView(ActionEvent actionEvent) {
-        makeChangesOnController( "/View/selectPropertyCommercialForViewFXML.fxml",actionEvent);
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -64,13 +49,13 @@ public class MainMenuForCustomer implements Initializable {
             stage.setScene(scene);
             stage.show();
 
-            MainMenuController main = fxmlLoader.getController();
-            main.addPropertyBtn.setVisible(false);
-            main.addUserBtn.setVisible(false);
-            main.transactionsBtn.setVisible(false);
-            main.statisticsBtn.setVisible(false);
-            main.viewPropertyBtn.setVisible(false);
-            main.viewUserBtn.setVisible(false);
+          //  MainMenuController main = fxmlLoader.getController();
+          //  main.addPropertyBtn.setVisible(false);
+           // main.addUserBtn.setVisible(false);
+          //  main.transactionsBtn.setVisible(false);
+          //  main.statisticsBtn.setVisible(false);
+          //  main.viewPropertyBtn.setVisible(false);
+          //  main.viewUserBtn.setVisible(false);
         } catch (IOException e) {
             e.printStackTrace();
         }

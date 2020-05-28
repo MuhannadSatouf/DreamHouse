@@ -27,6 +27,16 @@
 
 }
 
+
+.text-field:focused {
+    -fx-text-fill: -fx-secondary;
+    -fx-font-size : 11pt;
+    -jfx-focus-color: -fx-secondary;
+    -fx-prompt-text-fill: grey
+}
+
+
+
 #emailTextField
 {
     -fx-text-fill: -fx-secondary;
