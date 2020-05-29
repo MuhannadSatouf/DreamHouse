@@ -53,8 +53,7 @@ public class LogInController implements Initializable {
             viewWindow("/View/mainMenuForCustomer.fxml", "Menu");
 
         }
-        Stage stage = (Stage) startPane.getScene().getWindow();
-        stage.close();
+
     }
 
 
