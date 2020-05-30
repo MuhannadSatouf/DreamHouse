@@ -6,9 +6,10 @@
         <element id="file-copy" path="$PROJECT_DIR$/../../META-INF/MANIFEST.MF" />
       </element>
       <element id="module-output" name="Dream House" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/Lib/itextpdf-5.5.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/Lib/activation.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/src/Lib/mysql-connector-java-8.0.11.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/src/Lib/javax.mail-1.4.4.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/src/Lib/protobuf-java-2.6.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/Lib/jfoenix-9.0.8.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/Downloads/javafx-sdk-13.0.1/lib/src.zip" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/Downloads/javafx-sdk-13.0.1/lib/javafx-swt.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/Downloads/javafx-sdk-13.0.1/lib/javafx.web.jar" path-in-jar="/" />
@@ -18,10 +19,8 @@
       <element id="extracted-dir" path="$USER_HOME$/Downloads/javafx-sdk-13.0.1/lib/javafx.swing.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/Downloads/javafx-sdk-13.0.1/lib/javafx.controls.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/Downloads/javafx-sdk-13.0.1/lib/javafx.graphics.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$USER_HOME$/Downloads/javafx-sdk-13.0.1/lib/Seminar4Generic.zip" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/src/Lib/mysql-connector-java-5.1.40.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/src/Lib/jfoenix-9.0.8.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/src/Lib/activation.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/javafx-sdk-13.0.1/lib/DreamHouse7775546.zip" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/Lib/javax.mail-1.4.4.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
