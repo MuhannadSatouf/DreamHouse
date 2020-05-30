@@ -39,12 +39,12 @@ public class DataBaseHandler {
 
             Class.forName(DRIVER).newInstance();
 
-           // connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false&allowPublicKeyRetrieval=true", "root", "root");
-            //  useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "root");
+            // This url for connecting to Remote database
+            connection = DriverManager.getConnection("jdbc:mysql://den1.mysql6.gear.host/dreamhousedata?useSSL=false", "dreamhousedata", "Rx5XS11M7~5~");
 
+            // This url to connect to local database
+            // connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb?useSSL=false&allowPublicKeyRetrieval=true", "root", "root");
 
-            //Remote database  // connection = DriverManager.getConnection ("jdbc:mysql://den1.mysql5.gear.host:3306/realestate2?useSSL=false", "realestate2", "Xl9pU?!yN6Rr");
             System.out.println("Connection success");
         } catch (Exception e) {
 
@@ -470,6 +470,7 @@ public class DataBaseHandler {
 
         return false;
     }
+
     public void editEmployee(Employee employee) {
 
         String updateEmployee = "UPDATE land SET Type=?, Irrigated=?, Includes_Residence=? WHERE Property_ID=?";
@@ -504,13 +505,13 @@ public class DataBaseHandler {
         String updateApartmentForResident = "UPDATE Resident SET  Heating=?,  Parking=?, Balcony=?, Rooms=?, Bathrooms=?, Year=?    WHERE Property_ID=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(updateApartmentForResident);
-            preparedStatement.setBoolean (1, apartment.isHeating ());
-            preparedStatement.setBoolean (2, apartment.isParking ());
-            preparedStatement.setBoolean (3, apartment.isBalcony ());
-            preparedStatement.setString (4, apartment.getRoom ());
-            preparedStatement.setString(5, apartment.getBathroom ());
-            preparedStatement.setInt (6, apartment.getYearBuilt ());
-            preparedStatement.setInt (7, apartment.getProperty_ID ());
+            preparedStatement.setBoolean(1, apartment.isHeating());
+            preparedStatement.setBoolean(2, apartment.isParking());
+            preparedStatement.setBoolean(3, apartment.isBalcony());
+            preparedStatement.setString(4, apartment.getRoom());
+            preparedStatement.setString(5, apartment.getBathroom());
+            preparedStatement.setInt(6, apartment.getYearBuilt());
+            preparedStatement.setInt(7, apartment.getProperty_ID());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -536,18 +537,17 @@ public class DataBaseHandler {
         String updateHouseForResident = "UPDATE Resident SET  Heating=?,  Parking=?, Balcony=?, Rooms=?, Bathrooms=?, Year=?    WHERE Property_ID=?";
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(updateHouseForResident);
-            preparedStatement.setBoolean (1, house.isHeating ());
-            preparedStatement.setBoolean (2, house.isParking ());
-            preparedStatement.setBoolean (3, house.isBalcony ());
-            preparedStatement.setString (4, house.getRoom ());
-            preparedStatement.setString(5, house.getBathroom ());
-            preparedStatement.setInt (6, house.getYearBuilt ());
-            preparedStatement.setInt (7, house.getProperty_ID ());
+            preparedStatement.setBoolean(1, house.isHeating());
+            preparedStatement.setBoolean(2, house.isParking());
+            preparedStatement.setBoolean(3, house.isBalcony());
+            preparedStatement.setString(4, house.getRoom());
+            preparedStatement.setString(5, house.getBathroom());
+            preparedStatement.setInt(6, house.getYearBuilt());
+            preparedStatement.setInt(7, house.getProperty_ID());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
 
 
         String updateHouse = "UPDATE house SET Garage=? WHERE Property_ID=?";
@@ -568,15 +568,13 @@ public class DataBaseHandler {
             PreparedStatement preparedStatement = connection.prepareStatement(updateCommercial);
             preparedStatement.setString(1, commercialProperty.getType());
             preparedStatement.setString(2, commercialProperty.getFloor());
-            preparedStatement.setInt (3, commercialProperty.getYearBuilt ());
+            preparedStatement.setInt(3, commercialProperty.getYearBuilt());
             preparedStatement.setInt(4, commercialProperty.getProperty_ID());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
-
 
 
     public boolean editPropertyForLand(Land land) {
