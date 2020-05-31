@@ -683,7 +683,7 @@ public class DataBaseHandler {
 
         String qu = "SELECT count(Property_ID) From Property";
         String qu2 = "SELECT count(*) From Property WHERE fees > 0 ";
-        String qu3 = "SELECT count(*) From Property where fees IS NULL";
+        String qu3 = "SELECT count(*) From Property where fees <= 0 ";
 
         ResultSet rs = execQuery (qu);
         try {

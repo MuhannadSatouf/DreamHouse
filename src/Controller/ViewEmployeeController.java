@@ -54,7 +54,6 @@ public class ViewEmployeeController implements Initializable {
         String qu = "SELECT DISTINCT User.SSN,User.Name,User.Address,User.Phone,User.Email" +
                 " FROM User,Employee " +
                 "WHERE User.SSN=Employee.SSN";
-
         ResultSet resultSet = databaseHandler.execQuery(qu);
 
         try {
@@ -64,7 +63,6 @@ public class ViewEmployeeController implements Initializable {
                 String employeeAddress = resultSet.getString("Address");
                 String employeePhone = resultSet.getString("Phone");
                 String employeeEmail = resultSet.getString("Email");
-                //String employeeType = resultSet.getString("Role");
 
                 employeeList.add(new Employee(employeeSsn, employeeName, employeeAddress, employeePhone, employeeEmail));
 

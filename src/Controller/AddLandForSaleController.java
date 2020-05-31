@@ -61,7 +61,7 @@ public class AddLandForSaleController implements Initializable {
 
             try {
                 if (resultSet.next()) {
-                    createAlert("This ID was already entered!");
+                    createAlert("This ID was already exist!");
                     refreshing();
                 } else {
                     dataBaseHandler.addProperty(propertyID.getText(), region.getText(), address.getText(),
