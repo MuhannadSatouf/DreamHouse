@@ -19,7 +19,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
@@ -112,7 +111,7 @@ public class ViewCustomerController implements Initializable {
             addCustomerController.refreshUser (userToEdit);
             addCustomerController.refreshCustomer (userToEdit);
             Stage stage = new Stage(StageStyle.DECORATED);
-            stage.setTitle("Edit Land");
+            stage.setTitle("Edit Customer");
             stage.setScene(new Scene (parent));
             stage.show();
         } catch (IOException e) {

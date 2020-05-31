@@ -30,7 +30,7 @@ public class SendEmailWithPDF {
                 emailSend.sendEmailWithPDF(emailTextField.getText(), 3);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText(null);
-                alert.setContentText("The email has been send");
+                alert.setContentText("The email has been sent");
                 alert.showAndWait();
                 break;
             case "0":

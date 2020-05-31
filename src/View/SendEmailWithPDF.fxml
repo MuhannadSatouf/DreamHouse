@@ -10,7 +10,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="313.0" prefWidth="600.0" style="-fx-background-color: #4d4d4d;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SendEmailWithPDF">
    <children>
-      <JFXTextField fx:id="emailTextField" layoutX="174.0" layoutY="111.0" prefHeight="25.0" prefWidth="272.0" unFocusColor="#5190b9" />
+      <JFXTextField fx:id="emailTextField" layoutX="174.0" layoutY="111.0" prefHeight="25.0" prefWidth="272.0" stylesheets="@../Resources/Table.Css" unFocusColor="#5190b9" />
       <JFXTextField fx:id="propertyIdTextField" layoutX="174.0" layoutY="181.0" prefHeight="25.0" prefWidth="272.0" unFocusColor="#5190b9" />
       <Label layoutX="116.0" layoutY="123.0" text="Email :" textFill="#5190b9">
          <font>
