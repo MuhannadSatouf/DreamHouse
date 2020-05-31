@@ -40,6 +40,7 @@ public class ForgetPasswordController {
                 break;
             case "0":
                 System.out.println("The email not correct");
+                createAlert("The email is not exist in our system, please check your email first");
                 break;
             // will be here an alert
         }
